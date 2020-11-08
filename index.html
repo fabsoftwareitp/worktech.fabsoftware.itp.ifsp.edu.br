@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Início - X Worktech </title>
+  <meta charset="utf-8">
+  <!--Import Google Icon Font-->
+  <link href="css/material.icons.css" rel="stylesheet">
+  <!--Import materialize.css-->
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="img/logo_worktech.png">
+  <meta name="theme-color" content="#212121">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="dark">
+  <div class="header">
+    <!-- include -->
+    <div w3-include-html="view/components/navbar.html"></div>
+    <div class="center">
+      <img id="logo-topo-home" src="img/logo_worktech_remake_white.png" class="responsive-img logo-worktech">
+      <h4 class="thin mt-5 mt-sm-5 mb-sm-5">De 18 à 20 de Novembro<br> no Câmpus Itapetininga</h4>
+    </div>
+  </div>
+
+  <!-- PROGRAMACAO -->
+  <div id="programacao" class="programacao">
+    <div class="container-fluid position-relative mt-5">
+      <img src="img/detail-left-loccal.png" id="detail-right" class="hide-on-med-and-down">
+      <h1 class="uppercase hoverable-text purple-text f-700 mt-3 center" `>Programação</h1>
+      <div class="row center mt-3 mb-3">
+        <div class="col s8 offset-s2">
+          <div class="row">
+            <div class="center-align col m4">
+              <a href="#18-de-novembro" class="timeline-activation">
+                <i class="material-icons" aria-hidden="true">calendar_today</i> Dia 18
+              </a>
+            </div>
+            <div class="center-align col m4">
+              <a href="#19-de-novembro" class="timeline-activation active">
+                <i class="material-icons" aria-hidden="true">calendar_today</i> Dia 19
+              </a>
+            </div>
+            <div class="center-align col m4">
+              <a href="#20-de-novembro" class="timeline-activation">
+                <i class="material-icons" aria-hidden="true">calendar_today</i> Dia 20
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container schedule">
+        <div class="row timeline">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="inscricoes" class="container-fluid position-relative">
+    <img src="img/detail1.png" id="detail1" class="hide-on-med-and-down">
+    <div class="row mt-15 ">
+      <div class="col m4 s12 offset-m6 mt-sm-3 mb-sm-5 right-align">
+        <h2 class="uppercase cyan-text f-700 text-darken-1 hoverable-text">Inscrições</h2>
+        <h4 class="thin">As incrições garantem a participação e o certificado!</h4>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmlsshmqnu2oVgPUyDw3r6pIphit0fxcrMfhkz-eaYNsk7zA/viewform"
+          target="_blank" class="btn-large mt-sm-1 cyan darken-1"><i class="material-icons left">person_add</i>Realizar
+          Inscrição</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="local" class="container-fluid mt-15 index-local mb-5">
+    <div class="container left-align">
+      <h2 class="uppercase purple-text text-darken-2 f-700 text-darken-2 hoverable-text pt-5">Local </h2>
+      <div class="row">
+        <div class="col m6">
+          <h5 class="thin mt-1 thin">Esse ano o WorkTech <strong>acontecerá online</strong>, sendo transmitido pelo
+            canal do grupo de Informática do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo Câmpus
+            Itapetininga</h5>
+        </div>
+      </div>
+      <a href="https://www.youtube.com/channel/UCbQ1cDOJUmztOK23ZUjbwhw" target="_blank"
+        class="btn-large mt-sm-1 purple mt-3 mb-5"><i class="material-icons left">featured_video</i>Canal IFSP ITP
+        Informática</a>
+    </div>
+  </div>
+
+
+  <!-- include -->
+  <div class="container-fluid footer-final">
+    <div class="center-align  mt-4">
+      <img id="logo_footer" src="img/ifsp_white.png" class="responsive-img footer-logo" style="width: 20vw;">
+      <p class=" f-700 uppercase">O Worktech é uma iniciativa do IFSP Câmpus Itapetininga</p>
+      <p class="mt-3">© 2020 - Todos os direitos reservados</p>
+      <p class="so-sm-text white-text mb-0 pb-5 text-about">Designed and built with a lot of patience, care and haste by
+        <a class="pink-text" href="https://github.com/danilocbueno">@danilocbueno</a> and <a class="pink-text"
+          href="https://paulhenrique.github.io/ph" target="_blank">@paulhenrique</a></p>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- Compiled and minified JavaScript -->
+  <div class="fixed-action-btn" id="lamp">
+    <a class="btn-floating btn-large black">
+      <i class="large material-icons">wb_incandescent</i>
+    </a>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

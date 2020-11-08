@@ -1,0 +1,91 @@
+{
+	"18-de-novembro":[
+		{
+			"14:00 - 15:00":[
+				{
+					"titulo":"De Itapetininga para Apple Computer na California",
+					"palestrante":"Rafael Martins (SnitRam)",
+					"local":"#"
+				}
+			],
+			"15:00 - 16:00":[
+				{
+					"titulo":"Informática no Ensino da Matemática",
+					"palestrante":"Profa. Dra. Terezinha Nunes (Oxford University)",
+					"local":"#"
+				}
+			],	
+			"16:00 - 17:00":[
+				{
+					"titulo":"Projeto HEiMDaLL: A criação de um dispositivo de automação residencial",
+					"palestrante":"João de Almeida, Walace Soares e Gabriel Ferreira (FATEC Itapetininga)",
+					"local":"#"
+				}
+			],	
+			"19:00 - 20:30":[
+				{
+					"titulo":"Experiências no Ensino MOOC",
+					"palestrante":"Ricardo Prudenciato (Udemy)",
+					"local":"#"
+				}
+			],
+			"20:30 - 22:00":[
+				{
+					"titulo":"Do Ensino Técnico no IFSP Itapetininga à Competição Competitiva de Programação ",
+					"palestrante":"Felipe Rita (Hotel Urbano)",
+					"local":"#"
+				}
+			]	
+		}
+	],
+	"19-de-novembro":[
+		{
+			"14:00 - 15:00":[
+				{
+					"titulo":"HAR - Human Activity Recognition",
+					"palestrante":"Igor Natal - (IFSP Itapetininga)",
+					"local":"#"
+				}
+			],
+			"16:00 - 17:00":[
+				{
+					"titulo":"O mercado de SAP: Primeiros Passos ",
+					"palestrante":"Roberto Azevedo",
+					"local":"#"
+				}
+			],	
+			"19:00 - 20:30":[
+				{
+					"titulo":"Museus Virtuais e as Tecnologias da Informação",
+					"palestrante":"Prof. Dr. Daniel Fernando Bovolenta Ovigli (UFTM)",
+					"local":"#"
+				}
+			],
+			"20:30 - 22:00":[
+				{
+					"titulo":"Segurança da Informação Pessoal",
+					"palestrante":"Marco A. S. Santos (TV Tem)",
+					"local":"#"
+				}
+			]	
+		}
+	],
+	"20-de-novembro":[
+		{
+			"14:00 - 17:00":[
+				{
+					"titulo":"Mini-curso: Primeiros passos com Latex ",
+					"palestrante":"Carlos Henrique da Silva Santos e Igor Natal - (IFSP Itapetininga)",
+					"local":"#"
+				}
+			],
+			"19:00 - 20:30":[
+				{
+					"titulo":"Mini-curso: Primeiros passos com Latex ",
+					"palestrante":"Carlos Henrique da Silva Santos e Igor Natal - (IFSP Itapetininga)",
+					"local":"#"
+				}
+			]
+		}
+	]
+}
