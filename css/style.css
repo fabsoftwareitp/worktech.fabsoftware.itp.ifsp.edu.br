@@ -1995,7 +1995,7 @@ body .timeline-content p:first-of-type {
   order: -1;
   font-family: "Inconsolata", monospace;
 }
-body .timeline-content .local {
+body .timeline-content .descricao {
   margin-bottom: 2rem;
 }
 body .timeline-block:nth-child(odd)::before {

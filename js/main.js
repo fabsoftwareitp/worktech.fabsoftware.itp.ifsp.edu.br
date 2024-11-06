@@ -88,8 +88,7 @@ $(function(){
 			var all = $("<div>");
 			$.each(this[0], function(index) {	
 				var horario = index;
-				var iconGraduation = "<i class='material-icons ' aria-hidden='true'>person</i>";
-				var iconMap = "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>location_on</i>";
+				var iconDescription = "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i>";
 				var block = $("<div>");
 				var content = $("<div>");
 				$(all).attr('id',date);
@@ -103,8 +102,8 @@ $(function(){
 					if (this.palestrante !="") 
 					//esse tem o link-> $(content).append("<p><a class='speaker-link' href='#"+replaceAll(this.palestrante.replace( /\s/g, '' ).toLowerCase())+"'>"+ this.palestrante+"</a></p>");
 				$(content).append("<p>" + this.palestrante+ "</p>");
-				if (this.local != "")
-					$(content).append("<p class='local'>"+iconMap + " " + this.local+"</p>");
+				if (this.descricao != "")
+					$(content).append("<p class='descricao'>"+ iconDescription + " " + this.descricao+"</p>");
 				$(block).append(content);
 				$(all).append(block);			
 			});
