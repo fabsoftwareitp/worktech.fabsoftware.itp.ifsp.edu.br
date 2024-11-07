@@ -153,17 +153,8 @@ $(function(){
 		};
 	});
 
-	$(".timeline-activation").on("click",function(){
-		$.each($(".timeline-activation"),function(){
-			var activate = $(this).attr("href");
-			$(activate).hide();
-		});
-		var exib = $(this).attr("href");
-
-		$(".timeline-activation").removeClass("active");	
-		$(this).addClass("active");
-		$(exib).show("fast");
-		return false;
+	$(document).ready(function(){
+		$(".timeline-activation:first").addClass("active");
+		$($(".timeline-activation:first").attr("href")).show("fast");
 	});
-
 });
