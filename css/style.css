@@ -45,6 +45,11 @@ body .f-900 {
 body .f-700 {
   font-weight: 700;
 }
+
+body .fs {
+  font-size: 4rem;
+}
+
 body .hoverable-text {
   -webkit-transition: all 0.99s ease;
   -moz-transition: all 0.99s ease;
@@ -2116,6 +2121,10 @@ body.dark .timeline-activation {
 @media screen and (max-width: 600px) {
   body.programacao h1, body.local-page h1 {
     font-size: 2.5rem !important;
+  }
+
+  body .fs {
+    font-size: 3rem;
   }
 }
 
