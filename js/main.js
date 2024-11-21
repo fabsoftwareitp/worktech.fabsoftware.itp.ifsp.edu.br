@@ -1,37 +1,7 @@
-$(function(){
-
-	function includeHTML() {
-		var z, i, elmnt, file, xhttp;
-		z = document.getElementsByTagName("*");
-		for (i = 0; i < z.length; i++) {
-		  elmnt = z[i];
-		  file = elmnt.getAttribute("w3-include-html");
-		  if (file) {
-			xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-			  if (this.readyState == 4) {
-				if (this.status == 200) {
-				  elmnt.innerHTML = this.responseText;
-				  var elems = document.querySelectorAll('.sidenav');
-				  var instances = M.Sidenav.init(elems);
-				}
-				if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-				elmnt.removeAttribute("w3-include-html");
-				includeHTML();
-			  }
-			} 
-			xhttp.open("GET", file, true);
-			xhttp.send();
-			return;
-		  }
-		}
-	  }
-	includeHTML();
-	
+$(function() {
 	$(document).ready(function(){
 		$('.tooltipped').tooltip();
 	});
-
 
 	function acendeLampada(){
 		$("#lamp a").removeClass("black");
@@ -81,7 +51,6 @@ $(function(){
 		}
 
 	});
-
 
 	$.getJSON( "./jsons/workshops.json", function(data, index) {			
 		$.each(data, function(index){
@@ -145,13 +114,24 @@ $(function(){
 		});
 	}
 
-	$("a").on("click", function(){
-		var link = $(this).attr("href");
-		if(link[0] == "#"){
-			var posLink = $(link).offset().top;
-
-			$("html, body").animate({scrollTop:700},'swing');
-		};
+	$(document).ready(function() {
+		let links = document.querySelectorAll("a")
+	
+		links.forEach(link => {
+			link.addEventListener('click', function(event) {
+				event.preventDefault();
+	
+				let target = $(this.hash);
+	
+				if (target.length) {
+					let position = target.offset().top;
+	
+					$('html, body').animate({
+						scrollTop: position
+					}, 700);
+				}
+			});
+		});
 	});
 
 	$(document).ready(function(){
@@ -159,3 +139,8 @@ $(function(){
 		$($(".timeline-activation:first").attr("href")).show("fast");
 	});
 });
+
+function navbarToggle() {
+	const navbarMenu = document.querySelector('#navigation-bar');
+	navbarMenu.classList.toggle('active');
+}
