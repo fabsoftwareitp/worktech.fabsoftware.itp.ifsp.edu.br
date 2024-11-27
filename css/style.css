@@ -2115,10 +2115,55 @@ body.dark .timeline-activation {
   color: white;
 }
 
+body .nav1 {
+  background: rgba(0, 0, 0, 0);
+}
+
+body .nav2 {
+  position: fixed; /* Muda para fixed para ficar sobre outros elementos */
+  top: 0; /* Posiciona no topo da página */
+  left: 0; /* Alinha à esquerda */
+  height: 100vh; /* Altura total da tela */
+  width: 300px; /* Largura da barra de navegação */
+  background: rgba(0, 0, 0, 0.850);
+  transform: translateX(0%);
+  display: none; /* Inicialmente escondida */
+  z-index: 1000; /* Z-index alto para ficar acima de outros elementos */
+}
+
 body .navbar {
   display: flex;
   justify-content: right;
 }
+
+body .lista01 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: white 1px solid;
+  height: 15vh;
+}
+
+body .logo-worktech-white {
+  max-width: 42%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  body .nav2 {
+      display: block; /* Exibe a nav2 em telas menores */
+  }
+
+  .navbar2 {
+      display: flex;
+      flex-direction: column;
+  }
+
+  body .nav1 {
+      display: none; /* Oculta a nav1 em telas menores */
+  }
+}
+
 
 @media screen and (max-width: 600px) {
   body.programacao h1, body.local-page h1 {
