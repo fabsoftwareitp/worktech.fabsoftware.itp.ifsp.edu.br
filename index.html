@@ -10,6 +10,7 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -24,7 +25,10 @@
   <div class="header">
 
     <nav class="nav1">
-      <ul class="navbar">
+      <button class="navButton" onclick="navbarToggle()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="navbar1">
         <li><a href="index.html">Início</a></li>
         <li><a href="#programacao">Programação</a></li>
         <li><a href="#inscricoes">Inscrições</a></li>
@@ -35,10 +39,33 @@
     <nav class="nav2">
       <ul class="navbar2">
         <li class="lista01"><img src="img/logo_worktech_remake.png" class="responsive-img navbar logo-worktech-white"></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="#programacao">Programação</a></li>
-        <li><a href="#inscricoes">Inscrições</a></li>
-        <li><a href="#local">Local</a></li>
+        <li class="listaIcone">
+          <div>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          </div>
+          <a href="index.html">Início</a>
+        </li>
+
+        <li class="listaIcone">
+          <div>
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+          </div>
+          <a href="#programacao">Programação</a>
+        </li>
+
+        <li class="listaIcone">
+          <div>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </div>
+          <a href="#inscricoes">Inscrições</a>
+        </li>
+
+        <li class="listaIcone">
+          <div>
+            <i class="fa fa-map-marker"></i>
+          </div>
+          <a href="#local">Local</a>
+        </li>
       </ul>
     </nav>
 

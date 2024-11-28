@@ -141,6 +141,29 @@ $(function() {
 });
 
 function navbarToggle() {
-	const navbarMenu = document.querySelector('#navigation-bar');
-	navbarMenu.classList.toggle('active');
+    let navbarMenu = document.querySelector('.nav2');
+
+    if (navbarMenu.classList.contains('active')) {
+        navbarMenu.classList.remove('active');
+        setTimeout(() => {
+            navbarMenu.classList.add('inactive');
+        }, 300);
+    } else {
+        navbarMenu.classList.remove('inactive'); 
+        navbarMenu.classList.add('active'); 
+    }
 }
+
+document.addEventListener('click', function(event) {
+    let navbarMenu = document.querySelector('.nav2');
+    let navButton = document.querySelector('.navButton');
+
+    if (!navbarMenu.contains(event.target) && !navButton.contains(event.target)) {
+        if (navbarMenu.classList.contains('active')) {
+            navbarMenu.classList.remove('active');
+            setTimeout(() => {
+                navbarMenu.classList.add('inactive');
+            }, 300);
+        }
+    }
+});

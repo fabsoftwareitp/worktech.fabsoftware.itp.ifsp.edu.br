@@ -8,6 +8,7 @@ body {
   background: white;
   color: black !important;
 }
+
 body img {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -2116,24 +2117,39 @@ body.dark .timeline-activation {
 }
 
 body .nav1 {
-  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
 }
 
 body .nav2 {
-  position: fixed; /* Muda para fixed para ficar sobre outros elementos */
-  top: 0; /* Posiciona no topo da página */
-  left: 0; /* Alinha à esquerda */
-  height: 100vh; /* Altura total da tela */
-  width: 300px; /* Largura da barra de navegação */
+  position: fixed;
+  top: 0;
+  left: -300px;
+  height: 100vh;
+  width: 300px;
   background: rgba(0, 0, 0, 0.850);
-  transform: translateX(0%);
-  display: none; /* Inicialmente escondida */
-  z-index: 1000; /* Z-index alto para ficar acima de outros elementos */
+  opacity: 0;  
+  visibility: hidden; 
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
 }
 
-body .navbar {
+body .nav2.active {
+  left: 0;
+  opacity: 1; 
+  visibility: visible; 
+}
+
+body .nav2.inactive {
+  left: -300px;
+  opacity: 0; 
+  visibility: hidden; 
+}
+
+body .navbar1 {
   display: flex;
   justify-content: right;
+  width: 100%;
 }
 
 body .lista01 {
@@ -2142,6 +2158,7 @@ body .lista01 {
   align-items: center;
   border-bottom: white 1px solid;
   height: 15vh;
+  margin-bottom: 7%;
 }
 
 body .logo-worktech-white {
@@ -2149,21 +2166,48 @@ body .logo-worktech-white {
   height: auto;
 }
 
+body .listaIcone {
+  display: flex;
+  margin: 0% 0% 0% 10%;
+}
+
+body .fa {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: white;
+}
+
+body .navButton {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  display: none;
+  margin-left: 2%;
+}
+
+body .navButton {
+  cursor: pointer;
+}
+
+body .hidden {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  body .nav2 {
-      display: block; /* Exibe a nav2 em telas menores */
+  body .navbar1 {
+    display: none;
+  }
+
+  body .navButton {
+    display: block;
   }
 
   .navbar2 {
-      display: flex;
-      flex-direction: column;
-  }
-
-  body .nav1 {
-      display: none; /* Oculta a nav1 em telas menores */
+    display: flex;
+    flex-direction: column;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   body.programacao h1, body.local-page h1 {
