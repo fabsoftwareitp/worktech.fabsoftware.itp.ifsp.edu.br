@@ -1,156 +1,126 @@
-$(function() {
-	$(document).ready(function(){
-		$('.tooltipped').tooltip();
-	});
+document.addEventListener('DOMContentLoaded', function() {
+    function acendeLampada() {
+        let lampLink = document.querySelector("#lamp a");
+        lampLink.classList.remove("black");
+        lampLink.classList.add("white");
+        let lampIcon = lampLink.querySelector("i");
+        lampIcon.classList.remove("white-text");
+        lampIcon.classList.add("orange-text");
+        document.getElementById("lamp").style.transform = "rotate(180deg)";
+    }
 
-	function acendeLampada(){
-		$("#lamp a").removeClass("black");
-		$("#lamp a").addClass("white");
-		$("#lamp a i").removeClass("white-text");
-		$("#lamp a i").addClass("orange-text");
-		$("#lamp").css({
-			"transform":"rotate(180deg)"
-		});
-	}
-	function apagaLampada(){
-		$("#lamp a").removeClass("white");
-		$("#lamp a").addClass("black");
-		$("#lamp a i").removeClass("orange-text");
-		$("#lamp a i").addClass("white-text");
-		$("#lamp").css({
-			"transform":"rotate(+360deg)"
-		});
-	}
-	if (localStorage.getItem("moment") != null) {
-		if (localStorage.getItem("moment") == "dark") {
-			$("body").addClass("dark");	
-			$("#logo-topo-home").attr("src", "img/logo_worktech_remake_white.png");
-			$("#logo_footer").attr("src", "img/ifsp_white.png");
-			apagaLampada();
-		}else{
-			$("body").removeClass("dark");	
-			$("#logo-topo-home").attr("src", "img/logo_worktech_remake.png");
-			$("#logo_footer").attr("src", "img/ifsp.png");
-			acendeLampada();
-		}
-	}
+    function apagaLampada() {
+        let lampLink = document.querySelector("#lamp a");
+        lampLink.classList.remove("white");
+        lampLink.classList.add("black");
+        let lampIcon = lampLink.querySelector("i");
+        lampIcon.classList.remove("orange-text");
+        lampIcon.classList.add("white-text");
+        document.getElementById("lamp").style.transform = "rotate(360deg)";
+    }
 
-	$("#lamp").on("click", function(){
-		$("body").toggleClass("dark");
-		var logo_atual = $("#logo-topo-home").attr("src");
-		if (logo_atual == "img/logo_worktech_remake.png") {
-			$("#logo-topo-home").attr("src", "img/logo_worktech_remake_white.png");
-			$("#logo_footer").attr("src", "img/ifsp_white.png");
-			localStorage.setItem("moment", "dark");
-			acendeLampada();
-		}else{
-			$("#logo-topo-home").attr("src", "img/logo_worktech_remake.png");
-			$("#logo_footer").attr("src", "img/ifsp.png");
-			localStorage.setItem("moment", "light");
-			apagaLampada();
-		}
+    let moment = localStorage.getItem("moment");
+    if (moment) {
+        if (moment === "dark") {
+            document.body.classList.add("dark");
+            document.getElementById("logo-topo-home").src = "img/logo_worktech_remake_white.png";
+            document.getElementById("logo_footer").src = "img/ifsp_white.png";
+            apagaLampada();
+        } else {
+            document.body.classList.remove("dark");
+            document.getElementById("logo-topo-home").src = "img/logo_worktech_remake.png";
+            document.getElementById("logo_footer").src = "img/ifsp.png";
+            acendeLampada();
+        }
+    }
 
-	});
+    document.getElementById("lamp").addEventListener("click", function() {
+        document.body.classList.toggle("dark");
+        let logoAtual = document.getElementById("logo-topo-home").src;
+        if (logoAtual.includes("logo_worktech_remake.png")) {
+            document.getElementById("logo-topo-home").src = "img/logo_worktech_remake_white.png";
+            document.getElementById("logo_footer").src = "img/ifsp_white.png";
+            localStorage.setItem("moment", "dark");
+            acendeLampada();
+        } else {
+            document.getElementById("logo-topo-home").src = "img/logo_worktech_remake.png";
+            document.getElementById("logo_footer").src = "img/ifsp.png";
+            localStorage.setItem("moment", "light");
+            apagaLampada();
+        }
+    });
 
-	$.getJSON( "./jsons/workshops.json", function(data, index) {			
-		$.each(data, function(index){
-			var date = index;
-			var all = $("<div>");
-			$.each(this[0], function(index) {	
-				var horario = index;
-				var iconDescription = "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i>";
-				var block = $("<div>");
-				var content = $("<div>");
-				$(all).attr('id', date);
-				$(all).css("display", "none");
-				$(block).addClass("timeline-block");	
-				$(content).addClass("timeline-content");
-				$(content).append("<p>" + horario + "</p>");
-	
-				$.each(this, function(index){				
-					$(content).append("<h3 class='md-text'>" + this.titulo + "</h3>");
-					if (this.palestrante != "") 
-						$(content).append("<p>" + this.palestrante + "</p>");
-					if (this.descricao != "")
-						$(content).append("<p class='descricao'>" + iconDescription + " " + this.descricao + "</p>");
-					
-					// Adicionando o link do currículo do palestrante, caso exista
-					if (this.Curriculo) {
-						var linkCurriculo = $("<a>").attr("href", this.Curriculo).text("Currículo").addClass("curriculo-link");
-						$(content).append(linkCurriculo);
-					}
-	
-					$(block).append(content);
-					$(all).append(block);			
-				});
-	
-			});
-			$(".timeline").append(all);
-			// $(".timeline .timeline-block:first-child").prepend("<h1>"+index+"</h1>");
-			$($("a.timeline-activation.active").attr("href")).show("fast");
-		});
-	});
-	
-	$(window).scroll( function(){    
-		$('.timeline-block').each( function(i){            
-			var bottom_of_object = $(this).offset().top;
-			var bottom_of_window = $(window).scrollTop() + $(window).height();           
-			if( bottom_of_window > (bottom_of_object+300) ){                
-				$(this).addClass("current");
-			}else{
-				$(this).removeClass("current");
-			}     
-		});        
-	});   
-	var altura = $("body").height();
+    fetch("./jsons/workshops.json")
+        .then(response => response.json())
+        .then(data => {
+            Object.entries(data).forEach(([date, workshops]) => {
+                let all = document.createElement("div");
+                all.id = date;
+                all.style.display = "none";
 
-	if($(window).scrollTop() < altura/5){
-		$("#up").css({
-			"opacity":"0"
-		});
-	}else{
-		$("#up").css({
-			"opacity":"1"
-		});
-	}
+                workshops.forEach(workshop => {
+                    let block = document.createElement("div");
+                    let content = document.createElement("div");
+                    block.classList.add("timeline-block");
+                    content.classList.add("timeline-content");
+                    content.innerHTML = `<p>${workshop.horario}</p>
+                                         <h3 class='md-text'>${workshop.titulo}</h3>
+                                         ${workshop.palestrante ? `<p>${workshop.palestrante}</p>` : ''}
+                                         ${workshop.descricao ? `<p class='descricao'><i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i> ${workshop.descricao}</p>` : ''}
+                                         ${workshop.Curriculo ? `<a href='${workshop.Curriculo}' class='curriculo-link'>Currículo</a>` : ''}`;
 
-	$(document).ready(function() {
-		let links = document.querySelectorAll("a")
-	
-		links.forEach(link => {
-			link.addEventListener('click', function(event) {
-				event.preventDefault();
-	
-				let target = $(this.hash);
-	
-				if (target.length) {
-					let position = target.offset().top;
-	
-					$('html, body').animate({
-						scrollTop: position
-					}, 700);
-				}
-			});
-		});
-	});
+                    block.appendChild(content);
+                    all.appendChild(block);
+                });
 
-	$(document).ready(function(){
-		$(".timeline-activation:first").addClass("active");
-		$($(".timeline-activation:first").attr("href")).show("fast");
-	});
+                document.querySelector(".timeline").appendChild(all);
+                document.querySelector(document.querySelector("a.timeline-activation.active").getAttribute("href")).style.display = "block";
+            });
+        });
+
+    window.addEventListener("scroll", function() {
+        document.querySelectorAll('.timeline-block').forEach(block => {
+            let bottomOfObject = block.getBoundingClientRect().top + window.scrollY;
+            let bottomOfWindow = window.scrollY + window.innerHeight;
+            if (bottomOfWindow > (bottomOfObject + 300)) {
+                block.classList.add("current");
+            } else {
+                block.classList.remove("current");
+            }
+        });
+    });
+
+    let altura = document.body.scrollHeight;
+    document.getElementById("up").style.opacity = (window.scrollY < altura / 5) ? "0" : "1";
+
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            let target = document.querySelector(this.hash);
+            if (target) {
+                let position = target.offsetTop;
+                window.scrollTo({
+                    top: position,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    document.querySelector(".timeline-activation:first-child").classList.add("active");
+    document.querySelector(document.querySelector(".timeline-activation:first-child").getAttribute("href")).style.display = "block";
 });
 
 function navbarToggle() {
     let navbarMenu = document.querySelector('.nav2');
-
     if (navbarMenu.classList.contains('active')) {
         navbarMenu.classList.remove('active');
         setTimeout(() => {
             navbarMenu.classList.add('inactive');
         }, 300);
     } else {
-        navbarMenu.classList.remove('inactive'); 
-        navbarMenu.classList.add('active'); 
+        navbarMenu.classList.remove('inactive');
+        navbarMenu.classList.add('active');
     }
 }
 
