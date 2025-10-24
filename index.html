@@ -1,116 +1,318 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>XI Worktech - IFSP Itapetininga</title>
+    <link
+      rel="icon"
+      href="old/worktech.fabsoftware.itp.ifsp.edu.br/img/logo_worktech.png"
+    />
+    <script>
+      // Tailwind v4 (browser)
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  </head>
+  <body class="bg-black text-gray-200 antialiased selection:bg-emerald-500/20">
+    <header
+      class="fixed inset-x-0 top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 border-b border-white/5"
+    >
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#" class="inline-flex items-center gap-3">
+            <img
+              id="brandLogo"
+              src="old/worktech.fabsoftware.itp.ifsp.edu.br/img/logo_worktech_remake_white.png"
+              alt="Worktech"
+              class="h-8 w-auto"
+            />
+            <span class="sr-only">Worktech</span>
+          </a>
+          <div class="hidden md:flex items-center gap-8 text-sm">
+            <a href="#programacao" class="hover:text-white/90">Programação</a>
+            <a href="#inscricoes" class="hover:text-white/90">Inscrições</a>
+            <a href="#local" class="hover:text-white/90">Local</a>
+            <a href="#footer" class="hover:text-white/90">Contato</a>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              id="themeToggle"
+              aria-label="Alternar tema"
+              class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            >
+              <svg
+                id="themeIcon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                class="h-5 w-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-<head>
-  <title>Início - XI Worktech </title>
-  <meta charset="utf-8">
-  <!--Import Google Icon Font-->
-  <link href="css/material.icons.css" rel="stylesheet">
-  <!--Import materialize.css-->
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+    <main>
+      <section id="hero" class="relative isolate pt-40 sm:pt-48">
+        <div
+          id="heroBgGlow"
+          class="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_20%,rgba(16,185,129,0.15),transparent_60%),radial-gradient(30%_40%_at_80%_10%,rgba(168,85,247,0.15),transparent_60%),radial-gradient(30%_30%_at_10%_80%,rgba(59,130,246,0.12),transparent_60%)]"
+        ></div>
+        <svg
+          id="heroOrbs"
+          class="pointer-events-none absolute inset-x-0 top-10 -z-10 h-[420px] w-full"
+          viewBox="0 0 1200 420"
+          aria-hidden="true"
+        >
+          <defs>
+            <radialGradient id="orbG1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbG2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#a78bfa" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbG3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.30" />
+              <stop offset="100%" stop-color="#60a5fa" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <circle id="orb1" cx="220" cy="140" r="120" fill="url(#orbG1)" />
+          <circle id="orb2" cx="900" cy="120" r="140" fill="url(#orbG2)" />
+          <circle id="orb3" cx="640" cy="320" r="110" fill="url(#orbG3)" />
+        </svg>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid items-center gap-12 lg:grid-cols-2 xl:gap-16">
+            <div>
+              <p
+                class="text-emerald-400 font-semibold tracking-wide"
+                data-reveal
+              >
+                IFSP Câmpus Itapetininga
+              </p>
+              <h1
+                id="heroTitle"
+                data-reveal
+                class="mt-2 text-4xl font-extrabold tracking-tight text-white sm:text-6xl"
+              >
+                XI Worktech
+              </h1>
+              <p
+                id="heroSubtitle"
+                data-reveal
+                class="mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg"
+              >
+                Dia 30 de novembro, no Câmpus Itapetininga. Um encontro com
+                palestras e experiências sobre tecnologia, inovação e educação.
+              </p>
+              <svg
+                id="subtitleUnderline"
+                class="mt-2 h-6 w-48 text-emerald-400/70"
+                viewBox="0 0 200 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  id="underlinePath"
+                  d="M2 12 C 40 30, 160 -6, 198 12"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                  href="#programacao"
+                  class="inline-flex items-center rounded-lg bg-white text-gray-900 px-5 py-2.5 text-sm font-semibold shadow hover:bg-gray-100"
+                >
+                  Ver programação
+                </a>
+                <a
+                  href="#inscricoes"
+                  class="inline-flex items-center rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  Inscrições
+                </a>
+              </div>
+            </div>
+            <div class="relative">
+              <div id="heroMedia" class="aspect-[4/3] w-full rounded-2xl">
+                <div
+                  class="h-full w-full rounded-xl bg-[url('./worktech.png')] bg-contain bg-center"
+                ></div>
+              </div>
+              <div
+                class="pointer-events-none absolute -right-6 -top-6 hidden h-24 w-24 rounded-full bg-emerald-400/20 blur-2xl md:block"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="img/logo_worktech.png">
-  <meta name="theme-color" content="#212121">
+      <section id="programacao" class="relative py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="mb-10 flex items-end justify-between">
+            <div>
+              <h2
+                class="text-3xl font-bold text-white sm:text-4xl"
+                data-reveal-title
+              >
+                Programação
+              </h2>
+              <p class="mt-3 text-white/60" data-reveal>
+                Cronograma do dia 30 de novembro
+              </p>
+            </div>
+            <a
+              href="#inscricoes"
+              class="hidden sm:inline-flex rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/10"
+              >Inscreva-se</a
+            >
+          </div>
+          <div id="timeline" class="relative">
+            <div
+              class="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/20 to-white/0"
+            ></div>
+            <div id="timelineItems" class="space-y-8 pl-12"></div>
+          </div>
+        </div>
+      </section>
 
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
-<body class="dark">
-  <div class="header">
-    <!-- include -->
-    <div w3-include-html="view/components/navbar.html"></div>
-
-    <div class="center">
-      <img id="logo-topo-home" src="img/logo_worktech_remake_white.png" class="responsive-img logo-worktech">
-      <h4 class="thin mt-5 mt-sm-5 mb-sm-5">Dia 30 de novembro<br> no Câmpus Itapetininga</h4>
-    </div>
-  </div>
-
-  <!-- PROGRAMACAO -->
-  <div id="programacao" class="programacao">
-    <div class="container-fluid position-relative mt-5">
-      <img src="img/detail-left-loccal.png" id="detail-right" class="hide-on-med-and-down">
-      <h1 class="uppercase hoverable-text purple-text f-700 fs mt-3 center">Programação</h1>
-      <div class="row center mt-3 mb-3">
-        <div class="col s8 offset-s2">
-          <div class="row">
-            <div class="center-align col m12">
-              <a href="#30-de-novembro" class="timeline-activation">
-                <i class="material-icons" aria-hidden="true">calendar_today</i> Dia 30
+      <section id="inscricoes" class="relative overflow-hidden py-24 sm:py-32">
+        <div
+          class="absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_80%_40%,rgba(16,185,129,0.12),transparent_60%)]"
+        ></div>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid items-center gap-8 lg:grid-cols-2">
+            <div>
+              <h2
+                class="text-3xl font-bold text-white sm:text-4xl"
+                data-reveal-title
+              >
+                Inscrições
+              </h2>
+              <p class="mt-4 text-white/70" data-reveal>
+                As inscrições garantem a participação e o certificado.
+              </p>
+            </div>
+            <div class="flex lg:justify-end">
+              <a
+                href="https://suap.ifsp.edu.br/eventos/inscricao_publica/11287/"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center rounded-lg bg-emerald-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:bg-emerald-600"
+              >
+                Realizar inscrição
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="container schedule">
-        <div class="row timeline">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div id="inscricoes" class="container-fluid position-relative">
-    <img src="img/detail1.png" id="detail1" class="hide-on-med-and-down">
-    <div class="row mt-15 ">
-      <div class="col m4 s12 offset-m6 mt-sm-3 mb-sm-5 right-align">
-        <h2 class="uppercase cyan-text f-700 fs text-darken-1 hoverable-text">Inscrições</h2>
-        <h4 class="thin">As incrições garantem a participação e o certificado!</h4>
-        <a href="https://suap.ifsp.edu.br/eventos/inscricao_publica/11287/"
-          target="_blank" class="btn-large mt-sm-1 cyan darken-1"><i class="material-icons left">person_add</i>Realizar
-          Inscrição</a>
-      </div>
-    </div>
-  </div>
-
-  <div id="local" class="container-fluid mt-15 index-local mb-5">
-    <div class="container left-align">
-      <h2 class="uppercase purple-text text-darken-2 f-700 fs text-darken-2 hoverable-text pt-5">Local</h2>
-      <div class="row">
-        <div class="col-12">
-          <h5 class="thin mt-1 thin">
-            Esse ano o WorkTech <strong>será presencial</strong>, sendo realizado no Câmpus Itapetininga
-          </h5>
-          <a href="https://maps.app.goo.gl/Kb6QYDuV5dgss5Nr5" target="_blank"
-            class="btn-large mt-sm-1 purple mt-3 mb-3">
-            <i class="material-icons left">featured_video</i>Instituto Federal Câmpus Itapetininga
+      <section id="local" class="relative py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2
+            class="text-3xl font-bold text-white sm:text-4xl"
+            data-reveal-title
+          >
+            Local
+          </h2>
+          <p class="mt-4 text-white/70" data-reveal>
+            O Worktech será presencial, realizado no Câmpus Itapetininga.
+          </p>
+          <div class="mt-8 overflow-hidden rounded-2xl border border-white/10">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2932843709273!2d-48.02112402391343!3d-23.593812462786666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5cbf41ebfcf31%3A0xa65e4fb6d75446bf!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%2C%20Ci%C3%AAncia%20e%20Tecnologia%20de%20S%C3%A3o%20Paulo%2C%20Campus%20Itapetininga!5e0!3m2!1spt-PT!2sbr!4v1731000272375!5m2!1spt-PT!2sbr"
+              width="100%"
+              height="420"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/Kb6QYDuV5dgss5Nr5"
+            target="_blank"
+            rel="noopener"
+            class="mt-6 inline-flex items-center rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+          >
+            Instituto Federal Câmpus Itapetininga
           </a>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2932843709273!2d-48.02112402391343!3d-23.593812462786666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5cbf41ebfcf31%3A0xa65e4fb6d75446bf!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%2C%20Ci%C3%AAncia%20e%20Tecnologia%20de%20S%C3%A3o%20Paulo%2C%20Campus%20Itapetininga!5e0!3m2!1spt-PT!2sbr!4v1731000272375!5m2!1spt-PT!2sbr"
-            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="border-t border-white/5 py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <img
+          id="footerLogo"
+          src="old/worktech.fabsoftware.itp.ifsp.edu.br/img/ifsp_white.png"
+          alt="IFSP"
+          class="mx-auto h-10 w-auto"
+        />
+        <p class="mt-3 text-sm text-white/70">
+          O Worktech é uma iniciativa do IFSP Câmpus Itapetininga
+        </p>
+        <p class="mt-1 text-xs text-white/50">
+          © 2024 - Todos os direitos reservados
+        </p>
+        <p class="mt-3 text-xs text-white/50">
+          Design by
+          <a
+            class="underline decoration-dotted hover:text-white/70"
+            href="https://github.com/danilocbueno"
+            target="_blank"
+            rel="noopener"
+            >@danilocbueno</a
+          >
+          e
+          <a
+            class="underline decoration-dotted hover:text-white/70"
+            href="https://paulhenrique.github.io/ph"
+            target="_blank"
+            rel="noopener"
+            >@paulhenrique</a
+          >
+        </p>
       </div>
-    </div>
-  </div>
-  
-  <div class="container-fluid footer-final">
-    <div class="center-align  mt-4">
-      <img id="logo_footer" src="img/ifsp_white.png" class="responsive-img footer-logo" style="width: 20vw;">
-      <p class=" f-700 uppercase">O Worktech é uma iniciativa do IFSP Câmpus Itapetininga</p>
-      <p class="mt-3">© 2024 - Todos os direitos reservados</p>
-      <p class="so-sm-text white-text mb-0 pb-5 text-about">Designed and built with a lot of patience, care and haste by
-        <a class="pink-text" href="https://github.com/danilocbueno">@danilocbueno</a> and <a class="pink-text"
-          href="https://paulhenrique.github.io/ph" target="_blank">@paulhenrique</a></p>
-    </div>
+    </footer>
 
-  </div>
-  </div>
+    <button
+      id="scrollTop"
+      aria-label="Voltar ao topo"
+      class="fixed bottom-6 right-6 hidden rounded-full border border-white/10 bg-white/5 p-3 text-white shadow-lg backdrop-blur hover:bg-white/10"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="h-5 w-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M6 15l6-6 6 6"
+        />
+      </svg>
+    </button>
 
-  <!-- Compiled and minified JavaScript -->
-  <div class="fixed-action-btn" id="lamp">
-    <a class="btn-floating btn-large black">
-      <i class="large material-icons">wb_incandescent</i>
-    </a>
-  </div>
-  <script src="js/jquery.js"></script>
-  <script src="js/materialize.min.js"></script>
-  <script src="js/main.js"></script>
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
