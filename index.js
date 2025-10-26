@@ -24,9 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("text-gray-900", !isDark);
 
     if (brandLogo) {
-      brandLogo.src = isDark
-        ? "old/worktech.fabsoftware.itp.ifsp.edu.br/img/logo_worktech_remake_white.png"
-        : "old/worktech.fabsoftware.itp.ifsp.edu.br/img/logo_worktech_remake.png";
+      brandLogo.src = "Logo.png";
     }
     if (footerLogo) {
       footerLogo.src = isDark

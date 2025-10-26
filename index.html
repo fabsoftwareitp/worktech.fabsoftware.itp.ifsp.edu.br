@@ -42,26 +42,6 @@
             <a href="#footer" class="hover:text-white/90">Contato</a>
           </div>
           <div class="flex items-center gap-2">
-            <button
-              id="themeToggle"
-              aria-label="Alternar tema"
-              class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
-            >
-              <svg
-                id="themeIcon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                class="h-5 w-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </nav>
@@ -69,10 +49,11 @@
 
     <main>
       <section id="hero" class="relative isolate pt-40 sm:pt-48">
-        <div
+       <div
           id="heroBgGlow"
-          class="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_20%,rgba(16,185,129,0.15),transparent_60%),radial-gradient(30%_40%_at_80%_10%,rgba(168,85,247,0.15),transparent_60%),radial-gradient(30%_30%_at_10%_80%,rgba(59,130,246,0.12),transparent_60%)]"
+          class="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_20%,rgba(90,90,90,0.25),transparent_60%),radial-gradient(30%_40%_at_80%_10%,rgba(180,180,180,0.20),transparent_60%),radial-gradient(30%_30%_at_10%_80%,rgba(230,230,230,0.15),transparent_60%)]"
         ></div>
+
         <svg
           id="heroOrbs"
           class="pointer-events-none absolute inset-x-0 top-10 -z-10 h-[420px] w-full"
@@ -80,29 +61,35 @@
           aria-hidden="true"
         >
           <defs>
+            <!-- Cinza médio escuro -->
             <radialGradient id="orbG1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
-              <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+              <stop offset="0%" stop-color="#5a5a5a" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#5a5a5a" stop-opacity="0" />
             </radialGradient>
+
+            <!-- Cinza claro -->
             <radialGradient id="orbG2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35" />
-              <stop offset="100%" stop-color="#a78bfa" stop-opacity="0" />
+              <stop offset="0%" stop-color="#bfbfbf" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#bfbfbf" stop-opacity="0" />
             </radialGradient>
+
+            <!-- Branco suave -->
             <radialGradient id="orbG3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.30" />
-              <stop offset="100%" stop-color="#60a5fa" stop-opacity="0" />
+              <stop offset="0%" stop-color="#e6e6e6" stop-opacity="0.25" />
+              <stop offset="100%" stop-color="#e6e6e6" stop-opacity="0" />
             </radialGradient>
           </defs>
+
           <circle id="orb1" cx="220" cy="140" r="120" fill="url(#orbG1)" />
           <circle id="orb2" cx="900" cy="120" r="140" fill="url(#orbG2)" />
           <circle id="orb3" cx="640" cy="320" r="110" fill="url(#orbG3)" />
         </svg>
+
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="grid items-center gap-12 lg:grid-cols-2 xl:gap-16">
             <div>
-              <p
-                class="text-emerald-400 font-semibold tracking-wide"
-                data-reveal
+              <p class="text-gray-300 font-semibold tracking-wide" 
+              data-reveal
               >
                 IFSP Câmpus Itapetininga
               </p>
@@ -121,21 +108,6 @@
                 Dia 06 & 07 de novembro, no Câmpus Itapetininga. Um encontro com
                 palestras e experiências sobre tecnologia, inovação e educação.
               </p>
-              <svg
-                id="subtitleUnderline"
-                class="mt-2 h-6 w-48 text-emerald-400/70"
-                viewBox="0 0 200 24"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  id="underlinePath"
-                  d="M2 12 C 40 30, 160 -6, 198 12"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-              </svg>
               <div class="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#programacao"
@@ -152,10 +124,10 @@
               </div>
             </div>
             <div class="relative">
-              <div id="heroMedia" class="aspect-[4/3] w-full rounded-2xl">
-                <div
-                  class="h-full w-full rounded-xl bg-[url('./Logo.png')] bg-contain bg-center"
-                ></div>
+             <div id="heroMedia" class="aspect-[4/3] w-full rounded-2xl flex items-center justify-center">
+            <img src="Logo.png" alt="Logo Worktech" class="max-w-full h-auto rounded-xl" />
+          </div>
+
               </div>
               <div
                 class="pointer-events-none absolute -right-6 -top-6 hidden h-24 w-24 rounded-full bg-emerald-400/20 blur-2xl md:block"
@@ -175,8 +147,9 @@
               >
                 Programação
               </h2>
+
               <p class="mt-3 text-white/60" data-reveal>
-                Cronograma do dia 06 de novembro
+                Cronograma do dia <strong>06 de novembro</strong>
               </p>
 
               <br>
@@ -185,84 +158,77 @@
 
               <!-- MANHÃ -->
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">06/11 - Quinta-Feira - 09:00</div>
+                <div class="text-sm font-medium text-gray-300">06/11 - Quinta-Feira - 09:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Elielter de Araújo Welter</h3>
-                <p class="text-white/70">Criatividade Computacional: IA como aliada na resolução de problemas do cotidiano</p>
+                <p class="text-white/70">Criatividade Computacional: IA como aliada na resolução de problemas do cotidiano.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">06/11 - Quinta-Feira - 10:00</div>
+                <div class="text-sm font-medium text-gray-300">06/11 - Quinta-Feira - 10:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Eline Faliane de Araújo Welter</h3>
-                <p class="text-white/70">A Importância dos Grupos de Meninas na Computação: Inclusão e Representatividade no Contexto Escolar</p>
+                <p class="text-white/70">A Importância dos Grupos de Meninas na Computação: Inclusão e Representatividade no Contexto Escolar.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">06/11 - Quinta-Feira - 11:00</div>
+                <div class="text-sm font-medium text-gray-300">06/11 - Quinta-Feira - 11:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Vinicius Henrique Rodrigues Silveira</h3>
-                <p class="text-white/70">Primeiros passos em Testes de Software: Conceitos e Prática</p>
+                <p class="text-white/70">Primeiros passos em Testes de Software: Conceitos e Prática.</p>
               </div>
 
               <!-- NOITE -->
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">06/11 - Quinta-Feira - 19:30 (1h)</div>
+                <div class="text-sm font-medium text-gray-300">06/11 - Quinta-Feira - 19:30</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Roberto Azevedo, Gabriel Henrique Dias dos Anjos, Vinicius Alexandre de Oliveira Zevarex</h3>
-                <p class="text-white/70">Por Dentro do SAP Business One: Como o ERP Conecta Pessoas, Processos e Tecnologia</p>
+                <p class="text-white/70">Por Dentro do SAP Business One: Como o ERP Conecta Pessoas, Processos e Tecnologia.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">06/11 - Quinta-Feira - 20:45</div>
+                <div class="text-sm font-medium text-gray-300">06/11 - Quinta-Feira - 20:45</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Vinicius Henrique Rodrigues Silveira</h3>
-                <p class="text-white/70">Testes de Software: Conceitos e Prática</p>
+                <p class="text-white/70">Testes de Software: Conceitos e Prática.</p>
               </div>
               
               <p class="mt-3 text-white/60" data-reveal>
-                Cronograma do dia 07 de novembro
+                Cronograma do dia <strong>07 de novembro</strong>
               </p>
 
               <!-- MANHÃ -->
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">07/11 - Sexta-Feira - 09:00</div>
+                <div class="text-sm font-medium text-gray-300">07/11 - Sexta-Feira - 09:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Thiago Saraiva de Oliveira</h3>
                 <p class="text-white/70">Todo mundo quer o topo. Poucos desenham a escada.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">07/11 - Sexta-Feira - 10:00</div>
+                <div class="text-sm font-medium text-gray-300">07/11 - Sexta-Feira - 10:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">
                   Eline Faliane de Araújo Welter, Alexandre Drezza Menezes, Lucas de Oliveira Barros Modesto
                 </h3>
-                <p class="text-white/70">Desafios, Códigos e Conquistas: a Experiência da Maratona de Programação</p>
+                <p class="text-white/70">Desafios, Códigos e Conquistas: a Experiência da Maratona de Programação.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">07/11 - Sexta-Feira - 11:00</div>
+                <div class="text-sm font-medium text-gray-300">07/11 - Sexta-Feira - 11:00</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Daniela Almeida - FazMais</h3>
-                <p class="text-white/70">Trilha Futuro Digital e IA - Como integrar novas tecnologias aos processos sem perder o elemento humano</p>
+                <p class="text-white/70">Trilha Futuro Digital e IA - Como integrar novas tecnologias aos processos sem perder o elemento humano.</p>
               </div>
 
               <!-- NOITE -->
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">07/11 - Sexta-Feira - 19:30</div>
+                <div class="text-sm font-medium text-gray-300">07/11 - Sexta-Feira - 19:30</div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Alessandra Rabin</h3>
-                <p class="text-white/70">Liderança educadora</p>
+                <p class="text-white/70">Liderança educadora.</p>
               </div>
 
               <div class="relative rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition">
-                <div class="text-sm font-medium text-emerald-400">07/11 - Sexta-Feira - 20:45 </div>
+                <div class="text-sm font-medium text-gray-300">07/11 - Sexta-Feira - 20:45 </div>
                 <h3 class="mt-1 text-lg font-semibold text-white">Elielter de Araújo Welter</h3>
-                <p class="text-white/70">Criatividade Computacional: IA como aliada à inovação</p>
+                <p class="text-white/70">Criatividade Computacional: IA como aliada à inovação.</p>
               </div>
 
             </div>
 
-            </div>
-            <a
-              href="#inscricoes"
-              class="hidden sm:inline-flex rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/10"
-              >Inscreva-se</a
-            >
-          </div>
           <div id="timeline" class="relative">
             <div
               class="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/20 to-white/0"
@@ -290,12 +256,7 @@
               </p>
             </div>
             <div class="flex lg:justify-end">
-              <a
-                href="https://suap.ifsp.edu.br/eventos/inscricao_publica/11287/"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center rounded-lg bg-emerald-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:bg-emerald-600"
-              >
+              <a href="https://suap.ifsp.edu.br/eventos/inscricao_publica/11287/" target="_blank" rel="noopener" class="inline-flex items-center rounded-lg bg-white text-gray-900 px-5 py-2.5 text-sm font-semibold shadow hover:bg-gray-100">
                 Realizar inscrição
               </a>
             </div>
@@ -312,7 +273,7 @@
             Local
           </h2>
           <p class="mt-4 text-white/70" data-reveal>
-            O Worktech será presencial, realizado no Câmpus Itapetininga.
+            O Worktech será presencial, realizado no Instituto Federal Câmpus Itapetininga.
           </p>
           <div class="mt-8 overflow-hidden rounded-2xl border border-white/10">
             <iframe
@@ -341,7 +302,7 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <img
           id="footerLogo"
-          src="old/worktech.fabsoftware.itp.ifsp.edu.br/img/ifsp_white.png"
+          src="LogoIF.png"
           alt="IFSP"
           class="mx-auto h-10 w-auto"
         />
