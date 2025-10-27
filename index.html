@@ -28,6 +28,58 @@
           transition-duration: 0.01ms !important;
         }
       }
+
+      @media (max-width: 767px) {
+        #mobileOnlyEffects,
+        #progMobileEffects,
+        #inscMobileEffects {
+          display: block;
+        }
+
+        #hero {
+          background: radial-gradient(
+            ellipse 90% 60% at 50% 30%,
+            rgba(255, 255, 255, 0.04),
+            transparent
+          );
+        }
+
+        #programacao {
+          background: radial-gradient(
+            ellipse 80% 50% at 50% 50%,
+            rgba(255, 255, 255, 0.02),
+            transparent
+          );
+        }
+
+        #inscricoes {
+          background: radial-gradient(
+            ellipse 85% 55% at 50% 40%,
+            rgba(255, 255, 255, 0.03),
+            transparent
+          );
+        }
+
+        section {
+          position: relative;
+        }
+
+        #heroTitle {
+          text-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        #programacaoTitle {
+          text-shadow: 0 3px 15px rgba(255, 255, 255, 0.12);
+        }
+      }
+
+      @media (min-width: 768px) {
+        #mobileOnlyEffects,
+        #progMobileEffects,
+        #inscMobileEffects {
+          display: none;
+        }
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -410,6 +462,78 @@
               filter="url(#heroGlow)"
             />
           </g>
+
+          <g id="mobileOnlyEffects" class="md:hidden">
+            <circle
+              id="mobileOrb1"
+              cx="100"
+              cy="450"
+              r="120"
+              fill="url(#orbG1)"
+              opacity="0.5"
+            />
+            <circle
+              id="mobileOrb2"
+              cx="300"
+              cy="700"
+              r="100"
+              fill="url(#orbG2)"
+              opacity="0.4"
+            />
+
+            <g
+              id="mobileRings"
+              stroke="#ffffff"
+              stroke-width="2"
+              fill="none"
+              opacity="0.1"
+            >
+              <circle id="mobileRing1" cx="600" cy="450" r="40" />
+              <circle id="mobileRing2" cx="600" cy="450" r="60" />
+              <circle id="mobileRing3" cx="600" cy="450" r="80" />
+            </g>
+
+            <g id="mobilePulses">
+              <circle
+                class="mobile-pulse"
+                cx="200"
+                cy="250"
+                r="5"
+                fill="#ffffff"
+                opacity="0.6"
+                filter="url(#heroGlow)"
+              />
+              <circle
+                class="mobile-pulse"
+                cx="400"
+                cy="350"
+                r="4"
+                fill="#e5e5e5"
+                opacity="0.5"
+                filter="url(#heroGlow)"
+              />
+              <circle
+                class="mobile-pulse"
+                cx="200"
+                cy="600"
+                r="6"
+                fill="#d4d4d4"
+                opacity="0.7"
+                filter="url(#heroGlow)"
+              />
+            </g>
+
+            <g
+              id="mobileWaves"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              fill="none"
+              opacity="0.15"
+            >
+              <path id="mobileWave1" d="M 0,350 Q 200,320 400,350 T 800,350" />
+              <path id="mobileWave2" d="M 0,550 Q 200,580 400,550 T 800,550" />
+            </g>
+          </g>
         </svg>
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -469,12 +593,12 @@
             <div class="relative order-first md:order-last">
               <div
                 id="heroMedia"
-                class="w-full h-fit max-w-sm rounded-2xl flex items-center justify-center"
+                class="w-full h-fit max-w-sm rounded-2xl flex items-center sm:justify-center justify-start"
               >
                 <img
                   src="img/Logo.png"
                   alt="Logo Worktech"
-                  class="w-full max-w-sm h-fit rounded-xl"
+                  class="w-full sm:max-w-sm max-w-[100px] h-fit rounded-xl"
                 />
               </div>
               <div
@@ -485,7 +609,10 @@
         </div>
       </section>
 
-      <section id="programacao" class="relative overflow-hidden py-12 sm:py-32">
+      <section
+        id="programacao"
+        class="relative overflow-visible py-12 sm:py-32"
+      >
         <div
           id="programacaoBgGlow"
           class="absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_30%_40%,rgba(255,255,255,0.03),transparent_60%),radial-gradient(40%_40%_at_70%_60%,rgba(255,255,255,0.02),transparent_60%)]"
@@ -633,14 +760,60 @@
               opacity="0.35"
             />
           </g>
+
+          <g id="progMobileEffects" class="md:hidden">
+            <circle
+              id="progMobileOrb1"
+              cx="150"
+              cy="400"
+              r="80"
+              fill="url(#progOrb1)"
+              opacity="0.6"
+            />
+            <circle
+              id="progMobileOrb2"
+              cx="550"
+              cy="150"
+              r="60"
+              fill="url(#progOrb2)"
+              opacity="0.5"
+            />
+
+            <g id="progMobileSparkles">
+              <circle
+                class="prog-mobile-sparkle"
+                cx="100"
+                cy="250"
+                r="4"
+                fill="#ffffff"
+                opacity="0.7"
+              />
+              <circle
+                class="prog-mobile-sparkle"
+                cx="500"
+                cy="600"
+                r="3"
+                fill="#e5e5e5"
+                opacity="0.6"
+              />
+              <circle
+                class="prog-mobile-sparkle"
+                cx="300"
+                cy="450"
+                r="5"
+                fill="#d4d4d4"
+                opacity="0.8"
+              />
+            </g>
+          </g>
         </svg>
 
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="mb-10 flex items-center justify-center">
-            <div class="text-center">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-visible">
+          <div class="mb-10 flex items-center justify-center overflow-visible">
+            <div class="text-center overflow-visible">
               <h2
                 id="programacaoTitle"
-                class="text-3xl font-bold text-white sm:text-4xl relative inline-block"
+                class="text-3xl font-bold text-white sm:text-4xl relative inline-block overflow-visible"
                 data-reveal-title
               >
                 Programação
@@ -1087,6 +1260,52 @@
             fill="none"
             opacity="0.1"
           />
+
+          <g id="inscMobileEffects" class="md:hidden">
+            <circle
+              id="inscMobileOrb1"
+              cx="100"
+              cy="300"
+              r="70"
+              fill="url(#inscOrb1)"
+              opacity="0.7"
+            />
+            <circle
+              id="inscMobileOrb2"
+              cx="500"
+              cy="500"
+              r="55"
+              fill="url(#inscOrb2)"
+              opacity="0.6"
+            />
+
+            <g id="inscMobileStars">
+              <circle
+                class="insc-mobile-star"
+                cx="250"
+                cy="200"
+                r="3"
+                fill="#ffffff"
+                opacity="0.8"
+              />
+              <circle
+                class="insc-mobile-star"
+                cx="450"
+                cy="350"
+                r="4"
+                fill="#e5e5e5"
+                opacity="0.7"
+              />
+              <circle
+                class="insc-mobile-star"
+                cx="350"
+                cy="450"
+                r="3.5"
+                fill="#d4d4d4"
+                opacity="0.6"
+              />
+            </g>
+          </g>
         </svg>
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

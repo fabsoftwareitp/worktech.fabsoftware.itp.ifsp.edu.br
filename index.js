@@ -1060,6 +1060,247 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      const mobileOrb1 = document.getElementById("mobileOrb1");
+      const mobileOrb2 = document.getElementById("mobileOrb2");
+
+      if (mobileOrb1) {
+        gsap.to(mobileOrb1, {
+          x: 20,
+          y: -30,
+          duration: 10,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(mobileOrb1, {
+          scale: 1.15,
+          duration: 8,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      if (mobileOrb2) {
+        gsap.to(mobileOrb2, {
+          x: -15,
+          y: 25,
+          duration: 12,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(mobileOrb2, {
+          scale: 1.1,
+          duration: 9,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      const mobilePulses = document.querySelectorAll(".mobile-pulse");
+      mobilePulses.forEach((pulse, idx) => {
+        gsap.to(pulse, {
+          scale: 2,
+          opacity: 0,
+          duration: 2,
+          repeat: -1,
+          delay: idx * 0.7,
+          ease: "power2.out",
+        });
+      });
+
+      const mobileRings = ["#mobileRing1", "#mobileRing2", "#mobileRing3"];
+      mobileRings.forEach((ring, idx) => {
+        const el = document.getElementById(ring.replace("#", ""));
+        if (el) {
+          gsap.to(el, {
+            scale: 1.5,
+            opacity: 0,
+            duration: 3,
+            repeat: -1,
+            delay: idx * 1,
+            ease: "power1.out",
+          });
+        }
+      });
+
+      const mobileWave1 = document.getElementById("mobileWave1");
+      const mobileWave2 = document.getElementById("mobileWave2");
+
+      if (mobileWave1) {
+        gsap.to(mobileWave1, {
+          attr: { d: "M 0,350 Q 250,330 450,360 T 800,350" },
+          duration: 5,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      if (mobileWave2) {
+        gsap.to(mobileWave2, {
+          attr: { d: "M 0,550 Q 250,570 450,540 T 800,550" },
+          duration: 6,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      const progMobileOrb1 = document.getElementById("progMobileOrb1");
+      const progMobileOrb2 = document.getElementById("progMobileOrb2");
+
+      if (progMobileOrb1) {
+        gsap.to(progMobileOrb1, {
+          x: -20,
+          y: 20,
+          duration: 9,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(progMobileOrb1, {
+          scale: 1.2,
+          duration: 7,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      if (progMobileOrb2) {
+        gsap.to(progMobileOrb2, {
+          x: 15,
+          y: -15,
+          duration: 11,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(progMobileOrb2, {
+          scale: 1.15,
+          duration: 8,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      const progMobileSparkles = document.querySelectorAll(
+        ".prog-mobile-sparkle"
+      );
+      progMobileSparkles.forEach((sparkle, idx) => {
+        gsap.to(sparkle, {
+          scale: 1.8,
+          opacity: 0.3,
+          duration: 2.5,
+          yoyo: true,
+          repeat: -1,
+          delay: idx * 0.8,
+          ease: "power1.inOut",
+        });
+      });
+
+      const inscMobileOrb1 = document.getElementById("inscMobileOrb1");
+      const inscMobileOrb2 = document.getElementById("inscMobileOrb2");
+
+      if (inscMobileOrb1) {
+        gsap.to(inscMobileOrb1, {
+          x: 18,
+          y: -22,
+          duration: 10,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(inscMobileOrb1, {
+          scale: 1.18,
+          duration: 7,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      if (inscMobileOrb2) {
+        gsap.to(inscMobileOrb2, {
+          x: -12,
+          y: 18,
+          duration: 11,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+        gsap.to(inscMobileOrb2, {
+          scale: 1.12,
+          duration: 9,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      }
+
+      const inscMobileStars = document.querySelectorAll(".insc-mobile-star");
+      inscMobileStars.forEach((star, idx) => {
+        gsap.to(star, {
+          scale: 2.5,
+          opacity: 0.2,
+          duration: 3,
+          yoyo: true,
+          repeat: -1,
+          delay: idx * 1,
+          ease: "power1.inOut",
+        });
+
+        gsap.to(star, {
+          y: (Math.random() - 0.5) * 30,
+          duration: 5,
+          yoyo: true,
+          repeat: -1,
+          ease: "power1.inOut",
+        });
+      });
+
+      if (window.ScrollTrigger) {
+        gsap.to("#mobileOrb1, #mobileOrb2", {
+          yPercent: -30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 2,
+          },
+        });
+
+        gsap.to("#progMobileOrb1, #progMobileOrb2", {
+          yPercent: -25,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#programacao",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+          },
+        });
+
+        gsap.to("#inscMobileOrb1, #inscMobileOrb2", {
+          yPercent: -22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#inscricoes",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+          },
+        });
+      }
+    }
   }
 
   async function renderTimeline() {
