@@ -5,6 +5,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
     if (window.ScrollToPlugin) gsap.registerPlugin(window.ScrollToPlugin);
     if (window.SplitText) gsap.registerPlugin(window.SplitText);
+
+    // Imagem da seção de inscrições
+const inscricoesImg = document.getElementById("inscricoesImg");
+if (inscricoesImg && window.gsap) {
+  inscricoesImg.style.maxWidth = "400px"; 
+  inscricoesImg.style.transition = "transform 0.3s ease";
+
+  gsap.to(inscricoesImg, {
+    y: 15,
+    duration: 3,
+    yoyo: true,
+    repeat: -1,
+    ease: "sine.inOut",
+  });
+
+  gsap.to(inscricoesImg, {
+    rotation: 2,
+    duration: 4,
+    yoyo: true,
+    repeat: -1,
+    ease: "sine.inOut",
+  });
+}
+
   }
 
   const brandLogo = document.getElementById("brandLogo");
@@ -23,13 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("bg-white", !isDark);
     document.body.classList.toggle("text-gray-900", !isDark);
 
-    if (brandLogo) {
-      brandLogo.src = "Logo.png";
+     if (brandLogo) {
+       brandLogo.src = "img/bg-start.png"; // <-- coloque a extensão correta
     }
+
+   
     if (footerLogo) {
-      footerLogo.src = isDark
-        ? "old/worktech.fabsoftware.itp.ifsp.edu.br/img/ifsp_white.png"
-        : "old/worktech.fabsoftware.itp.ifsp.edu.br/img/ifsp.png";
+      footerLogo.src = isDark ? "img/LogoIF.png" : "img/LogoIF.png"; // mesmo logo no footer
     }
 
     if (themeIcon) {
