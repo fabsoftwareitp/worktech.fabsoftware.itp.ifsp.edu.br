@@ -28,6 +28,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const scrollTopBtn = document.getElementById("scrollTop");
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let isGsapAnimating = false;
+  let currentScroll = window.scrollY;
+  let targetScroll = window.scrollY;
+  const ease = 0.1;
+  let isScrolling = false;
+
+  const syncScrollValues = () => {
+    currentScroll = window.scrollY;
+    targetScroll = currentScroll;
+  };
+
+  const startGsapAnimation = (targetPosition, duration = 1) => {
+    isGsapAnimating = true;
+    isScrolling = false;
+
+    return window.gsap.to(window, {
+      duration,
+      scrollTo: targetPosition,
+      ease: "power2.inOut",
+      onUpdate: syncScrollValues,
+      onComplete: () => {
+        isGsapAnimating = false;
+        syncScrollValues();
+      },
+      onInterrupt: () => {
+        isGsapAnimating = false;
+        syncScrollValues();
+      },
+    });
+  };
 
   document.addEventListener("click", (e) => {
     const target = e.target.closest("a");
@@ -41,11 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (el) {
         e.preventDefault();
         if (window.gsap && window.ScrollToPlugin) {
-          window.gsap.to(window, {
-            duration: 1.2,
-            scrollTo: { y: el, offsetY: 80 },
-            ease: "power3.inOut",
-          });
+          startGsapAnimation({ y: el, offsetY: 80 }, 1);
         } else {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
@@ -53,17 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
   if (window.gsap && window.ScrollToPlugin && !prefersReduced) {
-    let currentScroll = window.scrollY;
-    let targetScroll = window.scrollY;
-    let ease = 0.1;
-    let isScrolling = false;
-
     const smoothScroll = () => {
+      if (isGsapAnimating) {
+        isScrolling = false;
+        return;
+      }
+
       const diff = targetScroll - currentScroll;
 
       if (Math.abs(diff) < 0.5) {
@@ -91,6 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const onWheel = (e) => {
+      if (isGsapAnimating) {
+        if (window.gsap.isTweening(window)) {
+          window.gsap.killTweensOf(window);
+        }
+        isGsapAnimating = false;
+        syncScrollValues();
+      }
+
       if (e.defaultPrevented) return;
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
 
@@ -115,24 +149,34 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    const onTouchStart = (e) => {
-      currentScroll = window.scrollY;
-      targetScroll = currentScroll;
+    const onTouchStart = () => {
+      if (isGsapAnimating) {
+        if (window.gsap.isTweening(window)) {
+          window.gsap.killTweensOf(window);
+        }
+        isGsapAnimating = false;
+      }
+      syncScrollValues();
     };
 
-    const onTouchMove = (e) => {
-      targetScroll = window.scrollY;
-      currentScroll = targetScroll;
+    const onTouchMove = () => {
+      syncScrollValues();
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
 
-    window.addEventListener("resize", () => {
-      currentScroll = window.scrollY;
-      targetScroll = currentScroll;
-    });
+    window.addEventListener("resize", syncScrollValues);
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!isScrolling && !isGsapAnimating) {
+          syncScrollValues();
+        }
+      },
+      { passive: true }
+    );
   }
 
   function updateScrollButton() {
@@ -145,11 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (scrollTopBtn) {
     scrollTopBtn.addEventListener("click", () => {
       if (window.gsap && window.ScrollToPlugin) {
-        window.gsap.to(window, {
-          duration: 1.5,
-          scrollTo: 0,
-          ease: "power3.inOut",
-        });
+        startGsapAnimation(0, 1.2);
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
