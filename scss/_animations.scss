@@ -1,0 +1,112 @@
+// SVG Animations and decoration styles
+
+.svg-theme-adaptive {
+  color: #000;
+  will-change: transform;
+}
+
+body.dark .svg-theme-adaptive {
+  color: #fff;
+}
+
+.svg-decoration-programacao,
+.svg-decoration-inscricoes,
+.svg-decoration-local {
+  will-change: transform;
+}
+
+.svg-group-1,
+.svg-group-2 {
+  will-change: transform;
+}
+
+.timeline-block {
+  will-change: transform, opacity;
+  transform-origin: center center;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.95;
+  }
+}
+
+.timeline-content {
+  will-change: transform;
+  
+  h3 {
+    will-change: transform, opacity;
+  }
+  
+  p {
+    will-change: transform, opacity;
+  }
+}
+
+.timeline-activation {
+  will-change: transform, opacity, color;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  &.active {
+    opacity: 1;
+  }
+}
+
+#lamp {
+  will-change: transform;
+  
+  a {
+    will-change: transform;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  i {
+    will-change: transform;
+  }
+}
+
+.programacao h1,
+#inscricoes h2,
+#local h2 {
+  will-change: transform, opacity;
+}
+
+// Animação dos triângulos SVG
+.svg-animated-triangles {
+  will-change: transform, opacity;
+  
+  .animated-triangle {
+    will-change: transform, opacity;
+  }
+}
+
+.btn-large {
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .svg-decoration-programacao,
+  .svg-decoration-inscricoes,
+  .svg-decoration-local,
+  .svg-decoration-header {
+    display: none;
+  }
+  
+  .timeline-block {
+    perspective: none;
+  }
+}
+
