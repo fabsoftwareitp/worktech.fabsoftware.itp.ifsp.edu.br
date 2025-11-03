@@ -68,8 +68,8 @@ body.dark .hoverable-text:hover {
 
 .header {
   background-image: url(../img/bg-start.png);
-  background-size: 100%;
-  background-position: 50% 50%;
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   min-height: 100vh;
@@ -78,7 +78,7 @@ body.dark .hoverable-text:hover {
   padding: 0;
   overflow: hidden;
   position: relative;
-  will-change: background-position, background-size;
+  will-change: transform;
 }
 .header nav {
   background: rgba(0, 0, 0, 0) !important;
@@ -99,6 +99,12 @@ body.dark .hoverable-text:hover {
 .header img.navbar {
   margin-top: 0;
   width: 100%;
+}
+@media screen and (max-width: 600px) {
+  .header {
+    background-position: center 40%;
+    min-height: 100vh;
+  }
 }
 
 #footer {

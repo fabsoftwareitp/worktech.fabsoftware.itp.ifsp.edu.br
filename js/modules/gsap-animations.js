@@ -4,24 +4,17 @@ window.WorktechApp.GSAPAnimations = {
   animateHeader: function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Parallax e zoom na imagem de fundo
-    gsap.fromTo(".header", 
-      {
-        backgroundSize: "100%",
-        backgroundPosition: "50% 50%",
+    // Zoom sutil via transform scale
+    gsap.to(".header", {
+      scrollTrigger: {
+        trigger: ".header",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.5,
       },
-      {
-        scrollTrigger: {
-          trigger: ".header",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-        backgroundSize: "105%",
-        backgroundPosition: "50% 80%",
-        ease: "none",
-      }
-    );
+      scale: 1.03,
+      ease: "none",
+    });
 
     gsap.from("#logo-topo-home", {
       duration: 1.2,

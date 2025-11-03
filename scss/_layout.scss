@@ -1,8 +1,8 @@
 // Header
 .header {
   background-image: url(../img/bg-start.png);
-  background-size: 100%;
-  background-position: 50% 50%;
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   min-height: $header-min-height;
@@ -11,7 +11,7 @@
   padding: 0;
   overflow: hidden;
   position: relative;
-  will-change: background-position, background-size;
+  will-change: transform;
 
   nav {
     background: rgba(0, 0, 0, 0) !important;
@@ -33,6 +33,11 @@
   img.navbar {
     margin-top: 0;
     width: 100%;
+  }
+
+  @include mobile {
+    background-position: center 40%;
+    min-height: 100vh;
   }
 }
 
