@@ -307,23 +307,23 @@ body.dark .timeline-block {
     cursor: pointer;
     letter-spacing: 0.3px;
     white-space: nowrap;
-    
+
     &:hover {
       background: $color-black;
       color: $color-white;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
+
     &:last-child {
       margin-right: 0;
     }
   }
-  
+
   .inscricao-link {
     background: $color-black;
     color: $color-white;
-    
+
     &:hover {
       background: transparent;
       color: $color-black;
@@ -348,7 +348,7 @@ body.dark .timeline-block {
     margin-bottom: 0.6rem;
     color: $color-gray;
   }
-  
+
   .workshop-time {
     font-family: "Inconsolata", monospace;
     margin-bottom: 1rem !important;
@@ -363,18 +363,19 @@ body.dark .timeline-block {
   padding: 1.5rem;
   margin-bottom: 1rem;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background: rgba(0, 0, 0, 0.04);
     border-color: rgba(0, 0, 0, 0.12);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
-  
-  h3, p {
+
+  h3,
+  p {
     margin-bottom: 0.8rem;
   }
-  
+
   .buttons-wrapper {
     margin-top: 1.5rem;
   }
@@ -383,7 +384,7 @@ body.dark .timeline-block {
 body.dark .workshop-card {
   background: rgba(255, 255, 255, 0.02);
   border-color: rgba(255, 255, 255, 0.06);
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.15);
@@ -394,7 +395,7 @@ body.dark .workshop-card {
 // Animated Triangles
 .svg-animated-triangles {
   overflow: visible !important;
-  
+
   .animated-triangle {
     fill: $color-black;
     transition: fill 0.3s ease;
@@ -434,23 +435,23 @@ body.dark .timeline-content {
   p {
     color: $color-gray-lighter;
   }
-  
+
   .curriculo-link,
   .inscricao-link {
     color: $color-white;
     border-color: $color-white;
-    
+
     &:hover {
       background: $color-white;
       color: $color-black;
       box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
     }
   }
-  
+
   .inscricao-link {
     background: $color-white;
     color: $color-black;
-    
+
     &:hover {
       background: transparent;
       color: $color-white;
