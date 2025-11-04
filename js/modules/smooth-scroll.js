@@ -17,11 +17,15 @@ window.WorktechApp.SmoothScroll = {
     }
 
     // Smooth scroll to anchor links
-    $("a").on("click", function () {
+    $("a").on("click", function (e) {
       var link = $(this).attr("href");
-      if (link && link[0] == "#") {
-        var posLink = $(link).offset().top;
-        $("html, body").animate({ scrollTop: 700 }, "swing");
+      if (link && link[0] == "#" && link.length > 1) {
+        var target = $(link);
+        if (target.length) {
+          e.preventDefault();
+          var posLink = target.offset().top;
+          $("html, body").animate({ scrollTop: posLink }, 800, "swing");
+        }
       }
     });
   },

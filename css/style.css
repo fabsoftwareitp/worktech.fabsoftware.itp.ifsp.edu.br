@@ -294,6 +294,42 @@ body.dark .hoverable-text:hover {
   }
 }
 
+.sidenav {
+  z-index: 1001 !important;
+}
+.sidenav li a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 32px;
+}
+.sidenav li a i {
+  margin: 0;
+}
+.sidenav .logo-worktech-white {
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+body.dark .sidenav {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+#sidenav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 996;
+  will-change: opacity;
+}
+
+.sidenav-overlay {
+  z-index: 996 !important;
+}
+
 .programacao-header {
   margin-bottom: 2rem;
   position: relative;
@@ -306,7 +342,7 @@ body.dark .hoverable-text:hover {
 }
 @media screen and (max-width: 600px) {
   .programacao-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -645,7 +681,8 @@ body.dark .timeline-block.current::before {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-.workshop-card h3, .workshop-card p {
+.workshop-card h3,
+.workshop-card p {
   margin-bottom: 0.8rem;
 }
 .workshop-card .buttons-wrapper {
