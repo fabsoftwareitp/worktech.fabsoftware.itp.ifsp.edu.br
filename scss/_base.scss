@@ -3,6 +3,8 @@ body {
   background-color: red;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  width: 100%;
   @include transition(all $transition-duration $transition-easing);
   background: $color-white;
   color: $color-black !important;

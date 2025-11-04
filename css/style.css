@@ -2,6 +2,8 @@ body {
   background-color: red;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  width: 100%;
   -webkit-transition: all 0.99s ease;
   -moz-transition: all 0.99s ease;
   -ms-transition: all 0.99s ease;
@@ -275,6 +277,22 @@ body.dark .hoverable-text:hover {
   -o-transition: all 0.99s ease;
   transition: all 0.99s ease;
 }
+@media screen and (max-width: 600px) {
+  #lamp {
+    right: 15px !important;
+    bottom: 15px !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  #lamp .btn-floating {
+    width: 48px;
+    height: 48px;
+  }
+  #lamp .btn-floating i {
+    font-size: 1.8rem;
+    line-height: 48px;
+  }
+}
 
 .programacao-header {
   margin-bottom: 2rem;
@@ -285,6 +303,11 @@ body.dark .hoverable-text:hover {
   margin-bottom: 0.5rem;
   color: #000000 !important;
   font-size: 4rem;
+}
+@media screen and (max-width: 600px) {
+  .programacao-header h1 {
+    font-size: 2.5rem;
+  }
 }
 
 .programacao-subtitle {
