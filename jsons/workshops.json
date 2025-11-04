@@ -1,17 +1,25 @@
 {
   "6-de-novembro": {
     "Manhã": {
+      "09:00": [
+        {
+          "titulo": "Criatividade Computacional: IA como aliada na resolução de problemas do cotidiano",
+          "palestrante": "Elielter de Araújo Welter e Giovani Toreli Antunes Oliveira",
+          "email": "elielter.welter@gmail.com",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/15579/"
+        }
+      ],
       "10:00": [
         {
-          "titulo": "Meninas na Computação: Inclusão e Representatividade no Contexto Escolar",
-          "palestrante": "Eline Faliane de Araújo Welter",
+          "titulo": "A Importância dos Grupos de Meninas na Computação: Inclusão e Representatividade no Contexto Escolar",
+          "palestrante": "Eline Faliane de Araújo Welter, Maria Eduarda Antunes Camargo e Rebeca Rosa Conceição",
           "email": "elinewelter@ifsp.edu.br",
           "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/15576/"
         }
       ],
       "11:00": [
         {
-          "titulo": "",
+          "titulo": "Palestra de Tecnologia",
           "palestrante": "Vinicius Henrique Rodrigues Silveira",
           "email": "vhrsilveira@gmail.com",
           "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/15577/"

@@ -9,6 +9,35 @@ $(function () {
     window.WorktechApp.includeHTML(function() {
       // Called after all HTML includes are loaded
       
+      // Initialize sidenav (Materialize)
+      $('.sidenav').sidenav({
+        edge: 'left',
+        draggable: true
+      });
+
+      // Close sidenav when clicking on anchor links
+      $('.sidenav a[href^="#"]').on('click', function() {
+        var instance = M.Sidenav.getInstance($('.sidenav'));
+        if (instance) {
+          instance.close();
+        }
+      });
+
+      // Scroll to top functionality - stop event propagation
+      $('.scroll-to-top').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('html, body').animate({
+          scrollTop: 0
+        }, 800);
+        
+        // Close sidenav if open
+        var instance = M.Sidenav.getInstance($('.sidenav'));
+        if (instance) {
+          instance.close();
+        }
+      });
+      
       // Initialize tooltips (Materialize)
       $(".tooltipped").tooltip();
 
