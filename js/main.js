@@ -20,7 +20,7 @@ $(function () {
         var instance = M.Sidenav.getInstance($('.sidenav'));
         if (instance) {
           instance.close();
-        }
+		}
       });
 
       // Scroll to top functionality - stop event propagation
@@ -40,7 +40,7 @@ $(function () {
       
       // Initialize tooltips (Materialize)
       $(".tooltipped").tooltip();
-
+					
       // Initialize theme toggle
       if (window.WorktechApp && window.WorktechApp.ThemeToggle) {
         window.WorktechApp.ThemeToggle.init();
@@ -54,7 +54,7 @@ $(function () {
       // Initialize smooth scroll
       if (window.WorktechApp && window.WorktechApp.SmoothScroll) {
         window.WorktechApp.SmoothScroll.init();
-      }
+			}     
 
       // Initialize GSAP animations
       if (window.WorktechApp && window.WorktechApp.GSAPAnimations) {

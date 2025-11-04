@@ -4,15 +4,15 @@ window.WorktechApp.GSAPAnimations = {
   animateHeader: function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Zoom sutil via transform scale
-    gsap.to(".header", {
+    // Zoom sutil via transform scale apenas no background
+    gsap.to(".header-background", {
       scrollTrigger: {
         trigger: ".header",
         start: "top top",
         end: "bottom top",
         scrub: 1.5,
       },
-      scale: 1.03,
+      scale: 1.05,
       ease: "none",
     });
 
