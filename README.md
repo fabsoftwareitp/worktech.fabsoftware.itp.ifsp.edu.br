@@ -1,4 +1,4 @@
-# 🎯 Worktech 2018
+# 🎯 Worktech 2025
 
 Site oficial do evento Worktech - IFSP Câmpus Itapetininga
 

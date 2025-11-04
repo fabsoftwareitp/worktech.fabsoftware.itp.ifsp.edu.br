@@ -23,8 +23,19 @@ window.WorktechApp.SmoothScroll = {
         var target = $(link);
         if (target.length) {
           e.preventDefault();
-          var posLink = target.offset().top;
-          $("html, body").animate({ scrollTop: posLink }, 800, "swing");
+          
+          // Se for um botão de troca de dia da programação, scroll até o título "Programação"
+          if ($(this).hasClass("timeline-activation")) {
+            var programacaoSection = $("#programacao");
+            if (programacaoSection.length) {
+              var posLink = programacaoSection.offset().top - 100; // 100px de margem do topo
+              $("html, body").animate({ scrollTop: posLink }, 800, "swing");
+            }
+          } else {
+            // Para outros links, comportamento normal
+            var posLink = target.offset().top;
+            $("html, body").animate({ scrollTop: posLink }, 800, "swing");
+          }
         }
       }
     });

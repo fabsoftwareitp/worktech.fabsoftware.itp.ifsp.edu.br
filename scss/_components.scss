@@ -421,6 +421,38 @@ body.dark .svg-animated-triangles {
   }
 }
 
+// Responsivo mobile para triângulos animados
+@include mobile {
+  .svg-animated-triangles {
+    width: 400px !important;
+    height: 600px !important;
+    top: 0 !important;
+    right: -50px !important;
+    opacity: 0.3 !important;
+  }
+  
+  #svg-programacao-triangles {
+    width: 400px !important;
+    height: 600px !important;
+  }
+  
+  #svg-inscricoes-triangles {
+    width: 400px !important;
+    height: 600px !important;
+  }
+  
+  // SVGs decorativos também devem ser visíveis em mobile
+  .svg-decoration-programacao,
+  .svg-decoration-local {
+    opacity: 0.6 !important;
+  }
+  
+  // Triângulos flutuantes menos visíveis em mobile
+  .svg-floating-triangles {
+    opacity: 0.3 !important;
+  }
+}
+
 body.dark .svg-floating-triangles {
   .floating-triangle {
     fill: $color-white;
