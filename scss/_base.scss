@@ -1,0 +1,80 @@
+// Base body styles
+body {
+  background-color: red;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  @include transition(all $transition-duration $transition-easing);
+  background: $color-white;
+  color: $color-black !important;
+
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  h1 {
+    // Reserved for future use
+  }
+
+  #logo-topo-home {
+    // Reserved for future use
+  }
+}
+
+// Typography utilities
+.sm-text {
+  font-size: 0.9rem !important;
+}
+
+.so-sm-text {
+  font-size: 0.8rem !important;
+}
+
+.f-900 {
+  font-weight: 900;
+}
+
+.f-700 {
+  font-weight: 700;
+}
+
+.fs {
+  font-size: 4rem;
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .fs {
+    font-size: 3rem;
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.italic {
+  font-style: italic;
+}
+
+// Interactive elements
+.hoverable-text {
+  transition: all 0.3s ease;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+body.dark .hoverable-text {
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.position-relative {
+  position: relative;
+}

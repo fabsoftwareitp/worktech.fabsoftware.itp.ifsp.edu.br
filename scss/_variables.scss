@@ -1,0 +1,29 @@
+// Colors - Black & White Theme
+$color-white: white;
+$color-black: black;
+$color-gray-dark: #1a1a1a;
+$color-gray: #343a40;
+$color-gray-medium: #666666;
+$color-gray-light: #999999;
+$color-gray-lighter: #cccccc;
+$color-gray-lightest: #e5e5e5;
+
+// Transitions
+$transition-duration: 0.99s;
+$transition-easing: ease;
+
+// Spacing
+$spacing-base: 1rem;
+
+// Layout
+$header-min-height: 100vh;
+$logo-width-desktop: 500px;
+$logo-width-mobile: 300px;
+
+// Timeline
+$timeline-width: 0.3rem;
+$timeline-dot-size: 1rem;
+
+// Breakpoints
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 575px;

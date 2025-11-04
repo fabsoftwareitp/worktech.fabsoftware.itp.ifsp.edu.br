@@ -1,0 +1,132 @@
+<div class="center">
+  <svg
+    class="svg-decoration-header svg-theme-adaptive"
+    viewBox="0 0 1200 900"
+    style="
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+    "
+  >
+    <defs>
+      <radialGradient id="headerOrb1" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="currentColor" stop-opacity="0.12" />
+        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="headerOrb2" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="currentColor" stop-opacity="0.08" />
+        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="headerOrb3" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="currentColor" stop-opacity="0.06" />
+        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+      </radialGradient>
+      <filter id="headerGlow">
+        <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <circle id="headerOrb1" cx="220" cy="280" r="180" fill="url(#headerOrb1)" />
+    <circle
+      id="headerOrb2"
+      cx="1000"
+      cy="200"
+      r="220"
+      fill="url(#headerOrb2)"
+    />
+    <circle id="headerOrb3" cx="600" cy="600" r="160" fill="url(#headerOrb3)" />
+
+    <g
+      id="headerGrid"
+      stroke="currentColor"
+      stroke-width="0.5"
+      fill="none"
+      opacity="0.06"
+    >
+      <line x1="0" y1="150" x2="1200" y2="150" />
+      <line x1="0" y1="300" x2="1200" y2="300" />
+      <line x1="0" y1="450" x2="1200" y2="450" />
+      <line x1="0" y1="600" x2="1200" y2="600" />
+      <line x1="200" y1="0" x2="200" y2="900" />
+      <line x1="400" y1="0" x2="400" y2="900" />
+      <line x1="600" y1="0" x2="600" y2="900" />
+      <line x1="800" y1="0" x2="800" y2="900" />
+      <line x1="1000" y1="0" x2="1000" y2="900" />
+    </g>
+
+    <g id="headerParticles">
+      <circle
+        class="header-particle"
+        cx="180"
+        cy="200"
+        r="3"
+        fill="currentColor"
+        opacity="0.5"
+        filter="url(#headerGlow)"
+      />
+      <circle
+        class="header-particle"
+        cx="380"
+        cy="280"
+        r="2.5"
+        fill="currentColor"
+        opacity="0.4"
+        filter="url(#headerGlow)"
+      />
+      <circle
+        class="header-particle"
+        cx="580"
+        cy="220"
+        r="3"
+        fill="currentColor"
+        opacity="0.6"
+        filter="url(#headerGlow)"
+      />
+      <circle
+        class="header-particle"
+        cx="780"
+        cy="340"
+        r="2"
+        fill="currentColor"
+        opacity="0.4"
+        filter="url(#headerGlow)"
+      />
+      <circle
+        class="header-particle"
+        cx="980"
+        cy="260"
+        r="3"
+        fill="currentColor"
+        opacity="0.5"
+        filter="url(#headerGlow)"
+      />
+    </g>
+
+    <g id="headerDots" fill="currentColor" opacity="0.12">
+      <circle cx="240" cy="180" r="2" />
+      <circle cx="320" cy="240" r="1.5" />
+      <circle cx="420" cy="190" r="2" />
+      <circle cx="720" cy="280" r="1.5" />
+      <circle cx="860" cy="220" r="2" />
+      <circle cx="940" cy="310" r="1.5" />
+    </g>
+  </svg>
+
+  <img
+    id="logo-topo-home"
+    src="img/logo_worktech.png"
+    class="responsive-img logo-worktech"
+  />
+  <h4 class="thin mt-5 mt-sm-5 mb-sm-5">
+    Dias 6 e 7 de novembro<br />
+    no Câmpus Itapetininga
+  </h4>
+</div>

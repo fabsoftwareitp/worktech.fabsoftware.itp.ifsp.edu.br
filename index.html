@@ -1,116 +1,72 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Início - XI Worktech </title>
-  <meta charset="utf-8">
-  <!--Import Google Icon Font-->
-  <link href="css/material.icons.css" rel="stylesheet">
-  <!--Import materialize.css-->
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <title>Início - XI Worktech</title>
+    <meta charset="utf-8" />
+    <link href="css/material.icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="img/logo_worktech.png">
-  <meta name="theme-color" content="#212121">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EaselPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/GSDevTools.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathHelper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PhysicsPropsPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PixiPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomBounce.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomWiggle.min.js"></script>
 
-  <!--Let browser know website is optimized for mobile-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="icon" sizes="192x192" href="img/logo_worktech.png" />
+    <meta name="theme-color" content="#212121" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body class="dark">
   <div class="header">
-    <!-- include -->
     <div w3-include-html="view/components/navbar.html"></div>
-
-    <div class="center">
-      <img id="logo-topo-home" src="img/logo_worktech_remake_white.png" class="responsive-img logo-worktech">
-      <h4 class="thin mt-5 mt-sm-5 mb-sm-5">Dia 30 de novembro<br> no Câmpus Itapetininga</h4>
-    </div>
+      <div w3-include-html="view/components/header.html"></div>
   </div>
 
-  <!-- PROGRAMACAO -->
-  <div id="programacao" class="programacao">
-    <div class="container-fluid position-relative mt-5">
-      <img src="img/detail-left-loccal.png" id="detail-right" class="hide-on-med-and-down">
-      <h1 class="uppercase hoverable-text purple-text f-700 fs mt-3 center">Programação</h1>
-      <div class="row center mt-3 mb-3">
-        <div class="col s8 offset-s2">
-          <div class="row">
-            <div class="center-align col m12">
-              <a href="#30-de-novembro" class="timeline-activation">
-                <i class="material-icons" aria-hidden="true">calendar_today</i> Dia 30
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div w3-include-html="view/components/programacao.html"></div>
+    <div w3-include-html="view/components/inscricoes.html"></div>
+    <div w3-include-html="view/components/local.html"></div>
+    <div w3-include-html="view/components/footer.html"></div>
+    <div w3-include-html="view/components/lamp-button.html"></div>
 
-      <div class="container schedule">
-        <div class="row timeline">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div id="inscricoes" class="container-fluid position-relative">
-    <img src="img/detail1.png" id="detail1" class="hide-on-med-and-down">
-    <div class="row mt-15 ">
-      <div class="col m4 s12 offset-m6 mt-sm-3 mb-sm-5 right-align">
-        <h2 class="uppercase cyan-text f-700 fs text-darken-1 hoverable-text">Inscrições</h2>
-        <h4 class="thin">As incrições garantem a participação e o certificado!</h4>
-        <a href="https://suap.ifsp.edu.br/eventos/inscricao_publica/11287/"
-          target="_blank" class="btn-large mt-sm-1 cyan darken-1"><i class="material-icons left">person_add</i>Realizar
-          Inscrição</a>
-      </div>
-    </div>
-  </div>
-
-  <div id="local" class="container-fluid mt-15 index-local mb-5">
-    <div class="container left-align">
-      <h2 class="uppercase purple-text text-darken-2 f-700 fs text-darken-2 hoverable-text pt-5">Local</h2>
-      <div class="row">
-        <div class="col-12">
-          <h5 class="thin mt-1 thin">
-            Esse ano o WorkTech <strong>será presencial</strong>, sendo realizado no Câmpus Itapetininga
-          </h5>
-          <a href="https://maps.app.goo.gl/Kb6QYDuV5dgss5Nr5" target="_blank"
-            class="btn-large mt-sm-1 purple mt-3 mb-3">
-            <i class="material-icons left">featured_video</i>Instituto Federal Câmpus Itapetininga
-          </a>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2932843709273!2d-48.02112402391343!3d-23.593812462786666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5cbf41ebfcf31%3A0xa65e4fb6d75446bf!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%2C%20Ci%C3%AAncia%20e%20Tecnologia%20de%20S%C3%A3o%20Paulo%2C%20Campus%20Itapetininga!5e0!3m2!1spt-PT!2sbr!4v1731000272375!5m2!1spt-PT!2sbr"
-            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="container-fluid footer-final">
-    <div class="center-align  mt-4">
-      <img id="logo_footer" src="img/ifsp_white.png" class="responsive-img footer-logo" style="width: 20vw;">
-      <p class=" f-700 uppercase">O Worktech é uma iniciativa do IFSP Câmpus Itapetininga</p>
-      <p class="mt-3">© 2024 - Todos os direitos reservados</p>
-      <p class="so-sm-text white-text mb-0 pb-5 text-about">Designed and built with a lot of patience, care and haste by
-        <a class="pink-text" href="https://github.com/danilocbueno">@danilocbueno</a> and <a class="pink-text"
-          href="https://paulhenrique.github.io/ph" target="_blank">@paulhenrique</a></p>
-    </div>
-
-  </div>
-  </div>
-
-  <!-- Compiled and minified JavaScript -->
-  <div class="fixed-action-btn" id="lamp">
-    <a class="btn-floating btn-large black">
-      <i class="large material-icons">wb_incandescent</i>
-    </a>
-  </div>
+  <!-- SCRIPTS -->
   <script src="js/jquery.js"></script>
   <script src="js/materialize.min.js"></script>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Application Modules -->
+    <script src="js/modules/html-include.js"></script>
+    <script src="js/modules/theme-toggle.js"></script>
+    <script src="js/modules/timeline.js"></script>
+    <script src="js/modules/smooth-scroll.js"></script>
+    <script src="js/modules/animated-triangles.js"></script>
+    <script src="js/modules/gsap-animations.js"></script>
+
+    <!-- Main Application -->
   <script src="js/main.js"></script>
 </body>
-
 </html>

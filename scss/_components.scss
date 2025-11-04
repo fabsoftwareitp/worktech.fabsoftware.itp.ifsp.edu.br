@@ -1,0 +1,527 @@
+// Programacao section
+.programacao-header {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+
+  h1 {
+    margin-bottom: 0.5rem;
+    color: #000000 !important;
+    font-size: 4rem;
+
+    @include mobile {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.programacao-subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #666666 !important;
+}
+
+body.dark .programacao-header h1 {
+  color: #ffffff !important;
+}
+
+body.dark .programacao-subtitle {
+  color: #cccccc !important;
+}
+
+.timeline-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.timeline-activation {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2.5rem;
+  background-color: #f5f5f5 !important;
+  border-radius: 12px;
+  border: 2px solid #000000 !important;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  text-decoration: none;
+  position: relative;
+  z-index: 10;
+
+  @include mobile {
+    min-width: 140px;
+    padding: 1.2rem 2rem;
+  }
+
+  i {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem;
+    color: #000000 !important;
+    line-height: 1;
+  }
+
+  .tab-label {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    display: block;
+    margin-bottom: 0.2rem;
+    color: #000000 !important;
+    line-height: 1.2;
+  }
+
+  .tab-date {
+    font-size: 0.9rem !important;
+    display: block;
+    color: #000000 !important;
+    opacity: 0.7;
+    line-height: 1;
+  }
+
+  &:hover {
+    background-color: #e0e0e0 !important;
+    border-color: #333333 !important;
+    transform: translateY(-2px);
+
+    i,
+    .tab-label,
+    .tab-date {
+      color: #000000 !important;
+    }
+  }
+
+  &.active {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    i,
+    .tab-label,
+    .tab-date {
+      color: #ffffff !important;
+      opacity: 1;
+    }
+  }
+}
+
+body.dark .timeline-activation {
+  background-color: #1a1a1a !important;
+  border-color: #ffffff !important;
+
+  i {
+    color: #ffffff !important;
+  }
+
+  .tab-label {
+    color: #ffffff !important;
+  }
+
+  .tab-date {
+    color: #ffffff !important;
+    opacity: 0.8;
+  }
+
+  &:hover {
+    background-color: #2a2a2a !important;
+    border-color: #ffffff !important;
+
+    i,
+    .tab-label,
+    .tab-date {
+      color: #ffffff !important;
+    }
+  }
+
+  &.active {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+
+    i,
+    .tab-label,
+    .tab-date {
+      color: #000000 !important;
+      opacity: 1;
+    }
+  }
+}
+
+// Schedule/Timeline components
+.schedule {
+  position: relative;
+  text-shadow: 0px 1px 2px $color-gray-lighter;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: $timeline-width;
+    background: $color-gray;
+    left: 50%;
+    @include transform(translateX(-50%));
+  }
+}
+
+.timeline-block {
+  margin-bottom: 3rem;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  transition: all 0.3s ease;
+
+  &:nth-child(odd) {
+    padding-left: 0;
+    padding-right: calc(50% + 4rem);
+    text-align: right;
+    position: relative;
+
+    &::before {
+      left: initial;
+      right: 50%;
+      @include transform(translateX(0.5rem));
+    }
+  }
+
+  &:nth-child(even) {
+    padding-right: 0;
+    padding-left: calc(50% + 4rem);
+    text-align: left;
+    position: relative;
+
+    &::before {
+      left: 50%;
+      @include transform(translateX(-0.5rem));
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    width: $timeline-dot-size;
+    height: $timeline-dot-size;
+    @include transform(translateX(-25%));
+    border-radius: 50%;
+    box-shadow: 0 0 0 7px $color-white, 0 3px 0 4px rgba(0, 0, 0, 0.05);
+    background: $color-gray;
+    transition: all $transition-duration ease-in;
+    will-change: box-shadow;
+  }
+
+  &.current::before {
+    box-shadow: 0 0 0 7px $color-black, 0 3px 0 4px $color-gray;
+    background: $color-white;
+    transition: box-shadow 0.5s ease-in;
+  }
+
+  h3 {
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  @include tablet {
+    &:nth-child(odd),
+    &:nth-child(even) {
+      padding-left: 1.6rem;
+      padding-right: 0;
+      text-align: left;
+      position: relative;
+
+      &::before {
+        left: 0;
+        right: 0;
+        @include transform(translateX(-0.5rem));
+      }
+    }
+  }
+}
+
+body.dark .timeline-block {
+  background: transparent;
+
+  &::before {
+    box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.8),
+      0 3px 0 4px rgba(255, 255, 255, 0.05);
+  }
+
+  &.current::before {
+    box-shadow: 0 0 0 7px $color-gray, 0 3px 0 4px $color-gray-light;
+    background: $color-white;
+  }
+}
+
+.timeline-content {
+  position: relative;
+  margin-left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+
+  .local {
+    margin-bottom: 2rem;
+  }
+
+  .descricao {
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .buttons-wrapper {
+    margin-top: 1rem;
+    display: block;
+    text-align: inherit;
+  }
+
+  .curriculo-link,
+  .inscricao-link {
+    margin-top: 0;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    width: auto;
+    max-width: max-content;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: $color-black;
+    border: 2px solid $color-black;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+
+    &:hover {
+      background: $color-black;
+      color: $color-white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .inscricao-link {
+    background: $color-black;
+    color: $color-white;
+
+    &:hover {
+      background: transparent;
+      color: $color-black;
+    }
+  }
+
+  .md-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+
+  h3 {
+    color: $color-black;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.8;
+    margin-bottom: 0.6rem;
+    color: $color-gray;
+  }
+
+  .workshop-time {
+    font-family: "Inconsolata", monospace;
+    margin-bottom: 1rem !important;
+  }
+}
+
+// Workshop Card (individual para cada palestra)
+.workshop-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  h3,
+  p {
+    margin-bottom: 0.8rem;
+  }
+
+  .buttons-wrapper {
+    margin-top: 1.5rem;
+  }
+}
+
+body.dark .workshop-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Animated Triangles
+.svg-animated-triangles {
+  overflow: visible !important;
+
+  .animated-triangle {
+    fill: $color-black;
+    transition: fill 0.3s ease;
+  }
+}
+
+// Triângulos flutuantes de fundo
+.svg-floating-triangles {
+  .floating-triangle {
+    fill: $color-black;
+    transition: fill 0.3s ease;
+  }
+}
+
+// Triângulos da seção de inscrições com z-index maior para não serem cortados
+#svg-inscricoes-triangles {
+  z-index: 5 !important;
+}
+
+body.dark .svg-animated-triangles {
+  .animated-triangle {
+    fill: $color-white;
+  }
+}
+
+body.dark .svg-floating-triangles {
+  .floating-triangle {
+    fill: $color-white;
+  }
+}
+
+body.dark .timeline-content {
+  h3 {
+    color: $color-white;
+  }
+
+  p {
+    color: $color-gray-lighter;
+  }
+
+  .curriculo-link,
+  .inscricao-link {
+    color: $color-white;
+    border-color: $color-white;
+
+    &:hover {
+      background: $color-white;
+      color: $color-black;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .inscricao-link {
+    background: $color-white;
+    color: $color-black;
+
+    &:hover {
+      background: transparent;
+      color: $color-white;
+    }
+  }
+}
+
+// Other components
+.row_apoio_realizacao {
+  background: $color-white !important;
+  padding-bottom: 32px;
+  margin-bottom: 0;
+}
+
+.rounded {
+  border-radius: 20px 20px 0 0;
+}
+
+.losangle {
+  z-index: 0;
+  top: -30px;
+
+  div {
+    z-index: 1;
+
+    @include mobile {
+      font-size: 2rem !important;
+    }
+  }
+
+  color: #fff !important;
+  font-size: 3rem;
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 54px;
+    background: $color-black;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 10px;
+    @include transform(skew(-17deg));
+  }
+}
+
+body.dark .losangle:before {
+  background: $color-white;
+}
+
+.logo-seifi {
+  padding: 0 3rem 0rem 3rem;
+
+  @include mobile {
+    padding: 0 1rem 0rem 1rem;
+  }
+}
+
+.logo-worktech-white {
+  @include tablet {
+    filter: contrast(90%) brightness(100);
+  }
+}
+
+@include tablet {
+  .display-3 {
+    font-size: 3.5rem;
+  }
+
+  .schedule::before {
+    left: 0;
+  }
+}
