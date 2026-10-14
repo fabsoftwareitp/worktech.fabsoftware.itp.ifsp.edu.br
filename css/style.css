@@ -175,46 +175,77 @@ body.dark .hoverable-text:hover {
     animation: none;
   }
 }
-.header > .header-binary {
-  --binary-tile: 540px;
+.header > .header-circuits {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 30% 26% at 50% 40%, transparent 0%, #000 100%), linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
-  -webkit-mask-composite: source-in;
-  mask-image: radial-gradient(ellipse 30% 26% at 50% 40%, transparent 0%, #000 100%), linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
-  mask-composite: intersect;
-}
-.header > .header-binary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: var(--binary-color);
-  -webkit-mask-image: url(../img/binary-pattern.svg);
-  mask-image: url(../img/binary-pattern.svg);
-  -webkit-mask-size: var(--binary-tile) var(--binary-tile);
-  mask-size: var(--binary-tile) var(--binary-tile);
-  animation: binary-rain 90s linear infinite;
-}
-@media screen and (max-width: 600px) {
-  .header > .header-binary {
-    --binary-tile: 405px;
-  }
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
 }
 
-@keyframes binary-rain {
+.circuit-track {
+  fill: none;
+  stroke: var(--circuit-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.circuit-pulses {
+  filter: drop-shadow(0 0 3px var(--circuit-glow)) drop-shadow(0 0 8px var(--circuit-glow));
+}
+
+.circuit-pulse {
+  fill: none;
+  stroke: var(--circuit-glow);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 70 2000;
+  stroke-dashoffset: 70;
+  animation: circuit-pulse var(--pulse-duration, 5s) linear var(--pulse-delay, 0s) infinite;
+}
+
+@keyframes circuit-pulse {
   from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
+    stroke-dashoffset: 70;
   }
   to {
-    -webkit-mask-position: 0 var(--binary-tile);
-    mask-position: 0 var(--binary-tile);
+    stroke-dashoffset: -1000;
+  }
+}
+.circuit-node {
+  fill: var(--page-bg);
+  stroke: var(--circuit-node);
+  stroke-width: 2.5;
+}
+
+.circuit-pad {
+  fill: var(--circuit-node);
+}
+
+.circuit-node.is-blinking,
+.circuit-pad.is-blinking {
+  animation: circuit-blink 3.2s ease-in-out var(--blink-delay, 0s) infinite;
+}
+
+@keyframes circuit-blink {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--circuit-glow));
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .header > .header-binary::before {
+  .circuit-pulse {
+    display: none;
+  }
+  .circuit-node.is-blinking,
+  .circuit-pad.is-blinking {
     animation: none;
   }
 }
@@ -3103,7 +3134,9 @@ body.dark .losangle:before {
   --hero-halo: rgba(175, 254, 210, 0.55);
   --hero-side: rgba(1, 148, 60, 0.05);
   --hero-beam: rgba(1, 122, 50, 0.07);
-  --binary-color: rgba(1, 92, 38, 0.22);
+  --circuit-color: rgba(1, 148, 60, 0.3);
+  --circuit-node: #017a32;
+  --circuit-glow: #01943c;
 }
 
 body.dark {
@@ -3144,7 +3177,9 @@ body.dark {
   --hero-halo: rgba(1, 148, 60, 0.36);
   --hero-side: rgba(175, 254, 210, 0.05);
   --hero-beam: rgba(175, 254, 210, 0.07);
-  --binary-color: rgba(255, 255, 255, 0.18);
+  --circuit-color: rgba(6, 251, 126, 0.3);
+  --circuit-node: #affed2;
+  --circuit-glow: #06fb7e;
 }
 
 ::selection {

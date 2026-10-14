@@ -70,6 +70,11 @@ $(function () {
         window.WorktechApp.GSAPAnimations.init();
       }
 
+      // Initialize header circuit traces
+      if (window.WorktechApp && window.WorktechApp.CircuitBoard) {
+        window.WorktechApp.CircuitBoard.init();
+      }
+
       // Initialize Animated Triangles
       if (window.WorktechApp && window.WorktechApp.AnimatedTriangles) {
         window.WorktechApp.AnimatedTriangles.init();

@@ -53,8 +53,12 @@
   --hero-halo: rgba(175, 254, 210, 0.55);
   --hero-side: rgba(1, 148, 60, 0.05);
   --hero-beam: rgba(1, 122, 50, 0.07);
-  // 0s e 1s do header: verde escuro translucido (branco sumiria no fundo claro)
-  --binary-color: rgba(1, 92, 38, 0.22);
+
+  // Trilhas de circuito do header
+  --circuit-color: rgba(1, 148, 60, 0.3);
+  --circuit-node: #{$logo-green-700};
+  --circuit-glow: #{$logo-green};
+
 }
 
 body.dark {
@@ -100,7 +104,10 @@ body.dark {
   --hero-halo: rgba(1, 148, 60, 0.36);
   --hero-side: rgba(175, 254, 210, 0.05);
   --hero-beam: rgba(175, 254, 210, 0.07);
-  --binary-color: rgba(255, 255, 255, 0.18);
+
+  --circuit-color: rgba(6, 251, 126, 0.3);
+  --circuit-node: #{$logo-mint};
+  --circuit-glow: #{$logo-neon};
 }
 
 // Selecao de texto e barra de rolagem

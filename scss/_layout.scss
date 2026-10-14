@@ -128,50 +128,78 @@
   }
 }
 
-// Camada de 0s e 1s sobre o degrade do header.
-// O SVG e usado como mascara: a cor vem do token --binary-color de cada tema.
-// A camada externa esmaece os digitos no centro (atras da logo) e embaixo;
-// o ::before desenha os digitos e desce bem devagar.
-.header > .header-binary {
-  --binary-tile: 540px; // igual ao tamanho do ladrilho em img/binary-pattern.svg
+// Trilhas de circuito do header (geradas por js/modules/circuit-board.js)
+// no estilo da logo: trilhas, pulsos de luz e terminais.
+.header > .header-circuits {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image:
-    radial-gradient(ellipse 30% 26% at 50% 40%, transparent 0%, #000 100%),
-    linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    radial-gradient(ellipse 30% 26% at 50% 40%, transparent 0%, #000 100%),
-    linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
-  mask-composite: intersect;
+  // Some suavemente na emenda com a secao seguinte
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--binary-color);
-    -webkit-mask-image: url(../img/binary-pattern.svg);
-    mask-image: url(../img/binary-pattern.svg);
-    -webkit-mask-size: var(--binary-tile) var(--binary-tile);
-    mask-size: var(--binary-tile) var(--binary-tile);
-    animation: binary-rain 90s linear infinite;
-  }
+.circuit-track {
+  fill: none;
+  stroke: var(--circuit-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-  @include mobile {
-    --binary-tile: 405px;
+// Um trecho curto de luz que percorre a trilha: o tracejado tem um traco de
+// 70 e um vao maior que a trilha (pathLength = 1000), entao so ha um pulso
+.circuit-pulses {
+  filter: drop-shadow(0 0 3px var(--circuit-glow)) drop-shadow(0 0 8px var(--circuit-glow));
+}
+
+.circuit-pulse {
+  fill: none;
+  stroke: var(--circuit-glow);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 70 2000;
+  stroke-dashoffset: 70;
+  animation: circuit-pulse var(--pulse-duration, 5s) linear var(--pulse-delay, 0s) infinite;
+}
+
+@keyframes circuit-pulse {
+  from { stroke-dashoffset: 70; }    // pulso antes do inicio da trilha
+  to   { stroke-dashoffset: -1000; } // pulso alem do terminal
+}
+
+.circuit-node {
+  fill: var(--page-bg);
+  stroke: var(--circuit-node);
+  stroke-width: 2.5;
+}
+
+.circuit-pad {
+  fill: var(--circuit-node);
+}
+
+.circuit-node,
+.circuit-pad {
+  &.is-blinking {
+    animation: circuit-blink 3.2s ease-in-out var(--blink-delay, 0s) infinite;
   }
 }
 
-// Desce exatamente um ladrilho por ciclo, para o loop nao dar "pulo"
-@keyframes binary-rain {
-  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
-  to   { -webkit-mask-position: 0 var(--binary-tile); mask-position: 0 var(--binary-tile); }
+@keyframes circuit-blink {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; filter: drop-shadow(0 0 6px var(--circuit-glow)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header > .header-binary::before {
+  .circuit-pulse {
+    display: none;
+  }
+
+  .circuit-node.is-blinking,
+  .circuit-pad.is-blinking {
     animation: none;
   }
 }
