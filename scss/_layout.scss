@@ -101,6 +101,54 @@
   }
 }
 
+// Camada de 0s e 1s sobre o degrade do header.
+// O SVG e usado como mascara: a cor vem do token --binary-color de cada tema.
+// A camada externa esmaece os digitos no centro (atras da logo) e embaixo;
+// o ::before desenha os digitos e desce bem devagar.
+.header > .header-binary {
+  --binary-tile: 480px;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image:
+    radial-gradient(ellipse 38% 34% at 50% 42%, transparent 0%, #000 100%),
+    linear-gradient(to bottom, #000 0%, #000 55%, transparent 92%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse 38% 34% at 50% 42%, transparent 0%, #000 100%),
+    linear-gradient(to bottom, #000 0%, #000 55%, transparent 92%);
+  mask-composite: intersect;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--binary-color);
+    -webkit-mask-image: url(../img/binary-pattern.svg);
+    mask-image: url(../img/binary-pattern.svg);
+    -webkit-mask-size: var(--binary-tile) var(--binary-tile);
+    mask-size: var(--binary-tile) var(--binary-tile);
+    animation: binary-rain 90s linear infinite;
+  }
+
+  @include mobile {
+    --binary-tile: 360px;
+  }
+}
+
+// Desce exatamente um ladrilho por ciclo, para o loop nao dar "pulo"
+@keyframes binary-rain {
+  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
+  to   { -webkit-mask-position: 0 var(--binary-tile); mask-position: 0 var(--binary-tile); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header > .header-binary::before {
+    animation: none;
+  }
+}
+
 // Footer
 #footer {
   background-image: url(../img/footer-detail.png);

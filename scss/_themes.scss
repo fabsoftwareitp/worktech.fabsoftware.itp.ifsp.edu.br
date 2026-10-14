@@ -53,6 +53,8 @@
   --mesh-mid: rgba(1, 148, 60, 0.08);
   --mesh-deep: rgba(1, 148, 60, 0.07);
   --mesh-soft: rgba(6, 251, 126, 0.1);
+  // 0s e 1s do header: verde escuro translucido (branco sumiria no fundo claro)
+  --binary-color: rgba(1, 92, 38, 0.14);
 }
 
 body.dark {
@@ -98,6 +100,7 @@ body.dark {
   --mesh-mid: rgba(1, 148, 60, 0.2);
   --mesh-deep: rgba(1, 92, 38, 0.28);
   --mesh-soft: rgba(175, 254, 210, 0.05);
+  --binary-color: rgba(255, 255, 255, 0.09);
 }
 
 // Selecao de texto e barra de rolagem
