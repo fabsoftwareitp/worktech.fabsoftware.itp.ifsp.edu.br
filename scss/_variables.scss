@@ -17,8 +17,11 @@ $spacing-base: 1rem;
 
 // Layout
 $header-min-height: 100vh;
-$logo-width-desktop: 500px;
-$logo-width-mobile: 300px;
+$logo-width-desktop: 640px;
+$logo-width-mobile: 340px;
+// O peso visual da logo fica a direita do centro do PNG (WORK TECH e mais
+// denso que os losangos); este deslocamento alinha com o texto abaixo
+$logo-optical-offset: -3%;
 
 // Timeline
 $timeline-width: 0.3rem;

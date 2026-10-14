@@ -91,16 +91,18 @@ body.dark .hoverable-text:hover {
 }
 .header img {
   margin-top: 20vh;
-  width: 500px;
+  width: min(640px, 90vw);
+  translate: -3% 0;
 }
 @media screen and (max-width: 600px) {
   .header img {
-    width: 300px !important;
+    width: min(340px, 90vw) !important;
   }
 }
 .header img.navbar {
   margin-top: 0;
   width: 100%;
+  translate: none;
 }
 @media screen and (max-width: 600px) {
   .header {

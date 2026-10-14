@@ -25,16 +25,19 @@
 
   img {
     margin-top: 20vh;
-    width: $logo-width-desktop;
+    width: min(#{$logo-width-desktop}, 90vw);
+    // "translate" (e nao transform) para nao conflitar com animacoes do GSAP
+    translate: $logo-optical-offset 0;
 
     @include mobile {
-      width: $logo-width-mobile !important;
+      width: min(#{$logo-width-mobile}, 90vw) !important;
     }
   }
 
   img.navbar {
     margin-top: 0;
     width: 100%;
+    translate: none;
   }
 
   @include mobile {
