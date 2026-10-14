@@ -24,7 +24,7 @@ window.WorktechApp.ThemeToggle = {
   // Imagens de cada tema. O "?v=" forca o navegador a baixar de novo quando
   // uma imagem e trocada mantendo o nome: ao alterar um arquivo, mude a versao
   // (e a do mesmo arquivo em header.html / navbar.html).
-  ASSET_VERSION: "2026-2",
+  ASSET_VERSION: "2026-3",
   IMAGES: {
     dark: { logo: "img/logo_worktech.png", footer: "img/ifsp_white.png" },
     light: { logo: "img/logo_worktech_white.png", footer: "img/ifsp.png" },
