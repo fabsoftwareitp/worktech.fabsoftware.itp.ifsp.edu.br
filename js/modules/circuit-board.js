@@ -14,7 +14,12 @@ window.WorktechApp.CircuitBoard = {
   LANE: 60,
   BEND: 26,
   // Parte das trilhas que recebe um pulso de luz
-  PULSE_CHANCE: 0.5,
+  PULSE_CHANCE: 0.45,
+  // Chance de pular uma faixa: quanto maior, menos trilhas
+  SKIP_SIDE: 0.5,
+  SKIP_BOTTOM: 0.55,
+  // Intensidade minima: algumas trilhas ficam bem esvaecidas, ao fundo
+  MIN_OPACITY: 0.3,
 
   init: function () {
     var svg = document.querySelector(".header-circuits");
@@ -23,11 +28,11 @@ window.WorktechApp.CircuitBoard = {
     // Semente fixa: o desenho e sempre o mesmo a cada visita
     this.random = this.createRandom(2026);
 
+    // Sem trilhas no topo: so laterais e base
     var traces = [];
     traces = traces.concat(this.buildSideZone(false)); // esquerda
     traces = traces.concat(this.buildSideZone(true)); // direita
-    traces = traces.concat(this.buildEdgeZone(false)); // topo
-    traces = traces.concat(this.buildEdgeZone(true)); // base
+    traces = traces.concat(this.buildBottomZone());
 
     this.render(svg, traces);
   },
@@ -56,7 +61,7 @@ window.WorktechApp.CircuitBoard = {
     var maxReach = 360; // limite horizontal: a logo comeca depois disso
 
     for (var y = 70; y <= this.HEIGHT - 70; y += this.LANE) {
-      if (this.random() < 0.25) continue; // falhas deixam o desenho organico
+      if (this.random() < this.SKIP_SIDE) continue; // falhas deixam o desenho organico
 
       var away = y < centerY ? -1 : 1;
       var closeness = 1 - Math.abs(y - centerY) / centerY;
@@ -82,14 +87,14 @@ window.WorktechApp.CircuitBoard = {
     return traces;
   },
 
-  // Trilhas que descem do topo (ou sobem da base) na faixa central; sao as
-  // que aparecem no celular, onde as laterais ficam cortadas
-  buildEdgeZone: function (fromBottom) {
+  // Trilhas que sobem da base na faixa central; sao as que aparecem no
+  // celular, onde as laterais ficam cortadas
+  buildBottomZone: function () {
     var traces = [];
     var centerX = this.WIDTH / 2;
 
     for (var x = 480; x <= 960; x += this.LANE) {
-      if (this.random() < 0.3) continue;
+      if (this.random() < this.SKIP_BOTTOM) continue;
 
       var away = x < centerX ? -1 : 1;
       var closeness = 1 - Math.abs(x - centerX) / 240;
@@ -101,7 +106,7 @@ window.WorktechApp.CircuitBoard = {
       points.push([x + away * this.BEND, first + this.BEND]);
       points.push([x + away * this.BEND, first + this.BEND + last]);
 
-      traces.push(fromBottom ? this.mirrorY(points) : points);
+      traces.push(this.mirrorY(points));
     }
     return traces;
   },
@@ -144,7 +149,12 @@ window.WorktechApp.CircuitBoard = {
 
     traces.forEach(function (points) {
       var d = self.toPath(points);
-      tracksGroup.appendChild(self.createElement("path", { d: d, class: "circuit-track" }));
+      // Mesma intensidade para trilha, pulso e terminal: cada circuito
+      // parece estar numa profundidade diferente
+      var opacity = self.between(self.MIN_OPACITY, 1).toFixed(2);
+      tracksGroup.appendChild(
+        self.createElement("path", { d: d, class: "circuit-track", opacity: opacity })
+      );
 
       // Pulso: um trecho curto de luz que percorre a trilha da borda ao terminal
       if (self.random() < self.PULSE_CHANCE) {
@@ -152,8 +162,9 @@ window.WorktechApp.CircuitBoard = {
           d: d,
           class: "circuit-pulse",
           pathLength: "1000",
+          opacity: opacity,
         });
-        pulse.style.setProperty("--pulse-duration", self.between(3.5, 7).toFixed(2) + "s");
+        pulse.style.setProperty("--pulse-duration", self.between(5, 10).toFixed(2) + "s");
         pulse.style.setProperty("--pulse-delay", self.between(0, 7).toFixed(2) + "s");
         pulsesGroup.appendChild(pulse);
       }
@@ -177,6 +188,7 @@ window.WorktechApp.CircuitBoard = {
           class: "circuit-pad",
         });
       }
+      node.setAttribute("opacity", opacity);
       if (self.random() < 0.35) {
         node.classList.add("is-blinking");
         node.style.setProperty("--blink-delay", self.between(0, 5).toFixed(2) + "s");

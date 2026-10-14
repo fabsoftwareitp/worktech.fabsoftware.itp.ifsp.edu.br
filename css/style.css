@@ -182,26 +182,28 @@ body.dark .hoverable-text:hover {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
-  mask-image: linear-gradient(to bottom, #000 70%, transparent 98%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, #000 72%, transparent 98%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, #000 72%, transparent 98%);
+  mask-composite: intersect;
 }
 
 .circuit-track {
   fill: none;
   stroke: var(--circuit-color);
-  stroke-width: 2.5;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .circuit-pulses {
-  filter: drop-shadow(0 0 3px var(--circuit-glow)) drop-shadow(0 0 8px var(--circuit-glow));
+  filter: drop-shadow(0 0 4px var(--circuit-glow));
 }
 
 .circuit-pulse {
   fill: none;
   stroke: var(--circuit-glow);
-  stroke-width: 3;
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 70 2000;
   stroke-dashoffset: 70;
@@ -219,7 +221,7 @@ body.dark .hoverable-text:hover {
 .circuit-node {
   fill: var(--page-bg);
   stroke: var(--circuit-node);
-  stroke-width: 2.5;
+  stroke-width: 2;
 }
 
 .circuit-pad {
