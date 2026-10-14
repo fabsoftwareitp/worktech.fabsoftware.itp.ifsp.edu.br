@@ -968,6 +968,31 @@ body.dark .programacao-subtitle {
   transition: fill 0.3s ease;
 }
 
+.inscricoes-circuits {
+  position: absolute;
+  top: -80px;
+  right: 0;
+  width: min(300px, 24vw);
+  height: calc(100% + 160px);
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 12%, #000 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to left, transparent 0%, #000 12%, #000 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+}
+@media screen and (max-width: 600px) {
+  .inscricoes-circuits {
+    width: 45vw;
+    opacity: 0.3;
+  }
+}
+
+#inscricoes > .row {
+  position: relative;
+  z-index: 6;
+}
+
 #svg-inscricoes-triangles {
   z-index: 5 !important;
 }

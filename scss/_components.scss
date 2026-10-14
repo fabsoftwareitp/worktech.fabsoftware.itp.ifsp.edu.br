@@ -517,6 +517,38 @@ $day-carousel-fade: 40px;
   }
 }
 
+// Trilhas de circuito no canto direito de Inscricoes: saem da borda e se
+// apagam antes de chegar ao texto
+.inscricoes-circuits {
+  position: absolute;
+  top: -80px;
+  right: 0;
+  width: min(300px, 24vw);
+  height: calc(100% + 160px);
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(to left, transparent 0%, #000 12%, #000 55%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to left, transparent 0%, #000 12%, #000 55%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+
+  // No celular o texto ocupa a largura toda: trilhas bem discretas
+  @include mobile {
+    width: 45vw;
+    opacity: 0.3;
+  }
+}
+
+// O conteudo fica sempre acima das trilhas e dos triangulos
+#inscricoes > .row {
+  position: relative;
+  z-index: 6;
+}
+
 // Triângulos da seção de inscrições com z-index maior para não serem cortados
 #svg-inscricoes-triangles {
   z-index: 5 !important;

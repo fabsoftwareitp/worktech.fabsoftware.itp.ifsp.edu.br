@@ -1,38 +1,54 @@
 // Circuit Board Module
 // Desenha trilhas de circuito no estilo da logo (retas com dobras de 45° e
-// terminais em bolinha ou quadradinho) no fundo do header, com pulsos de luz
-// correndo por elas. As cores e animacoes ficam no CSS (.header-circuits).
+// terminais em bolinha ou quadradinho), com pulsos de luz correndo por elas.
+// Usado no header e no canto direito de Inscricoes. As cores e animacoes
+// ficam no CSS (.circuit-*).
 window.WorktechApp = window.WorktechApp || {};
 
 window.WorktechApp.CircuitBoard = {
   SVG_NS: "http://www.w3.org/2000/svg",
-  // Mesmo tamanho do viewBox definido no index.html
-  WIDTH: 1440,
-  HEIGHT: 900,
   // Espaco entre trilhas vizinhas; cada dobra desloca menos que isso, entao
   // trilhas paralelas nunca se cruzam
   LANE: 60,
   BEND: 26,
   // Parte das trilhas que recebe um pulso de luz
   PULSE_CHANCE: 0.45,
-  // Chance de pular uma faixa: quanto maior, menos trilhas
-  SKIP_SIDE: 0.5,
-  SKIP_BOTTOM: 0.55,
   // Intensidade minima: algumas trilhas ficam bem esvaecidas, ao fundo
   MIN_OPACITY: 0.3,
 
   init: function () {
+    this.drawHeader();
+    this.drawInscricoes();
+  },
+
+  // Header (viewBox 1440x900 no index.html): laterais e base, nada no topo.
+  // A logo comeca depois de 360 unidades de cada lado.
+  drawHeader: function () {
     var svg = document.querySelector(".header-circuits");
     if (!svg) return;
 
     // Semente fixa: o desenho e sempre o mesmo a cada visita
     this.random = this.createRandom(2026);
+    var area = { width: 1440, height: 900 };
 
-    // Sem trilhas no topo: so laterais e base
-    var traces = [];
-    traces = traces.concat(this.buildSideZone(false)); // esquerda
-    traces = traces.concat(this.buildSideZone(true)); // direita
-    traces = traces.concat(this.buildBottomZone());
+    var traces = []
+      .concat(this.buildSideZone(area, { mirror: false, maxReach: 360, skip: 0.5 }))
+      .concat(this.buildSideZone(area, { mirror: true, maxReach: 360, skip: 0.5 }))
+      .concat(this.buildBottomZone(area, { from: 480, to: 960, skip: 0.55 }));
+
+    this.render(svg, traces);
+  },
+
+  // Canto direito de Inscricoes (viewBox 320x760 em inscricoes.html):
+  // trilhas saindo da borda direita, curtas para caber na faixa livre a
+  // direita do texto (~220px no desktop)
+  drawInscricoes: function () {
+    var svg = document.querySelector(".inscricoes-circuits");
+    if (!svg) return;
+
+    this.random = this.createRandom(2027);
+    var area = { width: 320, height: 760 };
+    var traces = this.buildSideZone(area, { mirror: true, maxReach: 230, skip: 0.4 });
 
     this.render(svg, traces);
   },
@@ -52,20 +68,21 @@ window.WorktechApp.CircuitBoard = {
     return min + this.random() * (max - min);
   },
 
-  // Trilhas que saem da borda esquerda (ou direita, espelhado) em direcao ao
-  // centro e param antes da area da logo. As trilhas mais afastadas do centro
-  // dobram primeiro e todas dobram para longe do centro, como na logo.
-  buildSideZone: function (mirror) {
+  // Trilhas que saem da borda esquerda (ou direita, com mirror) e param
+  // antes de maxReach. As trilhas mais afastadas do centro vertical dobram
+  // primeiro e todas dobram para longe dele, como na logo.
+  // skip: chance de pular uma faixa (quanto maior, menos trilhas)
+  buildSideZone: function (area, options) {
     var traces = [];
-    var centerY = this.HEIGHT / 2;
-    var maxReach = 360; // limite horizontal: a logo comeca depois disso
+    var centerY = area.height / 2;
+    var maxReach = options.maxReach;
 
-    for (var y = 70; y <= this.HEIGHT - 70; y += this.LANE) {
-      if (this.random() < this.SKIP_SIDE) continue; // falhas deixam o desenho organico
+    for (var y = 70; y <= area.height - 70; y += this.LANE) {
+      if (this.random() < options.skip) continue; // falhas deixam o desenho organico
 
       var away = y < centerY ? -1 : 1;
       var closeness = 1 - Math.abs(y - centerY) / centerY;
-      var first = 30 + closeness * 140 + this.between(0, 14);
+      var first = 30 + closeness * maxReach * 0.39 + this.between(0, 14);
       var middle = this.between(30, 70);
       var last = this.between(20, maxReach - first - middle - this.BEND * 2);
 
@@ -82,22 +99,23 @@ window.WorktechApp.CircuitBoard = {
         points.push([x, y + away * this.BEND * 2]);
       }
 
-      traces.push(mirror ? this.mirrorX(points) : points);
+      traces.push(options.mirror ? this.mirrorX(points, area.width) : points);
     }
     return traces;
   },
 
-  // Trilhas que sobem da base na faixa central; sao as que aparecem no
-  // celular, onde as laterais ficam cortadas
-  buildBottomZone: function () {
+  // Trilhas que sobem da base entre "from" e "to"; no header sao as que
+  // aparecem no celular, onde as laterais ficam cortadas
+  buildBottomZone: function (area, options) {
     var traces = [];
-    var centerX = this.WIDTH / 2;
+    var centerX = (options.from + options.to) / 2;
+    var halfSpan = (options.to - options.from) / 2;
 
-    for (var x = 480; x <= 960; x += this.LANE) {
-      if (this.random() < this.SKIP_BOTTOM) continue;
+    for (var x = options.from; x <= options.to; x += this.LANE) {
+      if (this.random() < options.skip) continue;
 
       var away = x < centerX ? -1 : 1;
-      var closeness = 1 - Math.abs(x - centerX) / 240;
+      var closeness = 1 - Math.abs(x - centerX) / halfSpan;
       var first = 20 + closeness * 50 + this.between(0, 10);
       var last = this.between(15, 50);
 
@@ -106,20 +124,18 @@ window.WorktechApp.CircuitBoard = {
       points.push([x + away * this.BEND, first + this.BEND]);
       points.push([x + away * this.BEND, first + this.BEND + last]);
 
-      traces.push(this.mirrorY(points));
+      traces.push(this.mirrorY(points, area.height));
     }
     return traces;
   },
 
-  mirrorX: function (points) {
-    var width = this.WIDTH;
+  mirrorX: function (points, width) {
     return points.map(function (p) {
       return [width - p[0], p[1]];
     });
   },
 
-  mirrorY: function (points) {
-    var height = this.HEIGHT;
+  mirrorY: function (points, height) {
     return points.map(function (p) {
       return [p[0], height - p[1]];
     });
