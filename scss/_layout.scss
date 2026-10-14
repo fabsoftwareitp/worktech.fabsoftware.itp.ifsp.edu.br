@@ -38,29 +38,90 @@
   }
 
   @include mobile {
-    background-position: center 40%;
     min-height: 100vh;
   }
 }
 
-// Background do header (separado para animação)
+// Fundo do header: brilho verde vindo do topo + feixes de luz verticais.
+// Feito so com gradientes (sem imagem); as cores vem dos tokens --hero-* do tema.
 .header-background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../img/bg-start.png);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  overflow: hidden;
+  background-color: var(--page-bg);
+  background-image:
+    // Nucleo do brilho, mais intenso, logo abaixo da borda superior
+    radial-gradient(ellipse 38% 32% at 50% 0%, var(--hero-core), transparent 70%),
+    // Halo mais largo em verde da logo
+    radial-gradient(ellipse 75% 60% at 50% -5%, var(--hero-halo), transparent 72%),
+    // Toques laterais bem discretos para dar profundidade
+    radial-gradient(ellipse 45% 40% at 12% 85%, var(--hero-side), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 88% 75%, var(--hero-side), transparent 70%);
   will-change: transform;
-  transform-origin: center center;
+  transform-origin: center top;
   z-index: 0;
+  animation: hero-breathe 9s ease-in-out infinite alternate;
+
+  // Feixes de luz: linhas finas que so aparecem perto do brilho
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 -10%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 46px,
+      var(--hero-beam) 47px,
+      transparent 49px
+    );
+    -webkit-mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
+    filter: blur(0.5px);
+    animation: hero-beams 24s linear infinite alternate;
+  }
+
+  // Emenda suave com a secao seguinte
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent, var(--page-bg));
+  }
 
   @include mobile {
-    background-position: center 40%;
+    // No celular o brilho fica mais estreito e alto para caber na tela
+    background-image:
+      radial-gradient(ellipse 70% 30% at 50% 0%, var(--hero-core), transparent 70%),
+      radial-gradient(ellipse 120% 55% at 50% -5%, var(--hero-halo), transparent 72%),
+      radial-gradient(ellipse 70% 35% at 10% 85%, var(--hero-side), transparent 70%);
+
+    &::before {
+      -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
+      mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
+    }
+  }
+}
+
+@keyframes hero-breathe {
+  from { opacity: 0.85; }
+  to   { opacity: 1; }
+}
+
+@keyframes hero-beams {
+  from { transform: translateX(0); }
+  to   { transform: translateX(47px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-background,
+  .header-background::before {
+    animation: none;
   }
 }
 

@@ -47,6 +47,12 @@
   // Degrade dos triangulos (topo -> fim da pagina)
   --tri-dark: #{$logo-green-800};
   --tri-light: #{$logo-mint};
+
+  // Fundo do header: brilho e feixes de luz
+  --hero-core: rgba(1, 148, 60, 0.22);
+  --hero-halo: rgba(175, 254, 210, 0.55);
+  --hero-side: rgba(1, 148, 60, 0.05);
+  --hero-beam: rgba(1, 122, 50, 0.07);
 }
 
 body.dark {
@@ -87,6 +93,11 @@ body.dark {
 
   --tri-dark: #{$logo-green-900};
   --tri-light: #{$logo-mint};
+
+  --hero-core: rgba(6, 251, 126, 0.3);
+  --hero-halo: rgba(1, 148, 60, 0.36);
+  --hero-side: rgba(175, 254, 210, 0.05);
+  --hero-beam: rgba(175, 254, 210, 0.07);
 }
 
 // Selecao de texto e barra de rolagem
@@ -274,6 +285,13 @@ nav ul a:hover,
 // Tema claro: preto da logo com leve fundo verde no lugar do preto puro
 body:not(.dark) {
   color: var(--ink) !important;
+
+  // O fundo do header agora e claro: menu escuro para ter contraste
+  .header nav a,
+  .header nav li,
+  .header nav i {
+    color: var(--ink) !important;
+  }
 
   .programacao-header h1,
   .section-title {

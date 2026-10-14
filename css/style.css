@@ -104,7 +104,6 @@ body.dark .hoverable-text:hover {
 }
 @media screen and (max-width: 600px) {
   .header {
-    background-position: center 40%;
     min-height: 100vh;
   }
 }
@@ -115,21 +114,65 @@ body.dark .hoverable-text:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../img/bg-start.png);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  overflow: hidden;
+  background-color: var(--page-bg);
+  background-image: radial-gradient(ellipse 38% 32% at 50% 0%, var(--hero-core), transparent 70%), radial-gradient(ellipse 75% 60% at 50% -5%, var(--hero-halo), transparent 72%), radial-gradient(ellipse 45% 40% at 12% 85%, var(--hero-side), transparent 70%), radial-gradient(ellipse 45% 40% at 88% 75%, var(--hero-side), transparent 70%);
   will-change: transform;
-  transform-origin: center center;
+  transform-origin: center top;
   z-index: 0;
+  animation: hero-breathe 9s ease-in-out infinite alternate;
+}
+.header-background::before {
+  content: "";
+  position: absolute;
+  inset: 0 -10%;
+  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 46px, var(--hero-beam) 47px, transparent 49px);
+  -webkit-mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
+  filter: blur(0.5px);
+  animation: hero-beams 24s linear infinite alternate;
+}
+.header-background::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, var(--page-bg));
 }
 @media screen and (max-width: 600px) {
   .header-background {
-    background-position: center 40%;
+    background-image: radial-gradient(ellipse 70% 30% at 50% 0%, var(--hero-core), transparent 70%), radial-gradient(ellipse 120% 55% at 50% -5%, var(--hero-halo), transparent 72%), radial-gradient(ellipse 70% 35% at 10% 85%, var(--hero-side), transparent 70%);
+  }
+  .header-background::before {
+    -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
   }
 }
 
+@keyframes hero-breathe {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-beams {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(47px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-background,
+  .header-background::before {
+    animation: none;
+  }
+}
 #footer {
   background-image: url(../img/footer-detail.png);
   background-size: 100%;
@@ -2994,6 +3037,10 @@ body.dark .losangle:before {
   --tab-active-muted: #affed2;
   --tri-dark: #015c26;
   --tri-light: #affed2;
+  --hero-core: rgba(1, 148, 60, 0.22);
+  --hero-halo: rgba(175, 254, 210, 0.55);
+  --hero-side: rgba(1, 148, 60, 0.05);
+  --hero-beam: rgba(1, 122, 50, 0.07);
 }
 
 body.dark {
@@ -3030,6 +3077,10 @@ body.dark {
   --tab-active-muted: #affed2;
   --tri-dark: #013d19;
   --tri-light: #affed2;
+  --hero-core: rgba(6, 251, 126, 0.3);
+  --hero-halo: rgba(1, 148, 60, 0.36);
+  --hero-side: rgba(175, 254, 210, 0.05);
+  --hero-beam: rgba(175, 254, 210, 0.07);
 }
 
 ::selection {
@@ -3168,6 +3219,11 @@ nav ul a:hover,
 }
 
 body:not(.dark) {
+  color: var(--ink) !important;
+}
+body:not(.dark) .header nav a,
+body:not(.dark) .header nav li,
+body:not(.dark) .header nav i {
   color: var(--ink) !important;
 }
 body:not(.dark) .programacao-header h1,
