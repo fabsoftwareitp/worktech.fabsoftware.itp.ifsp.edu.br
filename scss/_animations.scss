@@ -1,12 +1,9 @@
 // SVG Animations and decoration styles
 
+// Os SVGs decorativos usam currentColor, entao herdam o verde do tema
 .svg-theme-adaptive {
-  color: #000;
+  color: var(--accent);
   will-change: transform;
-}
-
-body.dark .svg-theme-adaptive {
-  color: #fff;
 }
 
 .svg-decoration-programacao,
@@ -43,18 +40,8 @@ body.dark .svg-theme-adaptive {
 }
 
 .timeline-activation {
-  will-change: transform, opacity, color;
-  transition: all 0.3s ease;
+  will-change: transform, opacity;
   cursor: pointer;
-  display: inline-block;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-  
-  &.active {
-    opacity: 1;
-  }
 }
 
 #lamp {
@@ -98,13 +85,7 @@ body.dark .svg-theme-adaptive {
 }
 
 @media screen and (max-width: $breakpoint-mobile) {
-  .svg-decoration-programacao,
-  .svg-decoration-inscricoes,
-  .svg-decoration-local,
-  .svg-decoration-header {
-    display: none;
-  }
-  
+  // As decoracoes de fundo continuam visiveis no mobile (opacidade em _components.scss)
   .timeline-block {
     perspective: none;
   }

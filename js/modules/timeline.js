@@ -13,7 +13,11 @@ window.WorktechApp.Timeline = {
             var iconDescription =
               "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i>";
             
-            $(all).attr("id", date);
+            $(all).attr({
+              id: date,
+              role: "tabpanel",
+              "aria-labelledby": "tab-" + date,
+            });
             $(all).css("display", "none");
 
             $.each(workshops, function (index) {
@@ -111,22 +115,8 @@ window.WorktechApp.Timeline = {
     this.loadWorkshops();
     this.initScrollAnimation();
 
-    $(document).ready(function () {
-      var isDark = $("body").hasClass("dark");
-      var $firstBtn = $(".timeline-activation:first");
-      
-      $firstBtn.addClass("active");
-      
-      if (isDark) {
-        $firstBtn.css("background", "#ffffff");
-        $firstBtn.find("i, .tab-label, .tab-date").css("color", "#000");
-      } else {
-        $firstBtn.css("background", "#000");
-        $firstBtn.find("i, .tab-label, .tab-date").css("color", "#fff");
-      }
-      
-      $($firstBtn.attr("href")).show("fast");
-    });
-
+    // Primeiro dia ativo por padrao; o conteudo e exibido em loadWorkshops
+    // assim que o JSON termina de carregar
+    $(".timeline-activation:first").addClass("active");
   },
 };

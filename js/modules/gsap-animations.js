@@ -16,20 +16,20 @@ window.WorktechApp.GSAPAnimations = {
       ease: "none",
     });
 
-    gsap.from("#logo-topo-home", {
-      duration: 1.2,
-      opacity: 0,
-      ease: "power2.out",
-      delay: 0.2,
-    });
+    // Revelacoes usam fromTo com valor final explicito: um from() le o valor
+    // computado e, se houver transicao CSS em andamento durante um
+    // ScrollTrigger.refresh(), grava opacity 0 como final e o elemento some.
+    gsap.fromTo(
+      "#logo-topo-home",
+      { opacity: 0 },
+      { duration: 1.2, opacity: 1, ease: "power2.out", delay: 0.2 }
+    );
 
-    gsap.from(".header h4", {
-      duration: 1,
-      y: 30,
-      opacity: 0,
-      ease: "power2.out",
-      delay: 0.6,
-    });
+    gsap.fromTo(
+      ".header h4",
+      { y: 30, opacity: 0 },
+      { duration: 1, y: 0, opacity: 1, ease: "power2.out", delay: 0.6 }
+    );
   },
 
   animateProgramacao: function () {
@@ -42,12 +42,11 @@ window.WorktechApp.GSAPAnimations = {
       },
     });
 
-    tl.from("#programacao h1", {
-      duration: 0.8,
-      y: 30,
-      opacity: 0,
-      ease: "power2.out",
-    }).fromTo(
+    tl.fromTo(
+      "#programacao h1",
+      { y: 30, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }
+    ).fromTo(
       ".timeline-activation",
       {
         opacity: 0,
@@ -59,6 +58,8 @@ window.WorktechApp.GSAPAnimations = {
         y: 0,
         stagger: 0.15,
         ease: "power2.out",
+        // Libera o transform para o efeito de hover do CSS funcionar
+        clearProps: "transform",
       },
       "-=0.4"
     );
@@ -68,18 +69,22 @@ window.WorktechApp.GSAPAnimations = {
     gsap.utils.toArray(".timeline-block").forEach((block, index) => {
       const isOdd = index % 2 === 0;
 
-      gsap.from(block, {
-        scrollTrigger: {
-          trigger: block,
-          start: "top 85%",
-          end: "top 40%",
-          toggleActions: "play none none reverse",
-        },
-        duration: 0.8,
-        x: isOdd ? -50 : 50,
-        opacity: 0,
-        ease: "power2.out",
-      });
+      gsap.fromTo(
+        block,
+        { x: isOdd ? -50 : 50, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: block,
+            start: "top 85%",
+            end: "top 40%",
+            toggleActions: "play none none reverse",
+          },
+          duration: 0.8,
+          x: 0,
+          opacity: 1,
+          ease: "power2.out",
+        }
+      );
     });
   },
 
@@ -93,29 +98,21 @@ window.WorktechApp.GSAPAnimations = {
       },
     });
 
-    tl.from("#inscricoes h2", {
-      duration: 0.8,
-      y: 30,
-      opacity: 0,
-      ease: "power2.out",
-    })
-      .from(
+    tl.fromTo(
+      "#inscricoes h2",
+      { y: 30, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }
+    )
+      .fromTo(
         "#inscricoes h4",
-        {
-          duration: 0.6,
-          y: 20,
-          opacity: 0,
-          ease: "power2.out",
-        },
+        { y: 20, opacity: 0 },
+        { duration: 0.6, y: 0, opacity: 1, ease: "power2.out" },
         "-=0.4"
       )
-      .from(
+      .fromTo(
         "#inscricoes .btn-large",
-        {
-          duration: 0.6,
-          opacity: 0,
-          ease: "power2.out",
-        },
+        { opacity: 0 },
+        { duration: 0.6, opacity: 1, ease: "power2.out" },
         "-=0.3"
       );
   },
@@ -149,38 +146,27 @@ window.WorktechApp.GSAPAnimations = {
       },
     });
 
-    tl.from("#local h2", {
-      duration: 0.8,
-      y: 30,
-      opacity: 0,
-      ease: "power2.out",
-    })
-      .from(
+    tl.fromTo(
+      "#local h2",
+      { y: 30, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }
+    )
+      .fromTo(
         "#local h5",
-        {
-          duration: 0.6,
-          y: 20,
-          opacity: 0,
-          ease: "power2.out",
-        },
+        { y: 20, opacity: 0 },
+        { duration: 0.6, y: 0, opacity: 1, ease: "power2.out" },
         "-=0.4"
       )
-      .from(
+      .fromTo(
         "#local .btn-large",
-        {
-          duration: 0.6,
-          opacity: 0,
-          ease: "power2.out",
-        },
+        { opacity: 0 },
+        { duration: 0.6, opacity: 1, ease: "power2.out" },
         "-=0.3"
       )
-      .from(
+      .fromTo(
         "#local iframe",
-        {
-          duration: 0.8,
-          opacity: 0,
-          ease: "power2.out",
-        },
+        { opacity: 0 },
+        { duration: 0.8, opacity: 1, ease: "power2.out" },
         "-=0.4"
       );
   },
@@ -354,29 +340,10 @@ window.WorktechApp.GSAPAnimations = {
       var target = $(this).attr("href");
       var $target = $(target);
       var $current = $(".timeline > div:visible");
-      var isDark = $("body").hasClass("dark");
 
+      // As cores da aba ativa ficam no CSS (.timeline-activation.active)
       $(".timeline-activation").removeClass("active");
-      
-      $(".timeline-activation").each(function() {
-        if (isDark) {
-          $(this).css("background", "#1a1a1a");
-          $(this).find("i, .tab-label, .tab-date").css("color", "#ffffff");
-        } else {
-          $(this).css("background", "#f5f5f5");
-          $(this).find("i, .tab-label, .tab-date").css("color", "#000");
-        }
-      });
-      
       $(this).addClass("active");
-      
-      if (isDark) {
-        $(this).css("background", "#ffffff");
-        $(this).find("i, .tab-label, .tab-date").css("color", "#000");
-      } else {
-        $(this).css("background", "#000");
-        $(this).find("i, .tab-label, .tab-date").css("color", "#fff");
-      }
 
       const tl = gsap.timeline();
 
@@ -414,14 +381,18 @@ window.WorktechApp.GSAPAnimations = {
         delay: $current.length > 0 ? 0.05 : 0,
       });
 
-      gsap.from($target.find(".timeline-content h3"), {
-        duration: 0.3,
-        y: 10,
-        opacity: 0,
-        stagger: 0.03,
-        ease: "power1.out",
-        delay: $current.length > 0 ? 0.15 : 0.1,
-      });
+      gsap.fromTo(
+        $target.find(".timeline-content h3"),
+        { y: 10, opacity: 0 },
+        {
+          duration: 0.3,
+          y: 0,
+          opacity: 1,
+          stagger: 0.03,
+          ease: "power1.out",
+          delay: $current.length > 0 ? 0.15 : 0.1,
+        }
+      );
     });
   },
 
@@ -435,20 +406,14 @@ window.WorktechApp.GSAPAnimations = {
       },
     });
 
-    tl.from(".footer-final img", {
-      duration: 0.8,
-      y: 30,
-      opacity: 0,
-      ease: "power2.out",
-    }).from(
+    tl.fromTo(
+      ".footer-final img",
+      { y: 30, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }
+    ).fromTo(
       ".footer-final p",
-      {
-        duration: 0.6,
-        y: 20,
-        opacity: 0,
-        stagger: 0.15,
-        ease: "power2.out",
-      },
+      { y: 20, opacity: 0 },
+      { duration: 0.6, y: 0, opacity: 1, stagger: 0.15, ease: "power2.out" },
       "-=0.4"
     );
   },

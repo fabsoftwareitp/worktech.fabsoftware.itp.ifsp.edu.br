@@ -1,4 +1,107 @@
+// ============================================
+// Tokens de cor por tema (CSS variables)
+// Todos os componentes leem estas variaveis, entao trocar o tema
+// e so alternar a classe .dark no body; nenhum JS precisa pintar cores.
+// ============================================
+:root {
+  --page-bg: #{$color-white};
+  --ink: #{$ink};
+  --ink-soft: #{$ink-soft};
+  --surface: #f4fbf7;                // fundo dos cards
+  --surface-border: #d6efe0;
+
+  // Linha do tempo, bolinhas e detalhes graficos
+  --accent: #{$logo-green};
+  --accent-strong: #{$logo-green-800};
+  --accent-soft: rgba(1, 148, 60, 0.1);
+  --accent-glow: rgba(1, 148, 60, 0.18);
+  // Textos em verde (contraste AA sobre branco)
+  --accent-text: #{$logo-green-700};
+
+  // Cada botao tem seu proprio tom (bg / texto / borda / hover)
+  // No tema claro os botoes sao verdes escuros e com sombra, para destacar
+  --cta-bg: #{$logo-green-800};      // "Realizar Inscricao"
+  --cta-fg: #{$color-white};
+  --cta-hover: #{$logo-green-900};
+  --fill-bg: #{$logo-green-700};     // "Fazer Inscricao" dos cards
+  --fill-fg: #{$color-white};
+  --fill-hover: #{$logo-green-800};
+  --map-bg: #{$logo-green-900};      // botao do mapa: verde mais escuro da paleta
+  --map-fg: #{$color-white};
+  --map-border: transparent;
+  --map-hover: #{$logo-green-950};
+  --outline: #{$logo-green-800};     // "Curriculo" (contornado)
+  --btn-shadow: 0 3px 10px rgba(1, 61, 25, 0.28);
+  --btn-shadow-hover: 0 6px 18px rgba(1, 61, 25, 0.35);
+
+  // Carrossel de dias
+  --tab-bg: #{$color-white};
+  --tab-border: #{$logo-mint-200};
+  --tab-text: #{$ink};
+  --tab-muted: #{$ink-soft};
+  --tab-active-bg: #{$logo-green-800};
+  --tab-active-text: #{$color-white};
+  --tab-active-border: #{$logo-green};
+  --tab-active-muted: #{$logo-mint};
+
+  // Degrade dos triangulos (topo -> fim da pagina)
+  --tri-dark: #{$logo-green-800};
+  --tri-light: #{$logo-mint};
+}
+
+body.dark {
+  --page-bg: #{$color-black};
+  --ink: #{$color-white};
+  --ink-soft: #{$color-gray-lighter};
+  --surface: rgba(175, 254, 210, 0.03);
+  --surface-border: rgba(175, 254, 210, 0.1);
+
+  --accent: #{$logo-neon};
+  --accent-strong: #{$logo-mint};
+  --accent-soft: rgba(6, 251, 126, 0.12);
+  --accent-glow: rgba(6, 251, 126, 0.2);
+  --accent-text: #{$logo-mint};
+
+  --cta-bg: #{$logo-neon};           // neon com texto preto, como na logo
+  --cta-fg: #{$color-black};
+  --cta-hover: #{$logo-mint};
+  --fill-bg: #{$logo-green-800};
+  --fill-fg: #{$color-white};
+  --fill-hover: #{$logo-green-700};
+  --map-bg: #{$logo-green-900};
+  --map-fg: #{$color-white};
+  --map-border: rgba(175, 254, 210, 0.25); // contorno menta sutil para destacar do fundo preto
+  --map-hover: #{$logo-green-800};
+  --outline: #{$logo-neon};
+  --btn-shadow: none;
+  --btn-shadow-hover: 0 4px 12px var(--accent-glow);
+
+  --tab-bg: rgba(175, 254, 210, 0.03);
+  --tab-border: rgba(175, 254, 210, 0.14);
+  --tab-text: #{$color-white};
+  --tab-muted: #{$logo-mint};
+  --tab-active-bg: #{$logo-green-900};
+  --tab-active-text: #{$color-white};
+  --tab-active-border: #{$logo-neon};
+  --tab-active-muted: #{$logo-mint};
+
+  --tri-dark: #{$logo-green-900};
+  --tri-light: #{$logo-mint};
+}
+
+// Selecao de texto e barra de rolagem
+::selection {
+  background: var(--accent);
+  color: var(--page-bg);
+}
+
+html {
+  scrollbar-color: var(--accent) transparent;
+}
+
+// ============================================
 // Dark mode theme
+// ============================================
 body.dark {
   background: $color-black;
   color: $color-white !important;
@@ -8,9 +111,13 @@ body.dark {
     color: $color-white !important;
   }
 
-  .logo-seifi,
-  .logo-sematif,
+  // Logo Worktech colorida, com um halo verde discreto
   .logo-worktech {
+    filter: drop-shadow(0 0 10px var(--accent-soft));
+  }
+
+  .logo-seifi,
+  .logo-sematif {
     filter: contrast(90%) brightness(100);
   }
 
@@ -27,30 +134,31 @@ body.dark {
       a {
         color: $color-white !important;
         text-decoration: underline;
-        
+        text-decoration-color: var(--accent);
+
         &:hover {
-          opacity: 0.8;
+          color: var(--accent) !important;
+          opacity: 1;
         }
       }
     }
   }
-  
+
   .programacao-subtitle {
     color: $color-gray-lighter !important;
   }
 
-  
   .index-local {
-    background-image: 
-      linear-gradient(to bottom, 
-        rgba(0, 0, 0, 1) 0%, 
+    background-image:
+      linear-gradient(to bottom,
+        rgba(0, 0, 0, 1) 0%,
         rgba(0, 0, 0, 0.95) 10%,
         rgba(0, 0, 0, 0.7) 30%,
         rgba(0, 0, 0, 0) 50%
       ),
       url(../img/background_final.png);
-    
-    // Transição no final para conectar com o footer (tema escuro)
+
+    // Transicao no final para conectar com o footer (tema escuro)
     &::after {
       background: linear-gradient(to bottom,
         rgba(0, 0, 0, 0) 0%,
@@ -63,6 +171,120 @@ body.dark {
   }
 }
 
+// ============================================
+// Detalhes verdes (valem para os dois temas)
+// ============================================
+
+// Botoes de acao (o botao flutuante da lampada fica de fora).
+// Cada variante define so as variaveis --btn-*; a regra base aplica.
+.btn:not(.btn-floating),
+.btn-large:not(.btn-floating),
+.btn-small:not(.btn-floating) {
+  --btn-bg: var(--fill-bg);
+  --btn-fg: var(--fill-fg);
+  --btn-border: transparent;
+  --btn-hover: var(--fill-hover);
+  background-color: var(--btn-bg) !important; // vence as classes de cor do Materialize (ex.: .black)
+  color: var(--btn-fg) !important;
+  border: 1px solid var(--btn-border);
+  border-radius: 8px;
+  box-shadow: var(--btn-shadow);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--btn-hover) !important;
+    box-shadow: var(--btn-shadow-hover);
+    transform: translateY(-1px);
+  }
+}
+
+// Botoes com texto longo nao podem estourar a altura fixa do Materialize
+.btn-large:not(.btn-floating) {
+  height: auto;
+  min-height: 54px;
+  line-height: 1.3;
+  padding: 0.95rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: normal;
+  text-align: center;
+
+  i.left {
+    margin-right: 0;
+    line-height: 1;
+  }
+}
+
+.btn-cta {
+  --btn-bg: var(--cta-bg) !important;
+  --btn-fg: var(--cta-fg) !important;
+  --btn-hover: var(--cta-hover) !important;
+  font-weight: 700;
+}
+
+.btn-map {
+  --btn-bg: var(--map-bg) !important;
+  --btn-fg: var(--map-fg) !important;
+  --btn-border: var(--map-border) !important;
+  --btn-hover: var(--map-hover) !important;
+}
+
+// Menu: links ficam verdes no hover
+nav ul a:hover,
+.sidenav li > a:hover,
+.sidenav li > a:hover i {
+  color: var(--accent-text) !important;
+}
+
+.sidenav .divider {
+  background-color: var(--accent-soft);
+}
+
+// Barrinha verde sob os titulos das secoes
+.section-title {
+  &::after {
+    content: "";
+    display: block;
+    width: 3.5rem;
+    height: 4px;
+    margin-top: 0.4rem;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  &.center::after,
+  .center > &::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .right-align > &::after {
+    margin-left: auto;
+  }
+}
+
+// Destaque verde em textos (ex.: datas no cabecalho)
+.text-accent {
+  color: var(--accent-text) !important;
+}
+
+// Tema claro: preto da logo com leve fundo verde no lugar do preto puro
+body:not(.dark) {
+  color: var(--ink) !important;
+
+  .programacao-header h1,
+  .section-title {
+    color: var(--ink) !important;
+  }
+
+  .programacao-subtitle {
+    color: var(--ink-soft) !important;
+  }
+}
+
 // Page-specific themes
 body.programacao,
 body.local-page {
@@ -72,4 +294,3 @@ body.local-page {
     }
   }
 }
-

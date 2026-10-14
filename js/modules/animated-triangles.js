@@ -2,6 +2,12 @@
 window.WorktechApp = window.WorktechApp || {};
 
 window.WorktechApp.AnimatedTriangles = {
+  // Profundidade na pagina (0 = topo, 1 = fim): o CSS usa --depth para
+  // misturar do verde escuro ao claro, criando o degrade ao descer a pagina
+  setDepth: function (polygon, depth) {
+    polygon.style.setProperty("--depth", Math.min(1, Math.max(0, depth)).toFixed(3));
+  },
+
   // Gera um triângulo preenchendo toda a área da montanha
   generateMountainTriangle: function (
     index,
@@ -77,6 +83,7 @@ window.WorktechApp.AnimatedTriangles = {
         this.generateMountainTriangle(i, triangleCount, width, height, false)
       );
       polygon.setAttribute("class", "animated-triangle");
+      this.setDepth(polygon, (i / triangleCount) * 0.5);
       polygon.style.opacity = Math.random() * 0.4 + 0.2; // Opacidade variada (0.2 a 0.6)
       svg.appendChild(polygon);
     }
@@ -101,6 +108,7 @@ window.WorktechApp.AnimatedTriangles = {
         this.generateMountainTriangle(i, triangleCount, width, height, true)
       );
       polygon.setAttribute("class", "animated-triangle");
+      this.setDepth(polygon, 0.5 + (i / triangleCount) * 0.5);
       polygon.style.opacity = Math.random() * 0.4 + 0.2; // Opacidade variada (0.2 a 0.6)
       svg.appendChild(polygon);
     }
@@ -229,7 +237,8 @@ window.WorktechApp.AnimatedTriangles = {
 
       polygon.setAttribute("points", points);
       polygon.setAttribute("class", "floating-triangle");
-      polygon.style.opacity = Math.random() * 0.04 + 0.01; // Menos visível (0.01 a 0.05)
+      this.setDepth(polygon, (y / height) * 0.5);
+      polygon.style.opacity = Math.random() * 0.08 + 0.04; // Sutil, mas visivel (0.04 a 0.12)
 
       // Rotação inicial aleatória
       polygon.style.transformOrigin = "center";

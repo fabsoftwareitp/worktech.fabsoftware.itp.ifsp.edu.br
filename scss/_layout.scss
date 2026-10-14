@@ -125,6 +125,11 @@
     z-index: 1;
   }
 
+  // Legivel no celular sem ficar enorme no desktop
+  .footer-logo {
+    width: clamp(160px, 20vw, 300px);
+  }
+
   @include mobile {
     background-size: cover;
     background-position-y: bottom;
@@ -238,6 +243,14 @@
 
   h5 {
     line-height: 2.5rem;
+  }
+
+  // Os utilitarios .mt-3/.mb-3 zeram no mobile; aqui o botao precisa respirar
+  .btn-map {
+    @include mobile {
+      margin-top: 1.25rem !important;
+      margin-bottom: 2rem !important;
+    }
   }
 
   @include mobile {

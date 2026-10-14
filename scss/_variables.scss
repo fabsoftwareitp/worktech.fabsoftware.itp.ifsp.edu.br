@@ -26,4 +26,21 @@ $timeline-dot-size: 1rem;
 
 // Breakpoints
 $breakpoint-mobile: 600px;
-$breakpoint-tablet: 575px;
+$breakpoint-tablet: 768px; // timeline vira coluna unica abaixo disso
+
+// Paleta verde: cores exatas da logo Worktech 2026
+$logo-neon: #06fb7e;  // circuitos e "IFSP CAMPUS ITAPETININGA" (logo escura)
+$logo-mint: #affed2;  // "2026" e losangos (logo escura)
+$logo-green: #01943c; // verde da logo clara
+
+// Tons derivados do mesmo matiz do $logo-green (mais escuros) e do menta (mais claros)
+$logo-green-700: #017a32;
+$logo-green-800: #015c26;
+$logo-green-900: #013d19;
+$logo-green-950: #012a11;
+$logo-mint-100: #e6fff1;
+$logo-mint-200: #d4f8e4;
+
+// Tinta do tema claro: preto da logo com leve fundo verde
+$ink: #0b1a10;
+$ink-soft: #46574c;

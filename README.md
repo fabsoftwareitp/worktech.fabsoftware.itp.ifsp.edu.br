@@ -179,7 +179,8 @@ Edite o arquivo `jsons/workshops.json` seguindo a estrutura existente:
 ### Modificar estilos
 
 1. Edite os arquivos apropriados em `scss/`:
-   - **Cores/variáveis** → `_variables.scss` (paleta preto/branco/cinza)
+   - **Cores/variáveis** → `_variables.scss` (cores exatas da logo: neon `#06fb7e`, menta `#affed2`, verde `#01943c` e tons derivados)
+   - **Tokens de cor por tema** → `_themes.scss` (`--accent`, `--fill`... trocam com `body.dark`; o JS não pinta cores)
    - **Componentes** → `_components.scss` (timeline, cards, botões)
    - **Layout** → `_layout.scss` (header, footer, seções)
    - **Temas** → `_themes.scss` (dark mode)
@@ -194,7 +195,8 @@ Edite o arquivo `jsons/workshops.json` seguindo a estrutura existente:
 Edite os módulos correspondentes em `js/modules/`:
 
 - **gsap-animations.js** - Animações gerais (header, local, timeline)
-- **animated-triangles.js** - Geração e animação dos SVGs de triângulos
+- **animated-triangles.js** - Geração e animação dos SVGs de triângulos (degradê escuro → claro via `--depth`)
+- **day-carousel.js** - Carrossel acessível dos dias da programação (setas, teclado, scroll-snap)
 
 ### Ajustar responsividade
 
@@ -215,7 +217,7 @@ Designed and built by [@danilocbueno](https://github.com/danilocbueno) and [@pau
 Redesigned by TSI students:
 
 - [@GustavoCardilho](https://github.com/GustavoCardilho)
-- [@andrwza](https://github.com/andrwza)
+- [@HelberCruz](https://github.com/HelberCruz)
 - [@m4halic3](https://github.com/m4halic3)
 
 ### Principais Melhorias do Redesign

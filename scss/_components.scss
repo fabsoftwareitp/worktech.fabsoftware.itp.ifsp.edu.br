@@ -29,139 +29,245 @@ body.dark .programacao-subtitle {
   color: #cccccc !important;
 }
 
-.timeline-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
+// ============================================
+// Carrossel de dias da programacao
+// Rolagem nativa (toque, trackpad, teclado) com scroll-snap; as setas e o
+// esmaecimento das bordas so aparecem quando ha dias escondidos.
+// ============================================
+$day-card-width: 104px;
+$day-carousel-fade: 40px;
+
+.day-carousel {
   position: relative;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 0.5rem;
 }
 
-.timeline-activation {
-  display: flex !important;
+.day-carousel__viewport {
+  flex: 1;
+  min-width: 0;
+  // Esmaecimento nas bordas indica que ha mais dias para os lados
+  --fade-left: 0px;
+  --fade-right: 0px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-left), #000 calc(100% - var(--fade-right)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-left), #000 calc(100% - var(--fade-right)), transparent);
+  transition: --fade-left 0.3s ease, --fade-right 0.3s ease;
+
+  .day-carousel.can-prev & {
+    --fade-left: #{$day-carousel-fade};
+  }
+
+  .day-carousel.can-next & {
+    --fade-right: #{$day-carousel-fade};
+  }
+}
+
+// Permite animar o esmaecimento (navegadores sem @property so trocam direto)
+@property --fade-left {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --fade-right {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.timeline-tabs.day-carousel__track {
+  position: relative; // referencia do offsetLeft usado para centralizar o dia
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  // Espaco para a sombra e o "pulo" do hover nao serem cortados
+  padding: 0.75rem 0.25rem 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Centraliza quando cabe, sem cortar o inicio quando transborda
+  > :first-child {
+    margin-left: auto;
+  }
+
+  > :last-child {
+    margin-right: auto;
+  }
+}
+
+.day-carousel__nav {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--tab-border);
+  background: var(--tab-bg);
+  color: var(--tab-text);
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease,
+    background-color 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  // Sem nada para aquele lado: some, mas mantem o espaco (sem pulo de layout)
+  &:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // Tudo cabe na tela: setas saem do layout
+  .day-carousel.is-static & {
+    display: none;
+  }
+}
+
+// Card de cada dia
+.timeline-activation.day-card {
+  flex: 0 0 $day-card-width;
+  scroll-snap-align: center;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 2.5rem;
-  background-color: #f5f5f5 !important;
-  border-radius: 12px;
-  border: 2px solid #000000 !important;
-  transition: all 0.3s ease;
-  min-width: 180px;
+  gap: 0.15rem;
+  padding: 0.9rem 0.5rem 1.1rem;
+  background-color: var(--tab-bg);
+  color: var(--tab-text);
+  border-radius: 14px;
+  border: 1px solid var(--tab-border);
   text-decoration: none;
   position: relative;
-  z-index: 10;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  @include mobile {
-    min-width: 140px;
-    padding: 1.2rem 2rem;
-  }
-
-  i {
-    font-size: 2.5rem !important;
-    margin-bottom: 0.5rem;
-    color: #000000 !important;
+  .tab-weekday,
+  .tab-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tab-muted);
     line-height: 1;
+    transition: color 0.3s ease;
   }
 
   .tab-label {
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    display: block;
-    margin-bottom: 0.2rem;
-    color: #000000 !important;
-    line-height: 1.2;
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: inherit;
   }
 
-  .tab-date {
-    font-size: 0.9rem !important;
-    display: block;
-    color: #000000 !important;
-    opacity: 0.7;
-    line-height: 1;
+  // Barrinha que "desliza" para baixo do dia ativo
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.45rem;
+    width: 22px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--accent);
+    transform: translateX(-50%) scaleX(0);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   &:hover {
-    background-color: #e0e0e0 !important;
-    border-color: #333333 !important;
-    transform: translateY(-2px);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
 
-    i,
-    .tab-label,
-    .tab-date {
-      color: #000000 !important;
-    }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
   &.active {
-    background-color: #000000 !important;
-    border-color: #000000 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background-color: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    border-color: var(--tab-active-border);
+    box-shadow: 0 6px 18px var(--accent-glow);
 
-    i,
-    .tab-label,
+    .tab-weekday,
     .tab-date {
-      color: #ffffff !important;
-      opacity: 1;
+      color: var(--tab-active-muted);
+    }
+
+    &::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+
+  @include mobile {
+    flex-basis: 88px;
+    padding: 0.8rem 0.4rem 1rem;
+
+    .tab-label {
+      font-size: 1.6rem;
     }
   }
 }
 
-body.dark .timeline-activation {
-  background-color: #1a1a1a !important;
-  border-color: #ffffff !important;
-
-  i {
-    color: #ffffff !important;
+@media (prefers-reduced-motion: reduce) {
+  .timeline-tabs.day-carousel__track {
+    scroll-behavior: auto;
   }
 
-  .tab-label {
-    color: #ffffff !important;
-  }
-
-  .tab-date {
-    color: #ffffff !important;
-    opacity: 0.8;
-  }
-
-  &:hover {
-    background-color: #2a2a2a !important;
-    border-color: #ffffff !important;
-
-    i,
-    .tab-label,
-    .tab-date {
-      color: #ffffff !important;
-    }
-  }
-
-  &.active {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-
-    i,
-    .tab-label,
-    .tab-date {
-      color: #000000 !important;
-      opacity: 1;
-    }
+  .timeline-activation.day-card,
+  .timeline-activation.day-card::after,
+  .day-carousel__nav {
+    transition: none;
   }
 }
 
 // Schedule/Timeline components
 .schedule {
   position: relative;
-  text-shadow: 0px 1px 2px $color-gray-lighter;
 
   &::before {
     content: "";
     position: absolute;
     height: 100%;
     width: $timeline-width;
-    background: $color-gray;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--accent) 4%,
+      var(--accent) 96%,
+      transparent
+    );
+    opacity: 0.6;
+    border-radius: $timeline-width;
     left: 50%;
     @include transform(translateX(-50%));
   }
@@ -208,15 +314,17 @@ body.dark .timeline-activation {
     height: $timeline-dot-size;
     @include transform(translateX(-25%));
     border-radius: 50%;
-    box-shadow: 0 0 0 7px $color-white, 0 3px 0 4px rgba(0, 0, 0, 0.05);
-    background: $color-gray;
+    // Anel da cor do fundo "recorta" a linha ao redor da bolinha
+    box-shadow: 0 0 0 7px var(--page-bg), 0 0 0 9px var(--accent-soft);
+    background: var(--accent);
     transition: all $transition-duration ease-in;
     will-change: box-shadow;
   }
 
   &.current::before {
-    box-shadow: 0 0 0 7px $color-black, 0 3px 0 4px $color-gray;
-    background: $color-white;
+    box-shadow: 0 0 0 5px var(--page-bg), 0 0 0 7px var(--accent),
+      0 0 10px 3px var(--accent-glow);
+    background: var(--accent-strong);
     transition: box-shadow 0.5s ease-in;
   }
 
@@ -239,20 +347,6 @@ body.dark .timeline-activation {
         @include transform(translateX(-0.5rem));
       }
     }
-  }
-}
-
-body.dark .timeline-block {
-  background: transparent;
-
-  &::before {
-    box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.8),
-      0 3px 0 4px rgba(255, 255, 255, 0.05);
-  }
-
-  &.current::before {
-    box-shadow: 0 0 0 7px $color-gray, 0 3px 0 4px $color-gray-light;
-    background: $color-white;
   }
 }
 
@@ -299,20 +393,20 @@ body.dark .timeline-block {
     font-weight: 500;
     padding: 0.75rem 1.5rem;
     background: transparent;
-    color: $color-black;
-    border: 2px solid $color-black;
+    color: var(--outline);
+    border: 1px solid var(--outline);
     border-radius: 8px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease,
+      box-shadow 0.25s ease, transform 0.25s ease;
     cursor: pointer;
     letter-spacing: 0.3px;
     white-space: nowrap;
 
-    &:hover {
-      background: $color-black;
-      color: $color-white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    &:hover,
+    &:focus-visible {
+      background: var(--accent-soft);
+      transform: translateY(-1px);
     }
 
     &:last-child {
@@ -321,12 +415,17 @@ body.dark .timeline-block {
   }
 
   .inscricao-link {
-    background: $color-black;
-    color: $color-white;
+    background: var(--fill-bg);
+    color: var(--fill-fg);
+    border-color: transparent;
+    font-weight: 600;
+    box-shadow: var(--btn-shadow);
 
-    &:hover {
-      background: transparent;
-      color: $color-black;
+    &:hover,
+    &:focus-visible {
+      background: var(--fill-hover);
+      color: var(--fill-fg);
+      box-shadow: var(--btn-shadow-hover);
     }
   }
 
@@ -338,7 +437,7 @@ body.dark .timeline-block {
   }
 
   h3 {
-    color: $color-black;
+    color: var(--ink);
     margin-bottom: 0.8rem;
     font-weight: 700;
   }
@@ -346,29 +445,34 @@ body.dark .timeline-block {
   p {
     line-height: 1.8;
     margin-bottom: 0.6rem;
-    color: $color-gray;
+    color: var(--ink-soft);
   }
 
   .workshop-time {
     font-family: "Inconsolata", monospace;
+    font-weight: 700;
     margin-bottom: 1rem !important;
   }
 }
 
+// Horario em verde (seletor mais forte que ".timeline-content p" dos dois temas)
+.timeline-block .timeline-content .workshop-time {
+  color: var(--accent-text);
+}
+
 // Workshop Card (individual para cada palestra)
 .workshop-card {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.12);
+    border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px var(--accent-soft);
   }
 
   h3,
@@ -379,16 +483,9 @@ body.dark .timeline-block {
   .buttons-wrapper {
     margin-top: 1.5rem;
   }
-}
 
-body.dark .workshop-card {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.06);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  @include mobile {
+    padding: 1.15rem;
   }
 }
 
@@ -397,7 +494,12 @@ body.dark .workshop-card {
   overflow: visible !important;
 
   .animated-triangle {
-    fill: $color-black;
+    fill: var(--tri-dark); // fallback para navegadores sem color-mix
+    fill: color-mix(
+      in srgb,
+      var(--tri-light) calc(var(--depth, 0) * 100%),
+      var(--tri-dark)
+    );
     transition: fill 0.3s ease;
   }
 }
@@ -405,7 +507,12 @@ body.dark .workshop-card {
 // Triângulos flutuantes de fundo
 .svg-floating-triangles {
   .floating-triangle {
-    fill: $color-black;
+    fill: var(--tri-dark); // fallback para navegadores sem color-mix
+    fill: color-mix(
+      in srgb,
+      var(--tri-light) calc(var(--depth, 0) * 100%),
+      var(--tri-dark)
+    );
     transition: fill 0.3s ease;
   }
 }
@@ -415,12 +522,6 @@ body.dark .workshop-card {
   z-index: 5 !important;
 }
 
-body.dark .svg-animated-triangles {
-  .animated-triangle {
-    fill: $color-white;
-  }
-}
-
 // Responsivo mobile para triângulos animados
 @include mobile {
   .svg-animated-triangles {
@@ -428,7 +529,7 @@ body.dark .svg-animated-triangles {
     height: 600px !important;
     top: 0 !important;
     right: -50px !important;
-    opacity: 0.3 !important;
+    opacity: 0.45 !important;
   }
   
   #svg-programacao-triangles {
@@ -441,55 +542,20 @@ body.dark .svg-animated-triangles {
     height: 600px !important;
   }
   
-  // SVGs decorativos também devem ser visíveis em mobile
+  // SVGs decorativos também visíveis em mobile
+  .svg-decoration-header,
   .svg-decoration-programacao,
   .svg-decoration-local {
-    opacity: 0.6 !important;
+    opacity: 0.85 !important;
   }
   
-  // Triângulos flutuantes menos visíveis em mobile
+  // Triângulos flutuantes um pouco mais suaves em mobile
   .svg-floating-triangles {
-    opacity: 0.3 !important;
+    opacity: 0.5 !important;
   }
 }
 
-body.dark .svg-floating-triangles {
-  .floating-triangle {
-    fill: $color-white;
-  }
-}
 
-body.dark .timeline-content {
-  h3 {
-    color: $color-white;
-  }
-
-  p {
-    color: $color-gray-lighter;
-  }
-
-  .curriculo-link,
-  .inscricao-link {
-    color: $color-white;
-    border-color: $color-white;
-
-    &:hover {
-      background: $color-white;
-      color: $color-black;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-    }
-  }
-
-  .inscricao-link {
-    background: $color-white;
-    color: $color-black;
-
-    &:hover {
-      background: transparent;
-      color: $color-white;
-    }
-  }
-}
 
 // Other components
 .row_apoio_realizacao {
