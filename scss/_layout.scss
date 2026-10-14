@@ -42,8 +42,10 @@
   }
 }
 
-// Fundo do header: brilho verde vindo do topo + feixes de luz verticais.
-// Feito so com gradientes (sem imagem); as cores vem dos tokens --hero-* do tema.
+// Fundo do header: "mesh gradient" verde, com manchas grandes e difusas
+// espalhadas e bolsoes escuros entre elas. Duas camadas de manchas: a de
+// tras fica parada e a da frente (::before) deriva devagar, dando vida sem
+// chamar atencao. Cores nos tokens --mesh-* de cada tema.
 .header-background {
   position: absolute;
   top: 0;
@@ -53,34 +55,24 @@
   overflow: hidden;
   background-color: var(--page-bg);
   background-image:
-    // Nucleo do brilho, mais intenso, logo abaixo da borda superior
-    radial-gradient(ellipse 38% 32% at 50% 0%, var(--hero-core), transparent 70%),
-    // Halo mais largo em verde da logo
-    radial-gradient(ellipse 75% 60% at 50% -5%, var(--hero-halo), transparent 72%),
-    // Toques laterais bem discretos para dar profundidade
-    radial-gradient(ellipse 45% 40% at 12% 85%, var(--hero-side), transparent 70%),
-    radial-gradient(ellipse 45% 40% at 88% 75%, var(--hero-side), transparent 70%);
+    radial-gradient(ellipse 45% 40% at 6% 4%, var(--mesh-bright), transparent 70%),
+    radial-gradient(ellipse 40% 55% at 0% 50%, var(--mesh-mid), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 100% 62%, var(--mesh-bright), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 62% 100%, var(--mesh-mid), transparent 70%);
   will-change: transform;
-  transform-origin: center top;
+  transform-origin: center center;
   z-index: 0;
-  animation: hero-breathe 9s ease-in-out infinite alternate;
 
-  // Feixes de luz: linhas finas que so aparecem perto do brilho
+  // Camada da frente: manchas profundas que derivam lentamente
   &::before {
     content: "";
     position: absolute;
-    inset: 0 -10%;
-    background-image: repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 46px,
-      var(--hero-beam) 47px,
-      transparent 49px
-    );
-    -webkit-mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
-    mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
-    filter: blur(0.5px);
-    animation: hero-beams 24s linear infinite alternate;
+    inset: -20%;
+    background-image:
+      radial-gradient(ellipse 30% 35% at 38% 32%, var(--mesh-deep), transparent 70%),
+      radial-gradient(ellipse 25% 30% at 78% 22%, var(--mesh-soft), transparent 70%),
+      radial-gradient(ellipse 30% 30% at 20% 78%, var(--mesh-deep), transparent 70%);
+    animation: mesh-drift 22s ease-in-out infinite alternate;
   }
 
   // Emenda suave com a secao seguinte
@@ -93,33 +85,14 @@
     height: 30%;
     background: linear-gradient(to bottom, transparent, var(--page-bg));
   }
-
-  @include mobile {
-    // No celular o brilho fica mais estreito e alto para caber na tela
-    background-image:
-      radial-gradient(ellipse 70% 30% at 50% 0%, var(--hero-core), transparent 70%),
-      radial-gradient(ellipse 120% 55% at 50% -5%, var(--hero-halo), transparent 72%),
-      radial-gradient(ellipse 70% 35% at 10% 85%, var(--hero-side), transparent 70%);
-
-    &::before {
-      -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
-      mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
-    }
-  }
 }
 
-@keyframes hero-breathe {
-  from { opacity: 0.85; }
-  to   { opacity: 1; }
-}
-
-@keyframes hero-beams {
-  from { transform: translateX(0); }
-  to   { transform: translateX(47px); }
+@keyframes mesh-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-5%, 4%) scale(1.08); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header-background,
   .header-background::before {
     animation: none;
   }

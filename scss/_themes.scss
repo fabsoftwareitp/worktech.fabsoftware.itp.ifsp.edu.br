@@ -48,11 +48,11 @@
   --tri-dark: #{$logo-green-800};
   --tri-light: #{$logo-mint};
 
-  // Fundo do header: brilho e feixes de luz
-  --hero-core: rgba(1, 148, 60, 0.22);
-  --hero-halo: rgba(175, 254, 210, 0.55);
-  --hero-side: rgba(1, 148, 60, 0.05);
-  --hero-beam: rgba(1, 122, 50, 0.07);
+  // Fundo do header (mesh gradient): bem suave sobre o branco
+  --mesh-bright: rgba(175, 254, 210, 0.45);
+  --mesh-mid: rgba(1, 148, 60, 0.08);
+  --mesh-deep: rgba(1, 148, 60, 0.07);
+  --mesh-soft: rgba(6, 251, 126, 0.1);
 }
 
 body.dark {
@@ -94,10 +94,10 @@ body.dark {
   --tri-dark: #{$logo-green-900};
   --tri-light: #{$logo-mint};
 
-  --hero-core: rgba(6, 251, 126, 0.3);
-  --hero-halo: rgba(1, 148, 60, 0.36);
-  --hero-side: rgba(175, 254, 210, 0.05);
-  --hero-beam: rgba(175, 254, 210, 0.07);
+  --mesh-bright: rgba(6, 251, 126, 0.13);
+  --mesh-mid: rgba(1, 148, 60, 0.2);
+  --mesh-deep: rgba(1, 92, 38, 0.28);
+  --mesh-soft: rgba(175, 254, 210, 0.05);
 }
 
 // Selecao de texto e barra de rolagem

@@ -116,21 +116,17 @@ body.dark .hoverable-text:hover {
   height: 100%;
   overflow: hidden;
   background-color: var(--page-bg);
-  background-image: radial-gradient(ellipse 38% 32% at 50% 0%, var(--hero-core), transparent 70%), radial-gradient(ellipse 75% 60% at 50% -5%, var(--hero-halo), transparent 72%), radial-gradient(ellipse 45% 40% at 12% 85%, var(--hero-side), transparent 70%), radial-gradient(ellipse 45% 40% at 88% 75%, var(--hero-side), transparent 70%);
+  background-image: radial-gradient(ellipse 45% 40% at 6% 4%, var(--mesh-bright), transparent 70%), radial-gradient(ellipse 40% 55% at 0% 50%, var(--mesh-mid), transparent 70%), radial-gradient(ellipse 45% 50% at 100% 62%, var(--mesh-bright), transparent 70%), radial-gradient(ellipse 50% 40% at 62% 100%, var(--mesh-mid), transparent 70%);
   will-change: transform;
-  transform-origin: center top;
+  transform-origin: center center;
   z-index: 0;
-  animation: hero-breathe 9s ease-in-out infinite alternate;
 }
 .header-background::before {
   content: "";
   position: absolute;
-  inset: 0 -10%;
-  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 46px, var(--hero-beam) 47px, transparent 49px);
-  -webkit-mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
-  mask-image: radial-gradient(ellipse 55% 70% at 50% 0%, #000 0%, transparent 75%);
-  filter: blur(0.5px);
-  animation: hero-beams 24s linear infinite alternate;
+  inset: -20%;
+  background-image: radial-gradient(ellipse 30% 35% at 38% 32%, var(--mesh-deep), transparent 70%), radial-gradient(ellipse 25% 30% at 78% 22%, var(--mesh-soft), transparent 70%), radial-gradient(ellipse 30% 30% at 20% 78%, var(--mesh-deep), transparent 70%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
 }
 .header-background::after {
   content: "";
@@ -141,34 +137,16 @@ body.dark .hoverable-text:hover {
   height: 30%;
   background: linear-gradient(to bottom, transparent, var(--page-bg));
 }
-@media screen and (max-width: 600px) {
-  .header-background {
-    background-image: radial-gradient(ellipse 70% 30% at 50% 0%, var(--hero-core), transparent 70%), radial-gradient(ellipse 120% 55% at 50% -5%, var(--hero-halo), transparent 72%), radial-gradient(ellipse 70% 35% at 10% 85%, var(--hero-side), transparent 70%);
-  }
-  .header-background::before {
-    -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
-    mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 0%, transparent 75%);
-  }
-}
 
-@keyframes hero-breathe {
+@keyframes mesh-drift {
   from {
-    opacity: 0.85;
+    transform: translate(0, 0) scale(1);
   }
   to {
-    opacity: 1;
-  }
-}
-@keyframes hero-beams {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(47px);
+    transform: translate(-5%, 4%) scale(1.08);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .header-background,
   .header-background::before {
     animation: none;
   }
@@ -3037,10 +3015,10 @@ body.dark .losangle:before {
   --tab-active-muted: #affed2;
   --tri-dark: #015c26;
   --tri-light: #affed2;
-  --hero-core: rgba(1, 148, 60, 0.22);
-  --hero-halo: rgba(175, 254, 210, 0.55);
-  --hero-side: rgba(1, 148, 60, 0.05);
-  --hero-beam: rgba(1, 122, 50, 0.07);
+  --mesh-bright: rgba(175, 254, 210, 0.45);
+  --mesh-mid: rgba(1, 148, 60, 0.08);
+  --mesh-deep: rgba(1, 148, 60, 0.07);
+  --mesh-soft: rgba(6, 251, 126, 0.1);
 }
 
 body.dark {
@@ -3077,10 +3055,10 @@ body.dark {
   --tab-active-muted: #affed2;
   --tri-dark: #013d19;
   --tri-light: #affed2;
-  --hero-core: rgba(6, 251, 126, 0.3);
-  --hero-halo: rgba(1, 148, 60, 0.36);
-  --hero-side: rgba(175, 254, 210, 0.05);
-  --hero-beam: rgba(175, 254, 210, 0.07);
+  --mesh-bright: rgba(6, 251, 126, 0.13);
+  --mesh-mid: rgba(1, 148, 60, 0.2);
+  --mesh-deep: rgba(1, 92, 38, 0.28);
+  --mesh-soft: rgba(175, 254, 210, 0.05);
 }
 
 ::selection {
