@@ -419,11 +419,13 @@
   }
 }
 
-// Sidenav (menu hamburguer): fundo solido e texto com contraste em cada tema
+// Sidenav (menu hamburguer): fundo escuro translucido nos dois temas,
+// com a escrita das secoes em destaque
 .sidenav {
+  --menu-fg: #{$color-white};
+  --menu-icon: #{$logo-mint};
   z-index: 1001 !important;
-  background: var(--menu-bg) !important;
-  border-right: 1px solid var(--menu-border);
+  background: rgba(0, 0, 0, 0.67) !important;
 
   li {
     a,
@@ -433,9 +435,12 @@
       gap: 1rem;
       padding: 0 32px;
       height: 56px;
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       color: var(--menu-fg) !important; // vence o .white-text do Materialize
+      // Sombra leve separa a letra do que aparece atras do fundo translucido
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
       transition: background-color 0.2s ease, color 0.2s ease;
 
       i,
@@ -446,8 +451,8 @@
 
       &:hover,
       &:focus-visible {
-        background-color: var(--accent-soft);
-        color: var(--accent-text) !important;
+        background-color: rgba(6, 251, 126, 0.12);
+        color: #{$logo-mint} !important;
       }
     }
   }

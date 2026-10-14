@@ -53,12 +53,6 @@
   --hero-halo: rgba(175, 254, 210, 0.55);
   --hero-side: rgba(1, 148, 60, 0.05);
   --hero-beam: rgba(1, 122, 50, 0.07);
-  // Menu hamburguer
-  --menu-bg: #{$color-white};
-  --menu-fg: #{$ink};
-  --menu-icon: #{$logo-green-700};
-  --menu-border: #{$logo-mint-200};
-
   // 0s e 1s do header: verde escuro translucido (branco sumiria no fundo claro)
   --binary-color: rgba(1, 92, 38, 0.22);
 }
@@ -107,11 +101,6 @@ body.dark {
   --hero-side: rgba(175, 254, 210, 0.05);
   --hero-beam: rgba(175, 254, 210, 0.07);
   --binary-color: rgba(255, 255, 255, 0.18);
-
-  --menu-bg: #050d08;
-  --menu-fg: #{$color-white};
-  --menu-icon: #{$logo-mint};
-  --menu-border: rgba(175, 254, 210, 0.12);
 }
 
 // Selecao de texto e barra de rolagem

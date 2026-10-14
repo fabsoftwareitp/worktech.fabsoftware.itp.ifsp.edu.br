@@ -608,7 +608,7 @@ body.dark .losangle:before {
   }
 }
 
-body.dark .logo-worktech-white {
+.logo-worktech-white {
   @include tablet {
     filter: contrast(90%) brightness(100);
   }
