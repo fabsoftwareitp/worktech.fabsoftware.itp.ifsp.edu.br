@@ -16,27 +16,78 @@ window.WorktechApp.CircuitBoard = {
   // Intensidade minima: algumas trilhas ficam bem esvaecidas, ao fundo
   MIN_OPACITY: 0.3,
 
+  // Abaixo desta largura (px) o header usa o layout de celular
+  MOBILE_BREAKPOINT: 768,
+
   init: function () {
+    var self = this;
     this.drawHeader();
     this.drawInscricoes();
+
+    // Ao girar o celular ou redimensionar a janela, redesenha so se o
+    // layout do header mudar (desktop <-> celular)
+    var resizeTimer = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        self.drawHeader();
+      }, 200);
+    });
   },
 
-  // Header (viewBox 1440x900 no index.html): laterais e base, nada no topo.
-  // A logo comeca depois de 360 unidades de cada lado.
+  // Header, nada no topo. Dois layouts:
+  // - desktop (1440x900): trilhas nas laterais (a logo comeca depois de 360
+  //   unidades de cada lado) e algumas subindo da base
+  // - celular (400x860, tela em pe): a logo ocupa quase toda a largura, entao
+  //   as trilhas ficam na metade de baixo, abaixo do texto, e na base
   drawHeader: function () {
     var svg = document.querySelector(".header-circuits");
     if (!svg) return;
 
+    var layout = svg.clientWidth < this.MOBILE_BREAKPOINT ? "mobile" : "desktop";
+    var band = layout === "mobile" ? this.bandBelowText(svg, 400, 860) : null;
+    // So redesenha se o layout (ou a faixa livre no celular) mudou
+    var key = layout + (band ? ":" + band.yStart : "");
+    if (svg.getAttribute("data-layout-key") === key) return;
+
     // Semente fixa: o desenho e sempre o mesmo a cada visita
     this.random = this.createRandom(2026);
-    var area = { width: 1440, height: 900 };
+    var area, traces;
 
-    var traces = []
-      .concat(this.buildSideZone(area, { mirror: false, maxReach: 360, skip: 0.5 }))
-      .concat(this.buildSideZone(area, { mirror: true, maxReach: 360, skip: 0.5 }))
-      .concat(this.buildBottomZone(area, { from: 480, to: 960, skip: 0.55 }));
+    if (layout === "mobile") {
+      area = { width: 400, height: 860 };
+      traces = []
+        .concat(this.buildSideZone(area, Object.assign({ mirror: false, maxReach: 150, skip: 0.3 }, band)))
+        .concat(this.buildSideZone(area, Object.assign({ mirror: true, maxReach: 150, skip: 0.3 }, band)))
+        .concat(this.buildBottomZone(area, { from: 140, to: 260, skip: 0.4 }));
+    } else {
+      area = { width: 1440, height: 900 };
+      traces = []
+        .concat(this.buildSideZone(area, { mirror: false, maxReach: 360, skip: 0.5 }))
+        .concat(this.buildSideZone(area, { mirror: true, maxReach: 360, skip: 0.5 }))
+        .concat(this.buildBottomZone(area, { from: 480, to: 960, skip: 0.55 }));
+    }
 
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.setAttribute("viewBox", "0 0 " + area.width + " " + area.height);
+    svg.setAttribute("data-layout", layout);
+    svg.setAttribute("data-layout-key", key);
     this.render(svg, traces);
+  },
+
+  // Faixa vertical livre abaixo do texto do header ("De 26 a 30..."), em
+  // unidades do viewBox. Mede a posicao real do texto, entao funciona em
+  // qualquer altura de tela; o SVG usa "slice" (escala e centraliza).
+  bandBelowText: function (svg, vbWidth, vbHeight) {
+    var text = document.querySelector(".header h4");
+    var box = svg.getBoundingClientRect();
+    var scale = Math.max(box.width / vbWidth, box.height / vbHeight);
+    var offsetY = (box.height - vbHeight * scale) / 2;
+    var textBottom = text ? text.getBoundingClientRect().bottom - box.top : box.height * 0.65;
+
+    var yStart = Math.round((textBottom - offsetY) / scale + 40);
+    var yEnd = Math.round((box.height - offsetY) / scale - 40);
+    return { yStart: yStart, yEnd: Math.max(yStart, yEnd) };
   },
 
   // Canto direito de Inscricoes (viewBox 320x760 em inscricoes.html):
@@ -69,19 +120,24 @@ window.WorktechApp.CircuitBoard = {
   },
 
   // Trilhas que saem da borda esquerda (ou direita, com mirror) e param
-  // antes de maxReach. As trilhas mais afastadas do centro vertical dobram
+  // antes de maxReach. As trilhas mais afastadas do centro da faixa dobram
   // primeiro e todas dobram para longe dele, como na logo.
   // skip: chance de pular uma faixa (quanto maior, menos trilhas)
+  // yStart/yEnd: faixa vertical ocupada (padrao: altura toda)
   buildSideZone: function (area, options) {
     var traces = [];
-    var centerY = area.height / 2;
+    var yStart = options.yStart || 70;
+    var yEnd = options.yEnd || area.height - 70;
+    var centerY = (yStart + yEnd) / 2;
+    // Sem faixa definida, usa metade da altura (mantem o desenho do desktop)
+    var halfBand = options.yStart ? Math.max((yEnd - yStart) / 2, 1) : centerY;
     var maxReach = options.maxReach;
 
-    for (var y = 70; y <= area.height - 70; y += this.LANE) {
+    for (var y = yStart; y <= yEnd; y += this.LANE) {
       if (this.random() < options.skip) continue; // falhas deixam o desenho organico
 
       var away = y < centerY ? -1 : 1;
-      var closeness = 1 - Math.abs(y - centerY) / centerY;
+      var closeness = 1 - Math.abs(y - centerY) / halfBand;
       var first = 30 + closeness * maxReach * 0.39 + this.between(0, 14);
       var middle = this.between(30, 70);
       var last = this.between(20, maxReach - first - middle - this.BEND * 2);

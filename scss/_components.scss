@@ -536,10 +536,14 @@ $day-carousel-fade: 40px;
     linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
   mask-composite: intersect;
 
-  // No celular o texto ocupa a largura toda: trilhas bem discretas
+  // No celular o texto ocupa a largura toda: as trilhas vao para o canto
+  // inferior direito, no espaco abaixo do botao
   @include mobile {
-    width: 45vw;
-    opacity: 0.3;
+    top: auto;
+    bottom: -3rem;
+    width: 55vw;
+    height: 220px;
+    opacity: 0.8;
   }
 }
 

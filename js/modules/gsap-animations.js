@@ -118,25 +118,6 @@ window.WorktechApp.GSAPAnimations = {
   },
 
   animateLocal: function () {
-    // Parallax e zoom na imagem de fundo da seção Local
-    gsap.fromTo(".index-local", 
-      {
-        backgroundSize: "100%, 100%",
-        backgroundPosition: "50% 0%, 50% 50%",
-      },
-      {
-        scrollTrigger: {
-          trigger: ".index-local",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-        backgroundSize: "100%, 105%",
-        backgroundPosition: "50% 0%, 50% 80%",
-        ease: "none",
-      }
-    );
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#local",
