@@ -437,23 +437,37 @@ body.dark .hoverable-text:hover {
 
 .sidenav {
   z-index: 1001 !important;
+  background: var(--menu-bg) !important;
+  border-right: 1px solid var(--menu-border);
 }
-.sidenav li a {
+.sidenav li a,
+.sidenav li a.white-text {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0 32px;
+  height: 56px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--menu-fg) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-.sidenav li a i {
+.sidenav li a i,
+.sidenav li a i.white-text,
+.sidenav li a.white-text i,
+.sidenav li a.white-text i.white-text {
   margin: 0;
+  color: var(--menu-icon) !important;
+}
+.sidenav li a:hover, .sidenav li a:focus-visible,
+.sidenav li a.white-text:hover,
+.sidenav li a.white-text:focus-visible {
+  background-color: var(--accent-soft);
+  color: var(--accent-text) !important;
 }
 .sidenav .logo-worktech-white {
   max-width: 180px;
   margin: 0 auto;
-}
-
-body.dark .sidenav {
-  background: rgba(0, 0, 0, 0.95) !important;
 }
 
 #sidenav-overlay {
@@ -1003,7 +1017,7 @@ body.dark .losangle:before {
 }
 
 @media (max-width: 768px) {
-  .logo-worktech-white {
+  body.dark .logo-worktech-white {
     filter: contrast(90%) brightness(100);
   }
 }
@@ -3086,6 +3100,10 @@ body.dark .losangle:before {
   --hero-halo: rgba(175, 254, 210, 0.55);
   --hero-side: rgba(1, 148, 60, 0.05);
   --hero-beam: rgba(1, 122, 50, 0.07);
+  --menu-bg: white;
+  --menu-fg: #0b1a10;
+  --menu-icon: #017a32;
+  --menu-border: #d4f8e4;
   --binary-color: rgba(1, 92, 38, 0.22);
 }
 
@@ -3128,6 +3146,10 @@ body.dark {
   --hero-side: rgba(175, 254, 210, 0.05);
   --hero-beam: rgba(175, 254, 210, 0.07);
   --binary-color: rgba(255, 255, 255, 0.18);
+  --menu-bg: #050d08;
+  --menu-fg: white;
+  --menu-icon: #affed2;
+  --menu-border: rgba(175, 254, 210, 0.12);
 }
 
 ::selection {

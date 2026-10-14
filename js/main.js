@@ -9,6 +9,10 @@ $(function () {
     window.WorktechApp.includeHTML(function() {
       // Called after all HTML includes are loaded
       
+      // O menu e incluido dentro do .header, cujo "z-index: 1" o prendia
+      // atras do conteudo e do overlay; no <body> ele fica acima de tudo
+      $('.sidenav').appendTo('body');
+
       // Initialize sidenav (Materialize)
       $('.sidenav').sidenav({
         edge: 'left',
