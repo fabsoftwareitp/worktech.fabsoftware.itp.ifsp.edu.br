@@ -1,24 +1,12 @@
 <div id="inscricoes" class="container-fluid position-relative">
-  <!-- SVG com triângulos animados em formato de montanha -->
-  <svg
+  <!-- Montanha em malha poligonal, desenhada por poly-mesh.js -->
+  <canvas
     id="svg-inscricoes-triangles"
-    class="svg-animated-triangles hide-on-med-and-down"
-    viewBox="0 0 690 800"
-    preserveAspectRatio="none"
-    style="
-      position: absolute;
-      top: -220px;
-      left: 0;
-      width: 690px;
-      height: 800px;
-      z-index: 5;
-      pointer-events: none;
-      opacity: 0.7;
-      overflow: visible;
-    "
-  >
-    <!-- Triângulos serão gerados dinamicamente via JavaScript -->
-  </svg>
+    class="mesh-mountain hide-on-med-and-down"
+    data-mesh="left"
+    aria-hidden="true"
+    style="top: -220px; left: 0; width: 690px; height: 800px; z-index: 5"
+  ></canvas>
   <!-- Trilhas de circuito no canto direito, geradas por circuit-board.js -->
   <svg
     class="inscricoes-circuits"

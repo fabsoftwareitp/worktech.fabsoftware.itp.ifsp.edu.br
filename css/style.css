@@ -986,16 +986,14 @@ body.dark .programacao-subtitle {
   }
 }
 
-.svg-animated-triangles {
-  overflow: visible !important;
-}
-.svg-animated-triangles .animated-triangle {
-  fill: var(--tri-dark);
-  fill: color-mix(in srgb, var(--tri-light) calc(var(--depth, 0) * 100%), var(--tri-dark));
-  transition: fill 0.3s ease;
+.mesh-mountain {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
-.prog-bg {
+.data-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -1004,7 +1002,7 @@ body.dark .programacao-subtitle {
   mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__canvas {
+.data-bg__canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -1047,7 +1045,7 @@ body.dark .programacao-subtitle {
 }
 
 @media screen and (max-width: 600px) {
-  .svg-animated-triangles {
+  .mesh-mountain {
     width: 400px !important;
     height: 600px !important;
     top: 0 !important;
@@ -1062,9 +1060,7 @@ body.dark .programacao-subtitle {
     width: 400px !important;
     height: 600px !important;
   }
-  .svg-decoration-header,
-  .svg-decoration-programacao,
-  .svg-decoration-local {
+  .svg-decoration-header {
     opacity: 0.85 !important;
   }
 }
@@ -3094,8 +3090,7 @@ body.dark .losangle:before {
 }
 
 .svg-decoration-programacao,
-.svg-decoration-inscricoes,
-.svg-decoration-local {
+.svg-decoration-inscricoes {
   will-change: transform;
 }
 
@@ -3132,13 +3127,6 @@ body.dark .losangle:before {
 .programacao h1,
 #inscricoes h2,
 #local h2 {
-  will-change: transform, opacity;
-}
-
-.svg-animated-triangles {
-  will-change: transform, opacity;
-}
-.svg-animated-triangles .animated-triangle {
   will-change: transform, opacity;
 }
 

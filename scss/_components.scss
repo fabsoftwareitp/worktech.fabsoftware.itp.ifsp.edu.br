@@ -544,26 +544,21 @@ $day-carousel-fade: 40px;
   }
 }
 
-// Animated Triangles
-.svg-animated-triangles {
-  overflow: visible !important;
-
-  .animated-triangle {
-    fill: var(--tri-dark); // fallback para navegadores sem color-mix
-    fill: color-mix(
-      in srgb,
-      var(--tri-light) calc(var(--depth, 0) * 100%),
-      var(--tri-dark)
-    );
-    transition: fill 0.3s ease;
-  }
+// Montanhas em malha poligonal (poly-mesh.js); posicao e tamanho de cada uma
+// ficam no style do canvas
+.mesh-mountain {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
-// Fundo de dados da Programacao (data-background.js). A camada cobre a secao
-// e se dissolve nas bordas de cima e de baixo; o canvas tem a altura da tela e
-// o JS o desloca para acompanhar a tela enquanto a secao passa (position:
-// sticky nao funciona aqui: body e #programacao tem overflow hidden)
-.prog-bg {
+// Fundo de dados (data-background.js), usado na Programacao e no Local. A
+// camada cobre a secao e se dissolve nas bordas de cima e de baixo; o canvas
+// tem no maximo a altura da tela e o JS o desloca para acompanhar a tela
+// enquanto a secao passa (position: sticky nao funciona aqui: body e as
+// secoes tem overflow hidden)
+.data-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -572,7 +567,7 @@ $day-carousel-fade: 40px;
   mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__canvas {
+.data-bg__canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -623,9 +618,9 @@ $day-carousel-fade: 40px;
   z-index: 5 !important;
 }
 
-// Responsivo mobile para triângulos animados
+// Responsivo mobile para as montanhas
 @include mobile {
-  .svg-animated-triangles {
+  .mesh-mountain {
     width: 400px !important;
     height: 600px !important;
     top: 0 !important;
@@ -644,9 +639,7 @@ $day-carousel-fade: 40px;
   }
   
   // SVGs decorativos também visíveis em mobile
-  .svg-decoration-header,
-  .svg-decoration-programacao,
-  .svg-decoration-local {
+  .svg-decoration-header {
     opacity: 0.85 !important;
   }
 }

@@ -18,7 +18,7 @@ window.WorktechApp.DataBackground = {
   FRAME_TIME: 1 / 30, // 30 quadros/s bastam para movimentos lentos
 
   init: function () {
-    var canvas = document.querySelector(".prog-bg__canvas");
+    var canvas = document.querySelector(".data-bg__canvas");
     if (!canvas) return;
 
     var self = this;

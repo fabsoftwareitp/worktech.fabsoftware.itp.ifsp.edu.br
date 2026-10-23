@@ -75,9 +75,9 @@ $(function () {
         window.WorktechApp.CircuitBoard.init();
       }
 
-      // Initialize Animated Triangles
-      if (window.WorktechApp && window.WorktechApp.AnimatedTriangles) {
-        window.WorktechApp.AnimatedTriangles.init();
+      // Initialize polygon mesh mountains and footer
+      if (window.WorktechApp && window.WorktechApp.PolyMesh) {
+        window.WorktechApp.PolyMesh.init();
       }
 
       // Initialize Programacao data background
