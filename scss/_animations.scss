@@ -17,26 +17,12 @@
   will-change: transform;
 }
 
-.timeline-block {
+// Opacidade e posicao da timeline sao animadas pelo GSAP; transicoes CSS
+// nessas propriedades suavizariam de novo cada quadro e travariam o movimento
+.timeline-content,
+.timeline-dot,
+.turno-label {
   will-change: transform, opacity;
-  transform-origin: center center;
-  transition: opacity 0.3s ease;
-  
-  &:hover {
-    opacity: 0.95;
-  }
-}
-
-.timeline-content {
-  will-change: transform;
-  
-  h3 {
-    will-change: transform, opacity;
-  }
-  
-  p {
-    will-change: transform, opacity;
-  }
 }
 
 .timeline-activation {

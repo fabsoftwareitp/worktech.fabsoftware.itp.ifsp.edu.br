@@ -218,6 +218,8 @@ window.WorktechApp.AnimatedTriangles = {
   createFloatingTriangles: function () {
     const svg = document.getElementById("svg-programacao-floating");
     if (!svg) return;
+    // Os triangulos vao no grupo que os ladrilhos de fundo espelham com <use>
+    const art = document.getElementById("prog-floating-art") || svg;
 
     const width = 1200;
     const height = 800;
@@ -244,7 +246,7 @@ window.WorktechApp.AnimatedTriangles = {
       polygon.style.transformOrigin = "center";
       polygon.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-      svg.appendChild(polygon);
+      art.appendChild(polygon);
     }
   },
 

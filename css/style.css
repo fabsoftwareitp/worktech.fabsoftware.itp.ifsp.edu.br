@@ -736,59 +736,17 @@ body.dark .programacao-subtitle {
   padding: 0;
   background: transparent;
   border-radius: 0;
-  transition: all 0.3s ease;
+  position: relative;
 }
 .timeline-block:nth-of-type(odd) {
   padding-left: 0;
   padding-right: calc(50% + 4rem);
   text-align: right;
-  position: relative;
-}
-.timeline-block:nth-of-type(odd)::before {
-  left: initial;
-  right: 50%;
-  -webkit-transform: translateX(0.5rem);
-  -moz-transform: translateX(0.5rem);
-  -ms-transform: translateX(0.5rem);
-  -o-transform: translateX(0.5rem);
-  transform: translateX(0.5rem);
 }
 .timeline-block:nth-of-type(even) {
   padding-right: 0;
   padding-left: calc(50% + 4rem);
   text-align: left;
-  position: relative;
-}
-.timeline-block:nth-of-type(even)::before {
-  left: 50%;
-  -webkit-transform: translateX(-0.5rem);
-  -moz-transform: translateX(-0.5rem);
-  -ms-transform: translateX(-0.5rem);
-  -o-transform: translateX(-0.5rem);
-  transform: translateX(-0.5rem);
-}
-.timeline-block::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 2rem;
-  width: 1rem;
-  height: 1rem;
-  -webkit-transform: translateX(-25%);
-  -moz-transform: translateX(-25%);
-  -ms-transform: translateX(-25%);
-  -o-transform: translateX(-25%);
-  transform: translateX(-25%);
-  border-radius: 50%;
-  box-shadow: 0 0 0 7px var(--page-bg), 0 0 0 9px var(--accent-soft);
-  background: var(--accent);
-  transition: all 0.99s ease-in;
-  will-change: box-shadow;
-}
-.timeline-block.current::before {
-  box-shadow: 0 0 0 5px var(--page-bg), 0 0 0 7px var(--accent), 0 0 10px 3px var(--accent-glow);
-  background: var(--accent-strong);
-  transition: box-shadow 0.5s ease-in;
 }
 .timeline-block h3 {
   font-weight: 700;
@@ -799,16 +757,61 @@ body.dark .programacao-subtitle {
     padding-left: 1.6rem;
     padding-right: 0;
     text-align: left;
-    position: relative;
   }
-  .timeline-block:nth-of-type(odd)::before, .timeline-block:nth-of-type(even)::before {
+}
+
+.timeline > div {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin-left: -0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 7px var(--page-bg), 0 0 0 9px var(--accent-soft);
+  background: var(--accent);
+  transition: box-shadow 0.5s ease-in, background-color 0.5s ease-in;
+}
+.timeline-block.current .timeline-dot {
+  box-shadow: 0 0 0 5px var(--page-bg), 0 0 0 7px var(--accent), 0 0 10px 3px var(--accent-glow);
+  background: var(--accent-strong);
+}
+@media (max-width: 768px) {
+  .timeline-dot {
     left: 0;
-    right: 0;
-    -webkit-transform: translateX(-0.5rem);
-    -moz-transform: translateX(-0.5rem);
-    -ms-transform: translateX(-0.5rem);
-    -o-transform: translateX(-0.5rem);
-    transform: translateX(-0.5rem);
+  }
+}
+
+.timeline-dot-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.timeline-pulse {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  width: 0.5rem;
+  height: 3rem;
+  margin-left: -0.25rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(to bottom, transparent, var(--accent-strong));
+  box-shadow: 0 0 14px 4px var(--accent-glow);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .timeline-pulse {
+    left: 0;
   }
 }
 
@@ -971,6 +974,29 @@ body.dark .programacao-subtitle {
   fill: var(--tri-dark);
   fill: color-mix(in srgb, var(--tri-light) calc(var(--depth, 0) * 100%), var(--tri-dark));
   transition: fill 0.3s ease;
+}
+
+.prog-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.prog-bg__tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/2;
+}
+.prog-bg__tile > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.prog-bg__tile.is-mirrored {
+  transform: scaleX(-1);
 }
 
 .svg-floating-triangles .floating-triangle {
@@ -3072,22 +3098,9 @@ body.dark .losangle:before {
   will-change: transform;
 }
 
-.timeline-block {
-  will-change: transform, opacity;
-  transform-origin: center center;
-  transition: opacity 0.3s ease;
-}
-.timeline-block:hover {
-  opacity: 0.95;
-}
-
-.timeline-content {
-  will-change: transform;
-}
-.timeline-content h3 {
-  will-change: transform, opacity;
-}
-.timeline-content p {
+.timeline-content,
+.timeline-dot,
+.turno-label {
   will-change: transform, opacity;
 }
 

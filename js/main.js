@@ -79,6 +79,11 @@ $(function () {
       if (window.WorktechApp && window.WorktechApp.AnimatedTriangles) {
         window.WorktechApp.AnimatedTriangles.init();
       }
+
+      // Initialize Programacao tiled background
+      if (window.WorktechApp && window.WorktechApp.TiledBackground) {
+        window.WorktechApp.TiledBackground.init();
+      }
     });
   }
 });

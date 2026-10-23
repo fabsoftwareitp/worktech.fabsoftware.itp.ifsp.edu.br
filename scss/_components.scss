@@ -278,54 +278,19 @@ $day-carousel-fade: 40px;
   padding: 0;
   background: transparent;
   border-radius: 0;
-  transition: all 0.3s ease;
+
+  position: relative;
 
   &:nth-of-type(odd) {
     padding-left: 0;
     padding-right: calc(50% + 4rem);
     text-align: right;
-    position: relative;
-
-    &::before {
-      left: initial;
-      right: 50%;
-      @include transform(translateX(0.5rem));
-    }
   }
 
   &:nth-of-type(even) {
     padding-right: 0;
     padding-left: calc(50% + 4rem);
     text-align: left;
-    position: relative;
-
-    &::before {
-      left: 50%;
-      @include transform(translateX(-0.5rem));
-    }
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 2rem;
-    width: $timeline-dot-size;
-    height: $timeline-dot-size;
-    @include transform(translateX(-25%));
-    border-radius: 50%;
-    // Anel da cor do fundo "recorta" a linha ao redor da bolinha
-    box-shadow: 0 0 0 7px var(--page-bg), 0 0 0 9px var(--accent-soft);
-    background: var(--accent);
-    transition: all $transition-duration ease-in;
-    will-change: box-shadow;
-  }
-
-  &.current::before {
-    box-shadow: 0 0 0 5px var(--page-bg), 0 0 0 7px var(--accent),
-      0 0 10px 3px var(--accent-glow);
-    background: var(--accent-strong);
-    transition: box-shadow 0.5s ease-in;
   }
 
   h3 {
@@ -339,14 +304,69 @@ $day-carousel-fade: 40px;
       padding-left: 1.6rem;
       padding-right: 0;
       text-align: left;
-      position: relative;
-
-      &::before {
-        left: 0;
-        right: 0;
-        @include transform(translateX(-0.5rem));
-      }
     }
+  }
+}
+
+// Cada dia e a referencia de posicao do pulso e das bolinhas
+.timeline > div {
+  position: relative;
+}
+
+// Bolinha: elemento proprio (nao ::before) para o GSAP animar sem mexer no
+// card. Fica centrada sobre a linha: no meio da tela, ou na esquerda no celular
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: $timeline-dot-size;
+  height: $timeline-dot-size;
+  margin-left: $timeline-dot-size * -0.5;
+  border-radius: 50%;
+  // Anel da cor do fundo "recorta" a linha ao redor da bolinha
+  box-shadow: 0 0 0 7px var(--page-bg), 0 0 0 9px var(--accent-soft);
+  background: var(--accent);
+  // So cor e sombra: escala e opacidade sao do GSAP
+  transition: box-shadow 0.5s ease-in, background-color 0.5s ease-in;
+
+  .timeline-block.current & {
+    box-shadow: 0 0 0 5px var(--page-bg), 0 0 0 7px var(--accent),
+      0 0 10px 3px var(--accent-glow);
+    background: var(--accent-strong);
+  }
+
+  @include tablet {
+    left: 0;
+  }
+}
+
+// Onda que sai da bolinha quando o sinal a acende
+.timeline-dot-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+// Sinal de luz que desce pela linha acendendo as bolinhas
+.timeline-pulse {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  width: 0.5rem;
+  height: 3rem;
+  margin-left: -0.25rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(to bottom, transparent, var(--accent-strong));
+  box-shadow: 0 0 14px 4px var(--accent-glow);
+  opacity: 0;
+  pointer-events: none;
+
+  @include tablet {
+    left: 0;
   }
 }
 
@@ -534,6 +554,33 @@ $day-carousel-fade: 40px;
       var(--tri-dark)
     );
     transition: fill 0.3s ease;
+  }
+}
+
+// Fundo da Programacao em ladrilhos de altura fixa (proporcao do viewBox
+// 1200x800), presos no topo: a altura da secao muda e o desenho nao se move
+.prog-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.prog-bg__tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+
+  > svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &.is-mirrored {
+    transform: scaleX(-1);
   }
 }
 

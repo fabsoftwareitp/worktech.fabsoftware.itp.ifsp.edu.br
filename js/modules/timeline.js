@@ -40,7 +40,12 @@ window.WorktechApp.Timeline = {
               $(block).addClass("timeline-block");
               $(content).addClass("timeline-content");
               $(card).addClass("workshop-card");
-              
+
+              // Bolinha sobre a linha, animada separada do card
+              $(block).append(
+                "<span class='timeline-dot' aria-hidden='true'><span class='timeline-dot-ring'></span></span>"
+              );
+
               // Horário (fora do card); atividades sem horário fixo usam chave vazia
               if (horario !== "") {
                 $(content).append("<p class='workshop-time'>" + horario + "</p>");
@@ -108,8 +113,12 @@ window.WorktechApp.Timeline = {
           });
         });
         $(".timeline").append(all);
-        $($("a.timeline-activation.active").attr("href")).show("fast");
       });
+
+      // Mostra o dia ativo de uma vez; a entrada animada fica com o GSAP
+      $($("a.timeline-activation.active").attr("href")).show();
+      window.WorktechApp.Timeline.ready = true;
+      $(document).trigger("timeline:ready");
     });
   },
 
