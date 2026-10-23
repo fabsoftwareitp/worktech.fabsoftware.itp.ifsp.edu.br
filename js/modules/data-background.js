@@ -1,10 +1,13 @@
-// Fundo de dados da Programacao
+// Fundo de dados (Programacao e Local)
 // Duas camadas que conversam: colunas de bytes em hexadecimal subindo devagar
 // nas laterais (fora da coluna dos cards) e uma rede esparsa de nos. De vez em
 // quando um byte acende e sai como pacote: entra na rede pelo no mais proximo,
 // salta de no em no e, ao terminar, volta para uma coluna e acende outro byte.
 // Tudo e desenhado num canvas do tamanho da tela, que para fora da secao e fica
 // parado para quem pede menos movimento.
+// Cada <div class="data-bg"> vira uma instancia propria. data-content aponta a
+// coluna de conteudo (os bytes ficam fora dela) e data-avoid, opcional, uma
+// area onde os bytes quase somem (a montanha de triangulos).
 window.WorktechApp = window.WorktechApp || {};
 
 window.WorktechApp.DataBackground = {
@@ -18,15 +21,25 @@ window.WorktechApp.DataBackground = {
   FRAME_TIME: 1 / 30, // 30 quadros/s bastam para movimentos lentos
 
   init: function () {
-    var canvas = document.querySelector(".data-bg__canvas");
+    var self = this;
+    this.instances = Array.prototype.map.call(document.querySelectorAll(".data-bg"), function (root) {
+      var instance = Object.create(self);
+      instance.start(root);
+      return instance;
+    });
+  },
+
+  start: function (root) {
+    var canvas = root.querySelector(".data-bg__canvas");
     if (!canvas) return;
 
     var self = this;
+    var avoid = root.getAttribute("data-avoid");
+    this.root = root;
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.section = document.getElementById("programacao");
-    this.content = document.querySelector("#programacao .schedule");
-    this.mountain = document.getElementById("svg-programacao-triangles");
+    this.content = document.querySelector(root.getAttribute("data-content"));
+    this.avoid = avoid ? document.querySelector(avoid) : null;
     this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.visible = true;
     this.time = 0;
@@ -50,11 +63,12 @@ window.WorktechApp.DataBackground = {
     };
     if ("ResizeObserver" in window) new ResizeObserver(relayout).observe(canvas);
     else window.addEventListener("resize", relayout);
+    window.addEventListener("resize", () => this.pin());
 
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         self.visible = entries[0].isIntersecting;
-      }).observe(this.section);
+      }).observe(root);
     }
 
     if (this.reduceMotion) {
@@ -80,9 +94,15 @@ window.WorktechApp.DataBackground = {
     window.requestAnimationFrame(loop);
   },
 
-  // Mantem o canvas na tela enquanto a secao passa, sem sair dos limites dela
+  // Mantem o canvas na tela enquanto a secao passa, sem sair dos limites dela.
+  // Em secoes mais baixas que a tela, o canvas fica com a altura da secao
   pin: function () {
-    var area = this.canvas.parentElement.getBoundingClientRect();
+    var area = this.root.getBoundingClientRect();
+    var height = Math.round(Math.min(window.innerHeight, area.height));
+    if (height !== this.canvasHeight) {
+      this.canvasHeight = height;
+      this.canvas.style.height = height + "px";
+    }
     var offset = Math.max(0, Math.min(-area.top, area.height - this.canvas.offsetHeight));
     this.canvas.style.transform = "translateY(" + Math.round(offset) + "px)";
   },
@@ -298,16 +318,16 @@ window.WorktechApp.DataBackground = {
 
     ctx.clearRect(0, 0, w, h);
 
-    // Area da montanha de triangulos, onde os bytes quase somem
+    // Area a evitar (a montanha de triangulos), onde os bytes quase somem
     var canvasRect = this.canvas.getBoundingClientRect();
-    var mountain = this.mountain ? this.mountain.getBoundingClientRect() : null;
-    var inMountain = function (x, y) {
+    var avoid = this.avoid ? this.avoid.getBoundingClientRect() : null;
+    var inAvoid = function (x, y) {
       return (
-        mountain &&
-        x > mountain.left - canvasRect.left &&
-        x < mountain.right - canvasRect.left &&
-        y > mountain.top - canvasRect.top &&
-        y < mountain.bottom - canvasRect.top
+        avoid &&
+        x > avoid.left - canvasRect.left &&
+        x < avoid.right - canvasRect.left &&
+        y > avoid.top - canvasRect.top &&
+        y < avoid.bottom - canvasRect.top
       );
     };
 
@@ -321,7 +341,7 @@ window.WorktechApp.DataBackground = {
       for (var row = 0; row * rowHeight < h + rowHeight; row++) {
         var id = first + row;
         var y = id * rowHeight - column.offset;
-        var alpha = base * column.fade * (inMountain(column.x, y) ? 0.3 : 1);
+        var alpha = base * column.fade * (inAvoid(column.x, y) ? 0.3 : 1);
         ctx.fillStyle = "rgba(" + rgb + "," + alpha + ")";
         ctx.fillText(this.byteAt(column, id), column.x, y + 3);
       }

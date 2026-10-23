@@ -1012,6 +1012,11 @@ body.dark .programacao-subtitle {
   will-change: transform;
 }
 
+#local > .container {
+  position: relative;
+  z-index: 1;
+}
+
 .inscricoes-circuits {
   position: absolute;
   top: -80px;

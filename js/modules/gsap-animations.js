@@ -319,38 +319,6 @@ window.WorktechApp.GSAPAnimations = {
     // SVG removido da seção de inscrições
   },
 
-  animateSVGLocal: function () {
-    gsap.to("#localOrb1", {
-      duration: 23,
-      x: 50,
-      y: -30,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#localOrb2", {
-      duration: 27,
-      x: -45,
-      y: 35,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to(".local-particle", {
-      duration: 4,
-      y: "random(-22, 22)",
-      x: "random(-18, 18)",
-      stagger: {
-        each: 0.55,
-        repeat: -1,
-        yoyo: true,
-      },
-      ease: "sine.inOut",
-    });
-  },
-
   animateTimelineSwitch: function () {
     var self = this;
     var $timeline = $(".timeline");
@@ -482,7 +450,6 @@ window.WorktechApp.GSAPAnimations = {
     this.animateFooter();
     this.animateSVGHeader();
     this.animateSVGInscricoes();
-    this.animateSVGLocal();
     this.animateTimelineSwitch();
     this.animateTimelineMount();
   },

@@ -577,6 +577,12 @@ $day-carousel-fade: 40px;
   will-change: transform;
 }
 
+// O conteudo do Local fica acima do fundo de dados
+#local > .container {
+  position: relative;
+  z-index: 1;
+}
+
 // Trilhas de circuito no canto direito de Inscricoes: saem da borda e se
 // apagam antes de chegar ao texto
 .inscricoes-circuits {
