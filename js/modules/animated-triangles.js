@@ -214,93 +214,15 @@ window.WorktechApp.AnimatedTriangles = {
     }, 2000);
   },
 
-  // Cria triângulos flutuantes de fundo na seção de Programação
-  createFloatingTriangles: function () {
-    const svg = document.getElementById("svg-programacao-floating");
-    if (!svg) return;
-    // Os triangulos vao no grupo que os ladrilhos de fundo espelham com <use>
-    const art = document.getElementById("prog-floating-art") || svg;
-
-    const width = 1200;
-    const height = 800;
-    const triangleCount = 12; // 12 triângulos flutuantes
-
-    for (let i = 0; i < triangleCount; i++) {
-      const polygon = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "polygon"
-      );
-      const size = Math.random() * 20 + 15; // Tamanho menor: entre 15 e 35
-      const x = Math.random() * width;
-      const y = Math.random() * height;
-
-      // Triângulos simples aleatórios
-      const points = `${x},${y} ${x + size},${y} ${x + size / 2},${y + size}`;
-
-      polygon.setAttribute("points", points);
-      polygon.setAttribute("class", "floating-triangle");
-      this.setDepth(polygon, (y / height) * 0.5);
-      polygon.style.opacity = Math.random() * 0.08 + 0.04; // Sutil, mas visivel (0.04 a 0.12)
-
-      // Rotação inicial aleatória
-      polygon.style.transformOrigin = "center";
-      polygon.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-      art.appendChild(polygon);
-    }
-  },
-
-  // Anima os triângulos flutuantes
-  animateFloatingTriangles: function () {
-    const triangles = document.querySelectorAll(
-      "#svg-programacao-floating .floating-triangle"
-    );
-    if (triangles.length === 0) return;
-
-    triangles.forEach((triangle, index) => {
-      // Movimento vertical (lento e sutil)
-      gsap.to(triangle, {
-        y: `random(-50, 50)`,
-        duration: `random(15, 25)`,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: Math.random() * 5,
-      });
-
-      // Movimento horizontal (lento e sutil)
-      gsap.to(triangle, {
-        x: `random(-40, 40)`,
-        duration: `random(18, 28)`,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: Math.random() * 5,
-      });
-
-      // Rotação (muito lenta e sutil)
-      gsap.to(triangle, {
-        rotation: `random(-30, 30)`,
-        duration: `random(20, 35)`,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: Math.random() * 5,
-      });
-    });
-  },
-
   init: function () {
     // Gera os triângulos
     this.createProgramacaoTriangles();
     this.createInscricoesTriangles();
-    this.createFloatingTriangles();
 
     // Anima após um pequeno delay
     setTimeout(() => {
       this.animateProgramacaoTriangles();
       this.animateInscricoesTriangles();
-      this.animateFloatingTriangles();
     }, 500);
   },
 };

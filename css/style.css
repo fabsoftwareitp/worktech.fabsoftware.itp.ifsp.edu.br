@@ -999,29 +999,19 @@ body.dark .programacao-subtitle {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
+  mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__tile {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3/2;
-}
-.prog-bg__tile > svg {
+.prog-bg__canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-}
-.prog-bg__tile.is-mirrored {
-  transform: scaleX(-1);
-}
-
-.svg-floating-triangles .floating-triangle {
-  fill: var(--tri-dark);
-  fill: color-mix(in srgb, var(--tri-light) calc(var(--depth, 0) * 100%), var(--tri-dark));
-  transition: fill 0.3s ease;
+  height: 100vh;
+  will-change: transform;
 }
 
 .inscricoes-circuits {
@@ -1076,9 +1066,6 @@ body.dark .programacao-subtitle {
   .svg-decoration-programacao,
   .svg-decoration-local {
     opacity: 0.85 !important;
-  }
-  .svg-floating-triangles {
-    opacity: 0.5 !important;
   }
 }
 .row_apoio_realizacao {

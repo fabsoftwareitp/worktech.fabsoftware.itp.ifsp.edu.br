@@ -315,71 +315,6 @@ window.WorktechApp.GSAPAnimations = {
     });
   },
 
-  animateSVGProgramacao: function () {
-    gsap.to("#progOrb1", {
-      duration: 22,
-      x: 60,
-      y: -40,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#progOrb2", {
-      duration: 28,
-      x: -50,
-      y: 30,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#progOrb3", {
-      duration: 20,
-      x: 40,
-      y: -25,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#progLine1", {
-      duration: 15,
-      attr: { d: "M 0,100 Q 300,150 600,100 T 1200,100" },
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#progLine2", {
-      duration: 18,
-      attr: { d: "M 0,300 Q 400,350 800,300 T 1200,300" },
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to("#progLine3", {
-      duration: 20,
-      attr: { d: "M 0,500 Q 350,550 700,500 T 1200,500" },
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    gsap.to(".prog-particle", {
-      duration: 4,
-      y: "random(-25, 25)",
-      x: "random(-20, 20)",
-      stagger: {
-        each: 0.6,
-        repeat: -1,
-        yoyo: true,
-      },
-      ease: "sine.inOut",
-    });
-  },
-
   animateSVGInscricoes: function () {
     // SVG removido da seção de inscrições
   },
@@ -546,7 +481,6 @@ window.WorktechApp.GSAPAnimations = {
     this.animateLamp();
     this.animateFooter();
     this.animateSVGHeader();
-    this.animateSVGProgramacao();
     this.animateSVGInscricoes();
     this.animateSVGLocal();
     this.animateTimelineSwitch();

@@ -80,9 +80,9 @@ $(function () {
         window.WorktechApp.AnimatedTriangles.init();
       }
 
-      // Initialize Programacao tiled background
-      if (window.WorktechApp && window.WorktechApp.TiledBackground) {
-        window.WorktechApp.TiledBackground.init();
+      // Initialize Programacao data background
+      if (window.WorktechApp && window.WorktechApp.DataBackground) {
+        window.WorktechApp.DataBackground.init();
       }
     });
   }

@@ -559,44 +559,27 @@ $day-carousel-fade: 40px;
   }
 }
 
-// Fundo da Programacao em ladrilhos de altura fixa (proporcao do viewBox
-// 1200x800), presos no topo: a altura da secao muda e o desenho nao se move
+// Fundo de dados da Programacao (data-background.js). A camada cobre a secao
+// e se dissolve nas bordas de cima e de baixo; o canvas tem a altura da tela e
+// o JS o desloca para acompanhar a tela enquanto a secao passa (position:
+// sticky nao funciona aqui: body e #programacao tem overflow hidden)
 .prog-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
+  mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__tile {
-  position: relative;
+.prog-bg__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
-
-  > svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &.is-mirrored {
-    transform: scaleX(-1);
-  }
-}
-
-// Triângulos flutuantes de fundo
-.svg-floating-triangles {
-  .floating-triangle {
-    fill: var(--tri-dark); // fallback para navegadores sem color-mix
-    fill: color-mix(
-      in srgb,
-      var(--tri-light) calc(var(--depth, 0) * 100%),
-      var(--tri-dark)
-    );
-    transition: fill 0.3s ease;
-  }
+  height: 100vh;
+  will-change: transform;
 }
 
 // Trilhas de circuito no canto direito de Inscricoes: saem da borda e se
@@ -665,11 +648,6 @@ $day-carousel-fade: 40px;
   .svg-decoration-programacao,
   .svg-decoration-local {
     opacity: 0.85 !important;
-  }
-  
-  // Triângulos flutuantes um pouco mais suaves em mobile
-  .svg-floating-triangles {
-    opacity: 0.5 !important;
   }
 }
 
