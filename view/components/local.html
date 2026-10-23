@@ -17,18 +17,40 @@
           target="_blank"
           class="btn-large btn-map mt-3 mb-3"
         >
-          <i class="material-icons left">featured_video</i>Instituto Federal
-          Câmpus Itapetininga
+          <i class="material-icons" aria-hidden="true">near_me</i>
+          <span>Instituto Federal Câmpus Itapetininga</span>
+          <i class="material-icons btn-map__go" aria-hidden="true">call_made</i>
         </a>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2932843709273!2d-48.02112402391343!3d-23.593812462786666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5cbf41ebfcf31%3A0xa65e4fb6d75446bf!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%2C%20Ci%C3%AAncia%20e%20Tecnologia%20de%20S%C3%A3o%20Paulo%2C%20Campus%20Itapetininga!5e0!3m2!1spt-PT!2sbr!4v1731000272375!5m2!1spt-PT!2sbr"
-          width="100%"
-          height="450"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <!-- Mapa em moldura de painel: barra com coordenadas, cantoneiras e
+             linha de varredura (so decoracao: o mapa continua clicavel) -->
+        <figure class="map-hud">
+          <div class="map-hud__bar">
+            <span class="map-hud__status">
+              <span class="map-hud__dot" aria-hidden="true"></span>
+              IFSP · Câmpus Itapetininga
+            </span>
+            <span class="map-hud__coords">23°35'38"S · 48°01'16"W</span>
+          </div>
+          <div class="map-hud__screen">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2932843709273!2d-48.02112402391343!3d-23.593812462786666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5cbf41ebfcf31%3A0xa65e4fb6d75446bf!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%2C%20Ci%C3%AAncia%20e%20Tecnologia%20de%20S%C3%A3o%20Paulo%2C%20Campus%20Itapetininga!5e0!3m2!1spt-PT!2sbr!4v1731000272375!5m2!1spt-PT!2sbr"
+              width="100%"
+              height="450"
+              title="Mapa do IFSP Câmpus Itapetininga"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <span class="map-hud__scan" aria-hidden="true"></span>
+            <span class="map-hud__corner map-hud__corner--tl" aria-hidden="true"></span>
+            <span class="map-hud__corner map-hud__corner--tr" aria-hidden="true"></span>
+            <span class="map-hud__corner map-hud__corner--bl" aria-hidden="true"></span>
+            <span class="map-hud__corner map-hud__corner--br" aria-hidden="true"></span>
+          </div>
+          <figcaption class="map-hud__foot">
+            Av. João Olímpio de Oliveira, 1561 · Vila Asem · Itapetininga/SP
+          </figcaption>
+        </figure>
       </div>
     </div>
   </div>

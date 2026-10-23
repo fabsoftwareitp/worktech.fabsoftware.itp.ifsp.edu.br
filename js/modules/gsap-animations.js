@@ -246,7 +246,7 @@ window.WorktechApp.GSAPAnimations = {
         "-=0.3"
       )
       .fromTo(
-        "#local iframe",
+        "#local .map-hud",
         { opacity: 0 },
         { duration: 0.8, opacity: 1, ease: "power2.out" },
         "-=0.4"

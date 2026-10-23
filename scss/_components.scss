@@ -583,6 +583,157 @@ $day-carousel-fade: 40px;
   z-index: 1;
 }
 
+// Mapa do Local em moldura de painel: barra com status e coordenadas,
+// cantoneiras, linha de varredura e endereco no rodape
+.map-hud {
+  --hud-line: color-mix(in srgb, var(--accent) 35%, transparent);
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--hud-line);
+  background: var(--surface);
+}
+
+.map-hud__bar,
+.map-hud__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.55rem 0.9rem;
+  font-family: $font-mono;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.map-hud__bar {
+  border-bottom: 1px solid var(--hud-line);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.map-hud__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+// Indicador "ao vivo"
+.map-hud__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: hud-blink 1.6s ease-in-out infinite;
+}
+
+.map-hud__coords {
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.map-hud__screen {
+  position: relative;
+  overflow: hidden;
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: 0;
+
+    @include mobile {
+      height: 340px;
+    }
+  }
+}
+
+// No tema escuro o mapa tambem fica escuro (cores invertidas, tons de volta)
+body.dark .map-hud__screen iframe {
+  filter: invert(90%) hue-rotate(180deg) saturate(0.6) contrast(0.95);
+}
+
+// Faixa de leitura descendo pelo mapa; a camada inteira desliza, so o fim
+// dela tem cor
+.map-hud__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    transparent 0 calc(100% - 3rem),
+    color-mix(in srgb, var(--accent) 16%, transparent) calc(100% - 2px),
+    var(--hud-line) calc(100% - 2px)
+  );
+  animation: hud-scan 6s linear infinite;
+}
+
+.map-hud__corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  pointer-events: none;
+
+  &--tl {
+    top: 8px;
+    left: 8px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  &--tr {
+    top: 8px;
+    right: 8px;
+    border-left: 0;
+    border-bottom: 0;
+  }
+
+  &--bl {
+    bottom: 8px;
+    left: 8px;
+    border-right: 0;
+    border-top: 0;
+  }
+
+  &--br {
+    bottom: 8px;
+    right: 8px;
+    border-left: 0;
+    border-top: 0;
+  }
+}
+
+.map-hud__foot {
+  border-top: 1px solid var(--hud-line);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@keyframes hud-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes hud-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-hud__dot,
+  .map-hud__scan {
+    animation: none;
+  }
+
+  .map-hud__scan {
+    display: none;
+  }
+}
+
 // Trilhas de circuito no canto direito de Inscricoes: saem da borda e se
 // apagam antes de chegar ao texto
 .inscricoes-circuits {
