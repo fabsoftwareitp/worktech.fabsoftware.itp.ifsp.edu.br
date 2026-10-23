@@ -140,7 +140,7 @@ window.WorktechApp.PolyMesh = {
     var w = mesh.width;
     var h = mesh.height;
     if (mesh.side === "bottom") {
-      return h * (0.55 + 0.18 * Math.sin(x * 0.0045 + 1.3) + 0.1 * Math.sin(x * 0.017));
+      return h * (0.45 + 0.14 * Math.sin(x * 0.0045 + 1.3) + 0.08 * Math.sin(x * 0.017));
     }
     var base = Math.pow(Math.sin((y / h) * Math.PI), 0.8) * w * 0.88;
     return Math.max(0, base + Math.sin(y * 0.05) * 10 + Math.sin(y * 0.013 + 1) * 18);
