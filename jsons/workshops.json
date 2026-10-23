@@ -1,230 +1,239 @@
 {
   "26-de-outubro": {
+    "Dia todo": {
+      "": [
+        {
+          "titulo": "Exposição \"Mulheres na Computação\"",
+          "palestrante": "Eline Welter e meninas do GATI",
+          "local": "Saguão/Mural",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19792/"
+        }
+      ]
+    },
     "Manhã": {
       "09:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
-        }
-      ],
-      "10:00": [
-        {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "IA: Introdução a Prompts",
+          "palestrante": "Gerson Nunho Carriel e Gabriel Oliveira Queiroz Passarinho",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19893/"
         }
       ],
       "11:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Debateflix de Black Mirror - Joan é Péssima",
+          "palestrante": "Eline Welter",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19894/"
         }
       ]
     },
     "Noite": {
       "19:30": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
-        }
-      ],
-      "20:45": [
-        {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Do Brasil para o Mundo: como trabalhar para empresas internacionais na era da IA",
+          "palestrante": "Fernando Thibes",
+          "local": "Auditório de Informática",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19796/"
         }
       ]
     }
   },
   "27-de-outubro": {
+    "Dia todo": {
+      "": [
+        {
+          "titulo": "Exposição \"Mulheres na Computação\"",
+          "palestrante": "Eline Welter e meninas do GATI",
+          "local": "Saguão/Mural",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19792/"
+        }
+      ]
+    },
     "Manhã": {
       "09:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
-        }
-      ],
-      "10:00": [
-        {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Segurança em aplicações Web",
+          "palestrante": "Mônica do Nascimento",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19895/"
         }
       ],
       "11:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Do Brasil para o Mundo: como trabalhar para empresas internacionais na era da IA",
+          "palestrante": "Fernando Thibes",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19796/"
         }
       ]
     },
     "Noite": {
       "19:30": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "De quem é esse lugar?",
+          "palestrante": "Alessandra Rabin",
+          "descricao": "O talento é de todos. As oportunidades também? Os desafios de construir uma carreira, conquistar espaço e transformar ambientes.",
+          "local": "Auditório de Informática",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19808/"
         }
       ],
       "20:45": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Qualidade na Prática: Shift Left",
+          "palestrante": "Vinícius Silveira",
+          "local": "LAB A (30 vagas)",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19897/"
         }
       ]
     }
   },
   "28-de-outubro": {
-    "Manhã": {
-      "09:00": [
+    "Dia todo": {
+      "": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Exposição \"Mulheres na Computação\"",
+          "palestrante": "Eline Welter e meninas do GATI",
+          "local": "Saguão/Mural",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19792/"
         }
-      ],
-      "10:00": [
+      ]
+    },
+    "Manhã": {
+      "09:10": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Painel Mulheres na Tecnologia",
+          "palestrante": "Eline Welter, Kelly Ribeiro e Mônica do Nascimento",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19797/"
         }
       ],
       "11:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "GATI Itapetininga: Level 1 Concluído com Sucesso!",
+          "palestrante": "Eline Welter",
+          "descricao": "Veja tudo o que rolou no nosso primeiro ano de projetos, eventos e tecnologia.",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19798/"
         }
       ]
     },
     "Noite": {
-      "19:30": [
+      "19:20": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Agentes Inteligentes: o próximo passo do uso da IA",
+          "palestrante": "Adriano Elias Daniel",
+          "local": "Auditório de Informática",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19801/"
         }
       ],
       "20:45": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "2ª Mostra Projeto de Extensão de TSI",
+          "palestrante": "Alunos do 5º semestre de TSI",
+          "local": "Corredores ou Saguão",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19802/"
         }
       ]
     }
   },
   "29-de-outubro": {
-    "Manhã": {
-      "09:00": [
+    "Dia todo": {
+      "": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Exposição \"Mulheres na Computação\"",
+          "palestrante": "Eline Welter e meninas do GATI",
+          "local": "Saguão/Mural",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19792/"
         }
-      ],
-      "10:00": [
+      ]
+    },
+    "Manhã": {
+      "09:10": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Inteligência Artificial: Mudanças no Mercado de Trabalho e na Sociedade",
+          "palestrante": "Carlos Henrique da Silva Santos",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19799/"
         }
       ],
       "11:00": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "GTAC - Grupo de Tecnologias e Aplicações da Computação",
+          "palestrante": "Gustavo, Hélber, Maria, Mariana e Thomaz",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19800/"
         }
       ]
     },
     "Noite": {
       "19:30": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Comunidade Devitape",
+          "palestrante": "Paulo Henrique Vieira Candido",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19804/"
         }
       ],
       "20:45": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Desenhando software escalável e organizações adaptáveis",
+          "palestrante": "Erik Aceiro",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19805/"
         }
       ]
     }
   },
   "30-de-outubro": {
+    "Dia todo": {
+      "": [
+        {
+          "titulo": "Exposição \"Mulheres na Computação\"",
+          "palestrante": "Eline Welter e meninas do GATI",
+          "local": "Saguão/Mural",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19792/"
+        }
+      ]
+    },
     "Manhã": {
-      "09:00": [
+      "09:10": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
-        }
-      ],
-      "10:00": [
-        {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
-        }
-      ],
-      "11:00": [
-        {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Mostra de Projetos de IoT",
+          "palestrante": "Wilton Ferraz Jr e alunos",
+          "local": "Saguão Biblioteca",
+          "duracao": "2h",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19896/"
         }
       ]
     },
     "Noite": {
-      "19:30": [
+      "19:10": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Inteligência Artificial: Mudanças no Mercado de Trabalho e na Sociedade",
+          "palestrante": "Carlos Henrique da Silva Santos",
+          "local": "Saguão Biblioteca",
+          "duracao": "1h30",
+          "inscricao": "https://suap.ifsp.edu.br/eventos/inscricao_publica/19799/"
         }
       ],
-      "20:45": [
+      "Encerramento": [
         {
-          "titulo": "Lorem ipsum dolor sit amet",
-          "palestrante": "Lorem Ipsum",
-          "email": "lorem@ipsum.com",
-          "inscricao": "#"
+          "titulo": "Confraternização TSI"
         }
       ]
     }

@@ -280,7 +280,7 @@ $day-carousel-fade: 40px;
   border-radius: 0;
   transition: all 0.3s ease;
 
-  &:nth-child(odd) {
+  &:nth-of-type(odd) {
     padding-left: 0;
     padding-right: calc(50% + 4rem);
     text-align: right;
@@ -293,7 +293,7 @@ $day-carousel-fade: 40px;
     }
   }
 
-  &:nth-child(even) {
+  &:nth-of-type(even) {
     padding-right: 0;
     padding-left: calc(50% + 4rem);
     text-align: left;
@@ -334,8 +334,8 @@ $day-carousel-fade: 40px;
   }
 
   @include tablet {
-    &:nth-child(odd),
-    &:nth-child(even) {
+    &:nth-of-type(odd),
+    &:nth-of-type(even) {
       padding-left: 1.6rem;
       padding-right: 0;
       text-align: left;
@@ -347,6 +347,39 @@ $day-carousel-fade: 40px;
         @include transform(translateX(-0.5rem));
       }
     }
+  }
+}
+
+// Marcador de turno (Dia todo / Manhã / Noite) centrado sobre a linha
+.turno-label {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 3rem;
+  position: relative;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid var(--accent-soft);
+    border-radius: 999px;
+    // Fundo da página "recorta" a linha atrás do marcador
+    background: var(--page-bg);
+    color: var(--accent-text);
+    font-family: "Inconsolata", monospace;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .material-icons {
+    font-size: 1.2rem;
+  }
+
+  @include tablet {
+    justify-content: flex-start;
+    margin-left: -0.5rem;
   }
 }
 

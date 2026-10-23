@@ -738,13 +738,13 @@ body.dark .programacao-subtitle {
   border-radius: 0;
   transition: all 0.3s ease;
 }
-.timeline-block:nth-child(odd) {
+.timeline-block:nth-of-type(odd) {
   padding-left: 0;
   padding-right: calc(50% + 4rem);
   text-align: right;
   position: relative;
 }
-.timeline-block:nth-child(odd)::before {
+.timeline-block:nth-of-type(odd)::before {
   left: initial;
   right: 50%;
   -webkit-transform: translateX(0.5rem);
@@ -753,13 +753,13 @@ body.dark .programacao-subtitle {
   -o-transform: translateX(0.5rem);
   transform: translateX(0.5rem);
 }
-.timeline-block:nth-child(even) {
+.timeline-block:nth-of-type(even) {
   padding-right: 0;
   padding-left: calc(50% + 4rem);
   text-align: left;
   position: relative;
 }
-.timeline-block:nth-child(even)::before {
+.timeline-block:nth-of-type(even)::before {
   left: 50%;
   -webkit-transform: translateX(-0.5rem);
   -moz-transform: translateX(-0.5rem);
@@ -795,13 +795,13 @@ body.dark .programacao-subtitle {
   font-size: 1.6rem;
 }
 @media (max-width: 768px) {
-  .timeline-block:nth-child(odd), .timeline-block:nth-child(even) {
+  .timeline-block:nth-of-type(odd), .timeline-block:nth-of-type(even) {
     padding-left: 1.6rem;
     padding-right: 0;
     text-align: left;
     position: relative;
   }
-  .timeline-block:nth-child(odd)::before, .timeline-block:nth-child(even)::before {
+  .timeline-block:nth-of-type(odd)::before, .timeline-block:nth-of-type(even)::before {
     left: 0;
     right: 0;
     -webkit-transform: translateX(-0.5rem);
@@ -809,6 +809,36 @@ body.dark .programacao-subtitle {
     -ms-transform: translateX(-0.5rem);
     -o-transform: translateX(-0.5rem);
     transform: translateX(-0.5rem);
+  }
+}
+
+.turno-label {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 3rem;
+  position: relative;
+}
+.turno-label span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  background: var(--page-bg);
+  color: var(--accent-text);
+  font-family: "Inconsolata", monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.turno-label .material-icons {
+  font-size: 1.2rem;
+}
+@media (max-width: 768px) {
+  .turno-label {
+    justify-content: flex-start;
+    margin-left: -0.5rem;
   }
 }
 
@@ -1019,6 +1049,8 @@ body.dark .programacao-subtitle {
 .losangle {
   z-index: 0;
   top: -30px;
+  color: #fff !important;
+  font-size: 3rem;
 }
 .losangle div {
   z-index: 1;
@@ -1027,10 +1059,6 @@ body.dark .programacao-subtitle {
   .losangle div {
     font-size: 2rem !important;
   }
-}
-.losangle {
-  color: #fff !important;
-  font-size: 3rem;
 }
 .losangle:before {
   content: "";

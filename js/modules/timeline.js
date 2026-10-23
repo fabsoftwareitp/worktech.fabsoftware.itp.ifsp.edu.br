@@ -8,10 +8,21 @@ window.WorktechApp.Timeline = {
         var date = index;
         var all = $("<div>");
 
+        var periodIcons = { "Dia todo": "event", "Manhã": "wb_sunny", "Noite": "brightness_3" };
+
         $.each(this, function (periodName, periodTimes) {
+          // Marcador de turno sobre a linha da timeline
+          $(all).append(
+            "<p class='turno-label'><span><i class='material-icons' aria-hidden='true'>" +
+              (periodIcons[periodName] || "schedule") +
+              "</i>" +
+              periodName +
+              "</span></p>"
+          );
+
           $.each(periodTimes, function (horario, workshops) {
-            var iconDescription =
-              "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i>";
+            var iconLocal =
+              "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>place</i>";
             
             $(all).attr({
               id: date,
@@ -30,8 +41,10 @@ window.WorktechApp.Timeline = {
               $(content).addClass("timeline-content");
               $(card).addClass("workshop-card");
               
-              // Horário (fora do card)
-              $(content).append("<p class='workshop-time'>" + horario + "</p>");
+              // Horário (fora do card); atividades sem horário fixo usam chave vazia
+              if (horario !== "") {
+                $(content).append("<p class='workshop-time'>" + horario + "</p>");
+              }
               
               // Só exibe o título se existir e não for vazio
               if (this.titulo && this.titulo.trim() !== "") {
@@ -45,12 +58,16 @@ window.WorktechApp.Timeline = {
               
               // Só exibe a descrição se existir e não for vazio
               if (this.descricao && this.descricao.trim() !== "") {
+                $(card).append("<p class='descricao'>" + this.descricao + "</p>");
+              }
+
+              // Local e duração na mesma linha, quando existirem
+              var detalhes = [this.local, this.duracao].filter(function (item) {
+                return item && item.trim() !== "";
+              });
+              if (detalhes.length) {
                 $(card).append(
-                  "<p class='descricao'>" +
-                    iconDescription +
-                    " " +
-                    this.descricao +
-                    "</p>"
+                  "<p class='descricao'>" + iconLocal + " " + detalhes.join(" · ") + "</p>"
                 );
               }
 
