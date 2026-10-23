@@ -11,6 +11,7 @@ body {
   transition: all 0.99s ease;
   background: white;
   color: black !important;
+  font-family: "Rubik", "Segoe UI", system-ui, sans-serif;
 }
 body img {
   -webkit-user-select: none;
@@ -18,6 +19,22 @@ body img {
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Tektur", "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 .sm-text {
@@ -257,45 +274,22 @@ body.dark .hoverable-text:hover {
     animation: none;
   }
 }
-#footer {
-  background-image: url(../img/footer-detail.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-}
-@media screen and (max-width: 600px) {
-  #footer {
-    background-size: cover;
-    background-position: center bottom;
-  }
-}
-
 .footer-final {
   position: relative;
 }
-.footer-final::before {
-  content: "";
+.footer-final .footer-mesh {
   position: absolute;
-  top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../img/footer-detail.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.6;
 }
-@media screen and (max-width: 600px) {
-  .footer-final::before {
-    background-size: cover;
-    background-position: center bottom;
-  }
+.footer-final > .center-align {
+  position: relative;
+  z-index: 1;
 }
 .footer-final .text-about {
   position: relative;
@@ -645,7 +639,8 @@ body.dark .programacao-subtitle {
 }
 .timeline-activation.day-card .tab-weekday,
 .timeline-activation.day-card .tab-date {
-  font-size: 0.75rem;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -654,8 +649,9 @@ body.dark .programacao-subtitle {
   transition: color 0.3s ease;
 }
 .timeline-activation.day-card .tab-label {
+  font-family: "Tektur", "Segoe UI", sans-serif;
   font-size: 1.9rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   color: inherit;
 }
@@ -830,7 +826,7 @@ body.dark .programacao-subtitle {
   border-radius: 999px;
   background: var(--page-bg);
   color: var(--accent-text);
-  font-family: "Inconsolata", monospace;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -932,7 +928,7 @@ body.dark .programacao-subtitle {
   color: var(--ink-soft);
 }
 .timeline-content .workshop-time {
-  font-family: "Inconsolata", monospace;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
   font-weight: 700;
   margin-bottom: 1rem !important;
 }
@@ -967,44 +963,170 @@ body.dark .programacao-subtitle {
   }
 }
 
-.svg-animated-triangles {
-  overflow: visible !important;
-}
-.svg-animated-triangles .animated-triangle {
-  fill: var(--tri-dark);
-  fill: color-mix(in srgb, var(--tri-light) calc(var(--depth, 0) * 100%), var(--tri-dark));
-  transition: fill 0.3s ease;
+.mesh-mountain {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
-.prog-bg {
+.data-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
+  mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__tile {
-  position: relative;
+.data-bg__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
   width: 100%;
-  aspect-ratio: 3/2;
+  height: 100vh;
+  will-change: transform;
 }
-.prog-bg__tile > svg {
+
+#local > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.map-hud {
+  --hud-line: color-mix(in srgb, var(--accent) 35%, transparent);
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--hud-line);
+  background: var(--surface);
+}
+
+.map-hud__bar,
+.map-hud__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.55rem 0.9rem;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.map-hud__bar {
+  border-bottom: 1px solid var(--hud-line);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.map-hud__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.map-hud__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: hud-blink 1.6s ease-in-out infinite;
+}
+
+.map-hud__coords {
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.map-hud__screen {
+  position: relative;
+  overflow: hidden;
+}
+.map-hud__screen iframe {
+  display: block;
+  width: 100%;
+  height: 450px;
+  border: 0;
+}
+@media screen and (max-width: 600px) {
+  .map-hud__screen iframe {
+    height: 340px;
+  }
+}
+
+body.dark .map-hud__screen iframe {
+  filter: invert(90%) hue-rotate(180deg) saturate(0.6) contrast(0.95);
+}
+
+.map-hud__scan {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.prog-bg__tile.is-mirrored {
-  transform: scaleX(-1);
+  pointer-events: none;
+  background: linear-gradient(transparent 0 calc(100% - 3rem), color-mix(in srgb, var(--accent) 16%, transparent) calc(100% - 2px), var(--hud-line) calc(100% - 2px));
+  animation: hud-scan 6s linear infinite;
 }
 
-.svg-floating-triangles .floating-triangle {
-  fill: var(--tri-dark);
-  fill: color-mix(in srgb, var(--tri-light) calc(var(--depth, 0) * 100%), var(--tri-dark));
-  transition: fill 0.3s ease;
+.map-hud__corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  pointer-events: none;
+}
+.map-hud__corner--tl {
+  top: 8px;
+  left: 8px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.map-hud__corner--tr {
+  top: 8px;
+  right: 8px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.map-hud__corner--bl {
+  bottom: 8px;
+  left: 8px;
+  border-right: 0;
+  border-top: 0;
+}
+.map-hud__corner--br {
+  bottom: 8px;
+  right: 8px;
+  border-left: 0;
+  border-top: 0;
 }
 
+.map-hud__foot {
+  border-top: 1px solid var(--hud-line);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@keyframes hud-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes hud-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-hud__dot,
+  .map-hud__scan {
+    animation: none;
+  }
+  .map-hud__scan {
+    display: none;
+  }
+}
 .inscricoes-circuits {
   position: absolute;
   top: -80px;
@@ -1038,7 +1160,7 @@ body.dark .programacao-subtitle {
 }
 
 @media screen and (max-width: 600px) {
-  .svg-animated-triangles {
+  .mesh-mountain {
     width: 400px !important;
     height: 600px !important;
     top: 0 !important;
@@ -1053,13 +1175,8 @@ body.dark .programacao-subtitle {
     width: 400px !important;
     height: 600px !important;
   }
-  .svg-decoration-header,
-  .svg-decoration-programacao,
-  .svg-decoration-local {
+  .svg-decoration-header {
     opacity: 0.85 !important;
-  }
-  .svg-floating-triangles {
-    opacity: 0.5 !important;
   }
 }
 .row_apoio_realizacao {
@@ -3088,8 +3205,7 @@ body.dark .losangle:before {
 }
 
 .svg-decoration-programacao,
-.svg-decoration-inscricoes,
-.svg-decoration-local {
+.svg-decoration-inscricoes {
   will-change: transform;
 }
 
@@ -3129,13 +3245,6 @@ body.dark .losangle:before {
   will-change: transform, opacity;
 }
 
-.svg-animated-triangles {
-  will-change: transform, opacity;
-}
-.svg-animated-triangles .animated-triangle {
-  will-change: transform, opacity;
-}
-
 .btn-large {
   transition: opacity 0.3s ease;
 }
@@ -3165,10 +3274,10 @@ body.dark .losangle:before {
   --fill-bg: #017a32;
   --fill-fg: white;
   --fill-hover: #015c26;
-  --map-bg: #013d19;
-  --map-fg: white;
-  --map-border: transparent;
-  --map-hover: #012a11;
+  --map-bg: rgba(1, 148, 60, 0.06);
+  --map-fg: #015c26;
+  --map-border: #01943c;
+  --map-hover: rgba(1, 148, 60, 0.06);
   --outline: #015c26;
   --btn-shadow: 0 3px 10px rgba(1, 61, 25, 0.28);
   --btn-shadow-hover: 0 6px 18px rgba(1, 61, 25, 0.35);
@@ -3208,10 +3317,10 @@ body.dark {
   --fill-bg: #015c26;
   --fill-fg: white;
   --fill-hover: #017a32;
-  --map-bg: #013d19;
-  --map-fg: white;
-  --map-border: rgba(175, 254, 210, 0.25);
-  --map-hover: #015c26;
+  --map-bg: rgba(6, 251, 126, 0.05);
+  --map-fg: #affed2;
+  --map-border: rgba(6, 251, 126, 0.6);
+  --map-hover: rgba(6, 251, 126, 0.05);
   --outline: #06fb7e;
   --btn-shadow: none;
   --btn-shadow-hover: 0 4px 12px var(--accent-glow);
@@ -3330,6 +3439,55 @@ body.dark .programacao-subtitle {
   --btn-fg: var(--map-fg) !important;
   --btn-border: var(--map-border) !important;
   --btn-hover: var(--map-hover) !important;
+}
+
+.btn-large.btn-map {
+  --cut: 12px;
+  position: relative;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-image: linear-gradient(90deg, var(--accent) 0 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  transition: background-position 0.35s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-large.btn-map::before, .btn-large.btn-map::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--cut) * 1.42);
+  height: 1px;
+  background: var(--btn-border);
+}
+.btn-large.btn-map::before {
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: translateY(var(--cut)) rotate(-45deg);
+}
+.btn-large.btn-map::after {
+  right: 0;
+  bottom: 0;
+  transform-origin: 100% 100%;
+  transform: translateY(calc(var(--cut) * -1)) rotate(-45deg);
+}
+.btn-large.btn-map .btn-map__go {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+.btn-large.btn-map:hover, .btn-large.btn-map:focus-visible {
+  background-position: 0 0;
+  color: var(--page-bg) !important;
+  box-shadow: inset 0 0 14px var(--accent-glow);
+  transform: none;
+}
+.btn-large.btn-map:hover .btn-map__go, .btn-large.btn-map:focus-visible .btn-map__go {
+  transform: translate(2px, -2px);
 }
 
 nav ul a:hover,

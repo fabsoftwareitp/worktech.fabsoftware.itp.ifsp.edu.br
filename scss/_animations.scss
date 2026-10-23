@@ -7,8 +7,7 @@
 }
 
 .svg-decoration-programacao,
-.svg-decoration-inscricoes,
-.svg-decoration-local {
+.svg-decoration-inscricoes {
   will-change: transform;
 }
 
@@ -51,15 +50,6 @@
 #inscricoes h2,
 #local h2 {
   will-change: transform, opacity;
-}
-
-// Animação dos triângulos SVG
-.svg-animated-triangles {
-  will-change: transform, opacity;
-  
-  .animated-triangle {
-    will-change: transform, opacity;
-  }
 }
 
 .btn-large {

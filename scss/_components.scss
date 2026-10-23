@@ -172,7 +172,8 @@ $day-carousel-fade: 40px;
 
   .tab-weekday,
   .tab-date {
-    font-size: 0.75rem;
+    font-family: $font-mono;
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -182,8 +183,9 @@ $day-carousel-fade: 40px;
   }
 
   .tab-label {
+    font-family: $font-display;
     font-size: 1.9rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     color: inherit;
   }
@@ -387,7 +389,7 @@ $day-carousel-fade: 40px;
     // Fundo da página "recorta" a linha atrás do marcador
     background: var(--page-bg);
     color: var(--accent-text);
-    font-family: "Inconsolata", monospace;
+    font-family: $font-mono;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -502,7 +504,7 @@ $day-carousel-fade: 40px;
   }
 
   .workshop-time {
-    font-family: "Inconsolata", monospace;
+    font-family: $font-mono;
     font-weight: 700;
     margin-bottom: 1rem !important;
   }
@@ -542,58 +544,193 @@ $day-carousel-fade: 40px;
   }
 }
 
-// Animated Triangles
-.svg-animated-triangles {
-  overflow: visible !important;
-
-  .animated-triangle {
-    fill: var(--tri-dark); // fallback para navegadores sem color-mix
-    fill: color-mix(
-      in srgb,
-      var(--tri-light) calc(var(--depth, 0) * 100%),
-      var(--tri-dark)
-    );
-    transition: fill 0.3s ease;
-  }
+// Montanhas em malha poligonal (poly-mesh.js); posicao e tamanho de cada uma
+// ficam no style do canvas
+.mesh-mountain {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
-// Fundo da Programacao em ladrilhos de altura fixa (proporcao do viewBox
-// 1200x800), presos no topo: a altura da secao muda e o desenho nao se move
-.prog-bg {
+// Fundo de dados (data-background.js), usado na Programacao e no Local. A
+// camada cobre a secao e se dissolve nas bordas de cima e de baixo; o canvas
+// tem no maximo a altura da tela e o JS o desloca para acompanhar a tela
+// enquanto a secao passa (position: sticky nao funciona aqui: body e as
+// secoes tem overflow hidden)
+.data-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
+  mask-image: linear-gradient(transparent, #000 160px, #000 calc(100% - 160px), transparent);
 }
 
-.prog-bg__tile {
-  position: relative;
+.data-bg__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: 100vh;
+  will-change: transform;
+}
 
-  > svg {
-    position: absolute;
-    inset: 0;
+// O conteudo do Local fica acima do fundo de dados
+#local > .container {
+  position: relative;
+  z-index: 1;
+}
+
+// Mapa do Local em moldura de painel: barra com status e coordenadas,
+// cantoneiras, linha de varredura e endereco no rodape
+.map-hud {
+  --hud-line: color-mix(in srgb, var(--accent) 35%, transparent);
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--hud-line);
+  background: var(--surface);
+}
+
+.map-hud__bar,
+.map-hud__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.55rem 0.9rem;
+  font-family: $font-mono;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.map-hud__bar {
+  border-bottom: 1px solid var(--hud-line);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.map-hud__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+// Indicador "ao vivo"
+.map-hud__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: hud-blink 1.6s ease-in-out infinite;
+}
+
+.map-hud__coords {
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.map-hud__screen {
+  position: relative;
+  overflow: hidden;
+
+  iframe {
+    display: block;
     width: 100%;
-    height: 100%;
-  }
+    height: 450px;
+    border: 0;
 
-  &.is-mirrored {
-    transform: scaleX(-1);
+    @include mobile {
+      height: 340px;
+    }
   }
 }
 
-// Triângulos flutuantes de fundo
-.svg-floating-triangles {
-  .floating-triangle {
-    fill: var(--tri-dark); // fallback para navegadores sem color-mix
-    fill: color-mix(
-      in srgb,
-      var(--tri-light) calc(var(--depth, 0) * 100%),
-      var(--tri-dark)
-    );
-    transition: fill 0.3s ease;
+// No tema escuro o mapa tambem fica escuro (cores invertidas, tons de volta)
+body.dark .map-hud__screen iframe {
+  filter: invert(90%) hue-rotate(180deg) saturate(0.6) contrast(0.95);
+}
+
+// Faixa de leitura descendo pelo mapa; a camada inteira desliza, so o fim
+// dela tem cor
+.map-hud__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    transparent 0 calc(100% - 3rem),
+    color-mix(in srgb, var(--accent) 16%, transparent) calc(100% - 2px),
+    var(--hud-line) calc(100% - 2px)
+  );
+  animation: hud-scan 6s linear infinite;
+}
+
+.map-hud__corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  pointer-events: none;
+
+  &--tl {
+    top: 8px;
+    left: 8px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  &--tr {
+    top: 8px;
+    right: 8px;
+    border-left: 0;
+    border-bottom: 0;
+  }
+
+  &--bl {
+    bottom: 8px;
+    left: 8px;
+    border-right: 0;
+    border-top: 0;
+  }
+
+  &--br {
+    bottom: 8px;
+    right: 8px;
+    border-left: 0;
+    border-top: 0;
+  }
+}
+
+.map-hud__foot {
+  border-top: 1px solid var(--hud-line);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@keyframes hud-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes hud-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-hud__dot,
+  .map-hud__scan {
+    animation: none;
+  }
+
+  .map-hud__scan {
+    display: none;
   }
 }
 
@@ -638,9 +775,9 @@ $day-carousel-fade: 40px;
   z-index: 5 !important;
 }
 
-// Responsivo mobile para triângulos animados
+// Responsivo mobile para as montanhas
 @include mobile {
-  .svg-animated-triangles {
+  .mesh-mountain {
     width: 400px !important;
     height: 600px !important;
     top: 0 !important;
@@ -659,15 +796,8 @@ $day-carousel-fade: 40px;
   }
   
   // SVGs decorativos também visíveis em mobile
-  .svg-decoration-header,
-  .svg-decoration-programacao,
-  .svg-decoration-local {
+  .svg-decoration-header {
     opacity: 0.85 !important;
-  }
-  
-  // Triângulos flutuantes um pouco mais suaves em mobile
-  .svg-floating-triangles {
-    opacity: 0.5 !important;
   }
 }
 
