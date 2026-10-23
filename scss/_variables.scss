@@ -8,6 +8,12 @@ $color-gray-light: #999999;
 $color-gray-lighter: #cccccc;
 $color-gray-lightest: #e5e5e5;
 
+// Fontes (Google Fonts, carregadas no index.html): titulos com tracos de
+// display digital, texto legivel e mono de terminal para horarios e rotulos
+$font-display: "Tektur", "Segoe UI", sans-serif;
+$font-body: "Rubik", "Segoe UI", system-ui, sans-serif;
+$font-mono: "Share Tech Mono", ui-monospace, monospace;
+
 // Transitions
 $transition-duration: 0.99s;
 $transition-easing: ease;

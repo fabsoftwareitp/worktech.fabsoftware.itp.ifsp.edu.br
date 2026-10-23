@@ -172,7 +172,8 @@ $day-carousel-fade: 40px;
 
   .tab-weekday,
   .tab-date {
-    font-size: 0.75rem;
+    font-family: $font-mono;
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -182,8 +183,9 @@ $day-carousel-fade: 40px;
   }
 
   .tab-label {
+    font-family: $font-display;
     font-size: 1.9rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     color: inherit;
   }
@@ -387,7 +389,7 @@ $day-carousel-fade: 40px;
     // Fundo da página "recorta" a linha atrás do marcador
     background: var(--page-bg);
     color: var(--accent-text);
-    font-family: "Inconsolata", monospace;
+    font-family: $font-mono;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -502,7 +504,7 @@ $day-carousel-fade: 40px;
   }
 
   .workshop-time {
-    font-family: "Inconsolata", monospace;
+    font-family: $font-mono;
     font-weight: 700;
     margin-bottom: 1rem !important;
   }

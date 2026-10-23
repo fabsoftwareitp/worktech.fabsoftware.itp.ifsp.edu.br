@@ -11,6 +11,7 @@ body {
   transition: all 0.99s ease;
   background: white;
   color: black !important;
+  font-family: "Rubik", "Segoe UI", system-ui, sans-serif;
 }
 body img {
   -webkit-user-select: none;
@@ -18,6 +19,22 @@ body img {
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Tektur", "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 .sm-text {
@@ -645,7 +662,8 @@ body.dark .programacao-subtitle {
 }
 .timeline-activation.day-card .tab-weekday,
 .timeline-activation.day-card .tab-date {
-  font-size: 0.75rem;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -654,8 +672,9 @@ body.dark .programacao-subtitle {
   transition: color 0.3s ease;
 }
 .timeline-activation.day-card .tab-label {
+  font-family: "Tektur", "Segoe UI", sans-serif;
   font-size: 1.9rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   color: inherit;
 }
@@ -830,7 +849,7 @@ body.dark .programacao-subtitle {
   border-radius: 999px;
   background: var(--page-bg);
   color: var(--accent-text);
-  font-family: "Inconsolata", monospace;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -932,7 +951,7 @@ body.dark .programacao-subtitle {
   color: var(--ink-soft);
 }
 .timeline-content .workshop-time {
-  font-family: "Inconsolata", monospace;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
   font-weight: 700;
   margin-bottom: 1rem !important;
 }
