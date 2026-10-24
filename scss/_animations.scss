@@ -1,17 +1,13 @@
 // SVG Animations and decoration styles
 
+// Os SVGs decorativos usam currentColor, entao herdam o verde do tema
 .svg-theme-adaptive {
-  color: #000;
+  color: var(--accent);
   will-change: transform;
 }
 
-body.dark .svg-theme-adaptive {
-  color: #fff;
-}
-
 .svg-decoration-programacao,
-.svg-decoration-inscricoes,
-.svg-decoration-local {
+.svg-decoration-inscricoes {
   will-change: transform;
 }
 
@@ -20,41 +16,17 @@ body.dark .svg-theme-adaptive {
   will-change: transform;
 }
 
-.timeline-block {
+// Opacidade e posicao da timeline sao animadas pelo GSAP; transicoes CSS
+// nessas propriedades suavizariam de novo cada quadro e travariam o movimento
+.timeline-content,
+.timeline-dot,
+.turno-label {
   will-change: transform, opacity;
-  transform-origin: center center;
-  transition: opacity 0.3s ease;
-  
-  &:hover {
-    opacity: 0.95;
-  }
-}
-
-.timeline-content {
-  will-change: transform;
-  
-  h3 {
-    will-change: transform, opacity;
-  }
-  
-  p {
-    will-change: transform, opacity;
-  }
 }
 
 .timeline-activation {
-  will-change: transform, opacity, color;
-  transition: all 0.3s ease;
+  will-change: transform, opacity;
   cursor: pointer;
-  display: inline-block;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-  
-  &.active {
-    opacity: 1;
-  }
 }
 
 #lamp {
@@ -80,15 +52,6 @@ body.dark .svg-theme-adaptive {
   will-change: transform, opacity;
 }
 
-// Animação dos triângulos SVG
-.svg-animated-triangles {
-  will-change: transform, opacity;
-  
-  .animated-triangle {
-    will-change: transform, opacity;
-  }
-}
-
 .btn-large {
   transition: opacity 0.3s ease;
   
@@ -98,13 +61,7 @@ body.dark .svg-theme-adaptive {
 }
 
 @media screen and (max-width: $breakpoint-mobile) {
-  .svg-decoration-programacao,
-  .svg-decoration-inscricoes,
-  .svg-decoration-local,
-  .svg-decoration-header {
-    display: none;
-  }
-  
+  // As decoracoes de fundo continuam visiveis no mobile (opacidade em _components.scss)
   .timeline-block {
     perspective: none;
   }

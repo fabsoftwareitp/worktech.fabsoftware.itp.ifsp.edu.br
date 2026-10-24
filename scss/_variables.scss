@@ -8,6 +8,12 @@ $color-gray-light: #999999;
 $color-gray-lighter: #cccccc;
 $color-gray-lightest: #e5e5e5;
 
+// Fontes (Google Fonts, carregadas no index.html): titulos com tracos de
+// display digital, texto legivel e mono de terminal para horarios e rotulos
+$font-display: "Tektur", "Segoe UI", sans-serif;
+$font-body: "Rubik", "Segoe UI", system-ui, sans-serif;
+$font-mono: "Share Tech Mono", ui-monospace, monospace;
+
 // Transitions
 $transition-duration: 0.99s;
 $transition-easing: ease;
@@ -17,8 +23,11 @@ $spacing-base: 1rem;
 
 // Layout
 $header-min-height: 100vh;
-$logo-width-desktop: 500px;
-$logo-width-mobile: 300px;
+$logo-width-desktop: 640px;
+$logo-width-mobile: 340px;
+// O peso visual da logo fica a direita do centro do PNG (WORK TECH e mais
+// denso que os losangos); este deslocamento alinha com o texto abaixo
+$logo-optical-offset: -3%;
 
 // Timeline
 $timeline-width: 0.3rem;
@@ -26,4 +35,21 @@ $timeline-dot-size: 1rem;
 
 // Breakpoints
 $breakpoint-mobile: 600px;
-$breakpoint-tablet: 575px;
+$breakpoint-tablet: 768px; // timeline vira coluna unica abaixo disso
+
+// Paleta verde: cores exatas da logo Worktech 2026
+$logo-neon: #06fb7e;  // circuitos e "IFSP CAMPUS ITAPETININGA" (logo escura)
+$logo-mint: #affed2;  // "2026" e losangos (logo escura)
+$logo-green: #01943c; // verde da logo clara
+
+// Tons derivados do mesmo matiz do $logo-green (mais escuros) e do menta (mais claros)
+$logo-green-700: #017a32;
+$logo-green-800: #015c26;
+$logo-green-900: #013d19;
+$logo-green-950: #012a11;
+$logo-mint-100: #e6fff1;
+$logo-mint-200: #d4f8e4;
+
+// Tinta do tema claro: preto da logo com leve fundo verde
+$ink: #0b1a10;
+$ink-soft: #46574c;

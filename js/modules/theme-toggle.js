@@ -21,60 +21,43 @@ window.WorktechApp.ThemeToggle = {
     });
   },
 
-  updateButtonColors: function (isDark) {
-    $(".timeline-activation").each(function () {
-      if (!$(this).hasClass("active")) {
-        if (isDark) {
-          $(this).css("background", "#1a1a1a");
-          $(this).css("border-color", "#ffffff");
-          $(this).find("i, .tab-label, .tab-date").css("color", "#ffffff");
-        } else {
-          $(this).css("background", "#f5f5f5");
-          $(this).css("border-color", "#000");
-          $(this).find("i, .tab-label, .tab-date").css("color", "#000");
-        }
-      }
-    });
+  // Imagens de cada tema. O "?v=" forca o navegador a baixar de novo quando
+  // uma imagem e trocada mantendo o nome: ao alterar um arquivo, mude a versao
+  // (e a do mesmo arquivo em header.html / navbar.html).
+  ASSET_VERSION: "2026-3",
+  IMAGES: {
+    dark: { logo: "img/logo_worktech.png", footer: "img/ifsp_white.png" },
+    light: { logo: "img/logo_worktech_white.png", footer: "img/ifsp.png" },
+  },
+
+  applyTheme: function (isDark) {
+    var images = isDark ? this.IMAGES.dark : this.IMAGES.light;
+    var version = "?v=" + this.ASSET_VERSION;
+
+    $("body").toggleClass("dark", isDark);
+    $("#logo-topo-home").attr("src", images.logo + version);
+    $("#logo_footer").attr("src", images.footer + version);
+
+    if (isDark) {
+      this.apagaLampada();
+    } else {
+      this.acendeLampada();
+    }
   },
 
   init: function () {
     var self = this;
+    var saved = localStorage.getItem("moment");
 
-    if (localStorage.getItem("moment") != null) {
-      if (localStorage.getItem("moment") == "dark") {
-        $("body").addClass("dark");
-        $("#logo-topo-home").attr("src", "img/logo_worktech.png");
-        $("#logo_footer").attr("src", "img/ifsp_white.png");
-        self.apagaLampada();
-        setTimeout(() => self.updateButtonColors(true), 1000);
-      } else {
-        $("body").removeClass("dark");
-        $("#logo-topo-home").attr("src", "img/logo_worktech_white.png");
-        $("#logo_footer").attr("src", "img/ifsp.png");
-        self.acendeLampada();
-        setTimeout(() => self.updateButtonColors(false), 1000);
-      }
+    // Sem preferencia salva, mantem o tema padrao do <body> (escuro)
+    if (saved != null) {
+      self.applyTheme(saved == "dark");
     }
 
     $("#lamp").on("click", function () {
-      $("body").toggleClass("dark");
-      var isDark = $("body").hasClass("dark");
-
-      if (isDark) {
-        // Tema escuro: usa logo_worktech.png
-        $("#logo-topo-home").attr("src", "img/logo_worktech.png");
-        $("#logo_footer").attr("src", "img/ifsp_white.png");
-        localStorage.setItem("moment", "dark");
-        self.apagaLampada();
-        self.updateButtonColors(true);
-      } else {
-        // Tema claro: usa logo_worktech_white.png
-        $("#logo-topo-home").attr("src", "img/logo_worktech_white.png");
-        $("#logo_footer").attr("src", "img/ifsp.png");
-        localStorage.setItem("moment", "light");
-        self.acendeLampada();
-        self.updateButtonColors(false);
-      }
+      var isDark = !$("body").hasClass("dark");
+      self.applyTheme(isDark);
+      localStorage.setItem("moment", isDark ? "dark" : "light");
     });
   },
 };

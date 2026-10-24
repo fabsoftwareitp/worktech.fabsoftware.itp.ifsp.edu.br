@@ -26,9 +26,8 @@ function includeHTML(callback) {
         if (this.readyState == 4) {
           var element = this.element;
           if (this.status == 200) {
+            // A sidenav e inicializada uma unica vez em main.js, depois de todos os includes
             element.innerHTML = this.responseText;
-            var elems = document.querySelectorAll(".sidenav");
-            var instances = M.Sidenav.init(elems);
           }
           if (this.status == 404) {
             element.innerHTML = "Page not found.";

@@ -8,12 +8,27 @@ window.WorktechApp.Timeline = {
         var date = index;
         var all = $("<div>");
 
+        var periodIcons = { "Dia todo": "event", "Manhã": "wb_sunny", "Noite": "brightness_3" };
+
         $.each(this, function (periodName, periodTimes) {
+          // Marcador de turno sobre a linha da timeline
+          $(all).append(
+            "<p class='turno-label'><span><i class='material-icons' aria-hidden='true'>" +
+              (periodIcons[periodName] || "schedule") +
+              "</i>" +
+              periodName +
+              "</span></p>"
+          );
+
           $.each(periodTimes, function (horario, workshops) {
-            var iconDescription =
-              "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>person</i>";
+            var iconLocal =
+              "<i class='material-icons' aria-hidden='true' style='transform:translate(0,7px)'>place</i>";
             
-            $(all).attr("id", date);
+            $(all).attr({
+              id: date,
+              role: "tabpanel",
+              "aria-labelledby": "tab-" + date,
+            });
             $(all).css("display", "none");
 
             $.each(workshops, function (index) {
@@ -25,9 +40,16 @@ window.WorktechApp.Timeline = {
               $(block).addClass("timeline-block");
               $(content).addClass("timeline-content");
               $(card).addClass("workshop-card");
-              
-              // Horário (fora do card)
-              $(content).append("<p class='workshop-time'>" + horario + "</p>");
+
+              // Bolinha sobre a linha, animada separada do card
+              $(block).append(
+                "<span class='timeline-dot' aria-hidden='true'><span class='timeline-dot-ring'></span></span>"
+              );
+
+              // Horário (fora do card); atividades sem horário fixo usam chave vazia
+              if (horario !== "") {
+                $(content).append("<p class='workshop-time'>" + horario + "</p>");
+              }
               
               // Só exibe o título se existir e não for vazio
               if (this.titulo && this.titulo.trim() !== "") {
@@ -41,12 +63,16 @@ window.WorktechApp.Timeline = {
               
               // Só exibe a descrição se existir e não for vazio
               if (this.descricao && this.descricao.trim() !== "") {
+                $(card).append("<p class='descricao'>" + this.descricao + "</p>");
+              }
+
+              // Local e duração na mesma linha, quando existirem
+              var detalhes = [this.local, this.duracao].filter(function (item) {
+                return item && item.trim() !== "";
+              });
+              if (detalhes.length) {
                 $(card).append(
-                  "<p class='descricao'>" +
-                    iconDescription +
-                    " " +
-                    this.descricao +
-                    "</p>"
+                  "<p class='descricao'>" + iconLocal + " " + detalhes.join(" · ") + "</p>"
                 );
               }
 
@@ -87,8 +113,12 @@ window.WorktechApp.Timeline = {
           });
         });
         $(".timeline").append(all);
-        $($("a.timeline-activation.active").attr("href")).show("fast");
       });
+
+      // Mostra o dia ativo de uma vez; a entrada animada fica com o GSAP
+      $($("a.timeline-activation.active").attr("href")).show();
+      window.WorktechApp.Timeline.ready = true;
+      $(document).trigger("timeline:ready");
     });
   },
 
@@ -111,22 +141,8 @@ window.WorktechApp.Timeline = {
     this.loadWorkshops();
     this.initScrollAnimation();
 
-    $(document).ready(function () {
-      var isDark = $("body").hasClass("dark");
-      var $firstBtn = $(".timeline-activation:first");
-      
-      $firstBtn.addClass("active");
-      
-      if (isDark) {
-        $firstBtn.css("background", "#ffffff");
-        $firstBtn.find("i, .tab-label, .tab-date").css("color", "#000");
-      } else {
-        $firstBtn.css("background", "#000");
-        $firstBtn.find("i, .tab-label, .tab-date").css("color", "#fff");
-      }
-      
-      $($firstBtn.attr("href")).show("fast");
-    });
-
+    // Primeiro dia ativo por padrao; o conteudo e exibido em loadWorkshops
+    // assim que o JSON termina de carregar
+    $(".timeline-activation:first").addClass("active");
   },
 };

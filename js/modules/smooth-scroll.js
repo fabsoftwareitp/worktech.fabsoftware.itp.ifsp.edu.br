@@ -24,10 +24,12 @@ window.WorktechApp.SmoothScroll = {
         if (target.length) {
           e.preventDefault();
           
-          // Se for um botão de troca de dia da programação, scroll até o título "Programação"
+          // Troca de dia: so rola ate a programacao se o carrossel estiver fora da tela
           if ($(this).hasClass("timeline-activation")) {
+            var rect = this.getBoundingClientRect();
+            var isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
             var programacaoSection = $("#programacao");
-            if (programacaoSection.length) {
+            if (!isVisible && programacaoSection.length) {
               var posLink = programacaoSection.offset().top - 100; // 100px de margem do topo
               $("html, body").animate({ scrollTop: posLink }, 800, "swing");
             }

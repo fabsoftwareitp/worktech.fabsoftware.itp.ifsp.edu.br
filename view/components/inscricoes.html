@@ -1,31 +1,27 @@
 <div id="inscricoes" class="container-fluid position-relative">
-  <!-- SVG com triângulos animados em formato de montanha -->
-  <svg
+  <!-- Montanha em malha poligonal, desenhada por poly-mesh.js -->
+  <canvas
     id="svg-inscricoes-triangles"
-    class="svg-animated-triangles hide-on-med-and-down"
-    viewBox="0 0 690 800"
-    preserveAspectRatio="none"
-    style="
-      position: absolute;
-      top: -220px;
-      left: 0;
-      width: 690px;
-      height: 800px;
-      z-index: 5;
-      pointer-events: none;
-      opacity: 0.5;
-      overflow: visible;
-    "
-  >
-    <!-- Triângulos serão gerados dinamicamente via JavaScript -->
-  </svg>
+    class="mesh-mountain hide-on-med-and-down"
+    data-mesh="left"
+    aria-hidden="true"
+    style="top: -220px; left: 0; width: 690px; height: 800px; z-index: 5"
+  ></canvas>
+  <!-- Trilhas de circuito no canto direito, geradas por circuit-board.js -->
+  <svg
+    class="inscricoes-circuits"
+    viewBox="0 0 320 760"
+    preserveAspectRatio="xMaxYMid slice"
+    aria-hidden="true"
+    focusable="false"
+  ></svg>
   <div class="row mt-15">
-    <div class="col m4 s12 offset-m6 mt-sm-3 mb-sm-5 right-align">
-      <h2 class="uppercase f-700 fs hoverable-text">Inscrições</h2>
+    <div class="col s12 m8 offset-m4 l4 offset-l6 mt-sm-3 mb-sm-5 right-align">
+      <h2 class="uppercase f-700 fs hoverable-text section-title">Inscrições</h2>
       <h4 class="thin">
         As inscrições garantem a participação e o certificado!
       </h4>
-      <a href="#programacao" class="btn-large mt-sm-1">
+      <a href="#programacao" class="btn-large btn-cta mt-sm-1">
         <i class="material-icons left">person_add</i>Realizar Inscrição
       </a>
     </div>

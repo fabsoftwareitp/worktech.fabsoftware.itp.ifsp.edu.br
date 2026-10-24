@@ -1,6 +1,5 @@
 // Base body styles
 body {
-  background-color: red;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -9,6 +8,7 @@ body {
   @include transition(all $transition-duration $transition-easing);
   background: $color-white;
   color: $color-black !important;
+  font-family: $font-body;
 
   img {
     -webkit-user-select: none;
@@ -17,14 +17,23 @@ body {
     user-select: none;
     pointer-events: none;
   }
+}
 
-  h1 {
-    // Reserved for future use
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-display;
+}
 
-  #logo-topo-home {
-    // Reserved for future use
-  }
+// Controles de formulario nao herdam a fonte por padrao
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 // Typography utilities
